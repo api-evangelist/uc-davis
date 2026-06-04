@@ -1,0 +1,57 @@
+---
+name: University of California, Davis
+description: University of California, Davis public developer/API footprint review for APIs.json cataloging.
+url: https://raw.githubusercontent.com/api-evangelist/uc-davis/refs/heads/main/review.yml
+created: '2026-06-03'
+modified: '2026-06-03'
+reviews:
+  - date: '2026-06-03'
+    rating: 3
+    summary: >-
+      UC Davis has a real but decentralized API footprint with no single unified
+      developer portal. Verified live (HTTP 200): IET Middleware Web Service APIs,
+      UC Davis Health systems-integration developer page (Epic/FHIR/custom REST-SOAP,
+      API key/OAuth2), CAES PEAKS and ACE API docs, the developers.ucdavis.edu
+      internal developer SIG, the official ucdavis GitHub org (441+ repos), the main
+      website, library site, and status page. AggieData returned 403 (likely
+      bot-blocked) and LinkedIn returned 999 (anti-scraping), both expected. No openly
+      documented public library/repository REST API was confirmed, so none was
+      fabricated. Most identity and administrative APIs are gated behind institutional
+      affiliation rather than open signup.
+    endpoints:
+      - url: https://iet-ws.ucdavis.edu/api/
+        status: 200
+        note: IET Middleware Web Service APIs landing/docs page.
+      - url: https://health.ucdavis.edu/systems-integration/developers
+        status: 200
+        note: UC Davis Health developer/integration page; Epic, FHIR, custom APIs.
+      - url: https://computing.caes.ucdavis.edu/documentation/peaks/api
+        status: 200
+        note: CAES PEAKS API documentation (Swagger/OpenAPI).
+      - url: https://computing.caes.ucdavis.edu/documentation/ace/api
+        status: 200
+        note: CAES ACE API documentation.
+      - url: https://peaks.ucdavis.edu/swagger/index.html
+        status: 200
+        note: PEAKS Swagger UI endpoint.
+      - url: https://developers.ucdavis.edu/
+        status: 200
+        note: Internal developer SIG community; not a public API catalog.
+      - url: https://github.com/ucdavis
+        status: 200
+        note: Official verified GitHub org, 441+ public repositories.
+      - url: https://www.ucdavis.edu/
+        status: 200
+        note: Official institutional website.
+      - url: https://library.ucdavis.edu/
+        status: 200
+        note: Library site; no confirmed documented public REST API.
+      - url: https://status.ucdavis.edu/
+        status: 200
+        note: Campus systems status page.
+      - url: https://aggiedata.ucdavis.edu/
+        status: 403
+        note: Institutional data portal; bot-blocked, no documented public API.
+      - url: https://www.linkedin.com/school/uc-davis/
+        status: 999
+        note: LinkedIn school page; 999 is LinkedIn anti-scraping, page exists.

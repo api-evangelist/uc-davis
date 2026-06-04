@@ -1,0 +1,102 @@
+---
+aid: uc-davis
+name: University of California, Davis
+description: >-
+  The University of California, Davis (UC Davis) is a public land-grant research
+  university located in Davis, California, and ranked #48 in the QS World University
+  Rankings 2025. Its public developer footprint is decentralized across campus units
+  rather than a single unified developer portal. Confirmed surfaces include IET
+  Middleware Web Service APIs (identity/integration middleware), a UC Davis Health
+  systems-integration program offering Epic/FHIR and custom REST/SOAP APIs, the CAES
+  Computing Resources Unit APIs (PEAKS, ACE), an internal developer SIG community at
+  developers.ucdavis.edu, and the official ucdavis GitHub organization with 441+ public
+  repositories. Most administrative and identity APIs are gated behind institutional
+  affiliation, SSO, or partner agreements rather than open self-service signup.
+type: Index
+position: Consumer
+access: 3rd-Party
+image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+url: https://raw.githubusercontent.com/api-evangelist/uc-davis/refs/heads/main/apis.yml
+tags:
+  - Education
+  - Higher Education
+  - University
+  - Research
+  - United States
+  - California
+  - Identity
+  - Health
+created: '2026-06-03'
+modified: '2026-06-03'
+specificationVersion: '0.19'
+apis:
+  - aid: uc-davis:iet-middleware
+    name: IET Middleware Web Service APIs
+    description: >-
+      Information and Educational Technology (IET) Middleware Web Service APIs provide
+      campus integration and identity-related middleware services. Usage instructions
+      are published via the IET Application Development documentation; access is
+      typically gated for affiliated campus developers.
+    humanURL: https://iet-ws.ucdavis.edu/api/
+    tags: [ Identity, Middleware, Integration ]
+    properties:
+      - type: Documentation
+        url: https://iet-ws.ucdavis.edu/api/
+  - aid: uc-davis:health-integration
+    name: UC Davis Health Systems Integration APIs
+    description: >-
+      UC Davis Health offers Epic (EHR), HL7 FHIR, and custom APIs accessed via SOAP
+      or REST using JSON/XML. Authentication methods include API Key, OAuth2, and
+      Direct Interconnect for existing Epic users, with traffic governed through
+      InterSystems API Manager. Access is arranged through the systems integration
+      team rather than open self-service.
+    humanURL: https://health.ucdavis.edu/systems-integration/developers
+    tags: [ Health, FHIR, Epic, Integration ]
+    properties:
+      - type: Documentation
+        url: https://health.ucdavis.edu/systems-integration/developers
+      - type: SignUp
+        url: https://health.ucdavis.edu/systems-integration/developers
+  - aid: uc-davis:peaks
+    name: CAES PEAKS API
+    description: >-
+      The College of Agricultural and Environmental Sciences (CAES) Computing Resources
+      Unit publishes the PEAKS API with Swagger/OpenAPI documentation. PEAKS supports
+      CAES administrative and computing workflows.
+    humanURL: https://computing.caes.ucdavis.edu/documentation/peaks/api
+    tags: [ Administration, Swagger, OpenAPI ]
+    properties:
+      - type: Documentation
+        url: https://computing.caes.ucdavis.edu/documentation/peaks/api
+  - aid: uc-davis:ace
+    name: CAES ACE API
+    description: >-
+      The CAES Computing Resources Unit publishes the ACE API with documentation
+      supporting college administrative and content workflows.
+    humanURL: https://computing.caes.ucdavis.edu/documentation/ace/api
+    tags: [ Administration, Integration ]
+    properties:
+      - type: Documentation
+        url: https://computing.caes.ucdavis.edu/documentation/ace/api
+common:
+  - type: Website
+    url: https://www.ucdavis.edu/
+  - type: DeveloperPortal
+    url: https://developers.ucdavis.edu/
+  - type: GitHub
+    url: https://github.com/ucdavis
+  - type: LinkedIn
+    url: https://www.linkedin.com/school/uc-davis/
+  - type: Status
+    url: https://status.ucdavis.edu/
+  - type: Plans
+    url: plans/uc-davis-plans-pricing.yml
+  - type: RateLimits
+    url: rate-limits/uc-davis-rate-limits.yml
+  - type: FinOps
+    url: finops/uc-davis-finops.yml
+  - type: Review
+    url: review.yml
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com
