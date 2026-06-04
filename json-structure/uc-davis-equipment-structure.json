@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/uc-davis/main/json-structure/uc-davis-equipment-structure.json",
+  "name": "Equipment",
+  "description": "JSON Structure for a PEAKS Equipment object (UC Davis CAES People Equipment Access Keys Space API).",
+  "type": "object",
+  "properties": {
+    "id": { "type": "int32", "description": "System-assigned identifier for the equipment." },
+    "name": { "type": "string", "maxLength": 64, "description": "Human-readable name of the equipment." },
+    "notes": { "type": "string", "description": "Free-form notes about the equipment." },
+    "tags": { "type": "string", "description": "Comma-delimited tags." },
+    "teamId": { "type": "int32", "description": "Identifier of the owning team." },
+    "active": { "type": "boolean", "description": "Whether the equipment record is active." },
+    "type": { "type": "string", "description": "Equipment type/category." },
+    "serialNumber": { "type": "string", "description": "Manufacturer serial number." },
+    "make": { "type": "string", "description": "Equipment make/manufacturer." },
+    "model": { "type": "string", "description": "Equipment model." },
+    "protectionLevel": { "type": "string", "maxLength": 2, "description": "Data protection level classification." },
+    "availabilityLevel": { "type": "string", "maxLength": 2, "description": "Availability level classification." },
+    "systemManagementId": { "type": "string", "maxLength": 16, "description": "System management identifier." },
+    "spaceId": { "type": "int32", "description": "Identifier of the space where the equipment is located." },
+    "title": { "type": "string", "description": "Derived display title." }
+  },
+  "required": ["name"]
+}

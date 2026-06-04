@@ -65,9 +65,24 @@ apis:
       CAES administrative and computing workflows.
     humanURL: https://computing.caes.ucdavis.edu/documentation/peaks/api
     tags: [ Administration, Swagger, OpenAPI ]
+    baseURL: https://peaks.ucdavis.edu
     properties:
       - type: Documentation
         url: https://computing.caes.ucdavis.edu/documentation/peaks/api
+      - type: OpenAPI
+        url: openapi/uc-davis-peaks.yaml
+      - type: x-json-schema
+        url: json-schema/uc-davis-key-schema.json
+      - type: x-json-structure
+        url: json-structure/uc-davis-key-structure.json
+      - type: x-examples
+        url: examples/uc-davis-keys-list-example.json
+      - type: x-rules
+        url: rules/uc-davis-rules.yml
+      - type: x-vocabulary
+        url: vocabulary/uc-davis-vocabulary.yml
+      - type: x-json-ld
+        url: json-ld/uc-davis-context.jsonld
   - aid: uc-davis:ace
     name: CAES ACE API
     description: >-

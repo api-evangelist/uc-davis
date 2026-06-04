@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/uc-davis/main/json-structure/uc-davis-key-structure.json",
+  "name": "Key",
+  "description": "JSON Structure for a PEAKS Key object (UC Davis CAES People Equipment Access Keys Space API).",
+  "type": "object",
+  "properties": {
+    "id": { "type": "int32", "description": "System-assigned identifier for the key." },
+    "name": { "type": "string", "maxLength": 64, "description": "Human-readable name of the key." },
+    "code": { "type": "string", "maxLength": 64, "description": "Key code identifier." },
+    "notes": { "type": "string", "description": "Free-form notes about the key." },
+    "tags": { "type": "string", "description": "Comma-delimited tags associated with the key." },
+    "teamId": { "type": "int32", "description": "Identifier of the owning team." },
+    "active": { "type": "boolean", "description": "Whether the key record is active." },
+    "title": { "type": "string", "description": "Derived display title for the key." }
+  },
+  "required": ["code", "name"]
+}

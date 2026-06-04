@@ -1,0 +1,41 @@
+{
+  "operation": "POST /api/{teamName}/equipment/Create",
+  "description": "Representative request/response for creating a piece of equipment in PEAKS. Field shapes derived from the PEAKS OpenAPI Equipment schema; values are illustrative.",
+  "request": {
+    "method": "POST",
+    "path": "/api/caes-cru/equipment/Create",
+    "headers": {
+      "X-Auth-Token": "<team-api-key>",
+      "Content-Type": "application/json"
+    },
+    "body": {
+      "name": "Microscope - Zeiss Axio",
+      "type": "Lab Instrument",
+      "serialNumber": "ZX-558291",
+      "make": "Zeiss",
+      "model": "Axio Imager",
+      "protectionLevel": "P3",
+      "availabilityLevel": "A2",
+      "spaceId": 42,
+      "tags": "microscope,imaging",
+      "active": true
+    }
+  },
+  "response": {
+    "id": 305,
+    "name": "Microscope - Zeiss Axio",
+    "type": "Lab Instrument",
+    "serialNumber": "ZX-558291",
+    "make": "Zeiss",
+    "model": "Axio Imager",
+    "protectionLevel": "P3",
+    "availabilityLevel": "A2",
+    "systemManagementId": null,
+    "spaceId": 42,
+    "teamId": 7,
+    "tags": "microscope,imaging",
+    "notes": null,
+    "active": true,
+    "title": "Microscope - Zeiss Axio"
+  }
+}

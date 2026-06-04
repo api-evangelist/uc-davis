@@ -1,0 +1,33 @@
+{
+  "operation": "GET /api/{teamName}/keys/List",
+  "description": "Representative response payload listing keys for a PEAKS team. Field shapes derived from the PEAKS OpenAPI Key schema; values are illustrative.",
+  "request": {
+    "method": "GET",
+    "path": "/api/caes-cru/keys/List",
+    "headers": {
+      "X-Auth-Token": "<team-api-key>"
+    }
+  },
+  "response": [
+    {
+      "id": 101,
+      "name": "Hutchison Hall Master",
+      "code": "HUT-001",
+      "notes": "Master key for first-floor labs",
+      "tags": "master,lab",
+      "teamId": 7,
+      "active": true,
+      "title": "Hutchison Hall Master (HUT-001)"
+    },
+    {
+      "id": 102,
+      "name": "Storage Room B",
+      "code": "STG-B",
+      "notes": null,
+      "tags": "storage",
+      "teamId": 7,
+      "active": true,
+      "title": "Storage Room B (STG-B)"
+    }
+  ]
+}

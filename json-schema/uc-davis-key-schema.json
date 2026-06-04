@@ -1,0 +1,19 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/uc-davis/main/json-schema/uc-davis-key-schema.json",
+  "title": "PEAKS Key",
+  "description": "A physical or logical key tracked by the UC Davis CAES PEAKS (People Equipment Access Keys Space) API.",
+  "type": "object",
+  "required": ["code", "name"],
+  "additionalProperties": false,
+  "properties": {
+    "id": { "type": "integer", "format": "int32", "description": "System-assigned identifier for the key." },
+    "name": { "type": "string", "maxLength": 64, "description": "Human-readable name of the key." },
+    "code": { "type": "string", "maxLength": 64, "description": "Key code identifier." },
+    "notes": { "type": ["string", "null"], "description": "Free-form notes about the key." },
+    "tags": { "type": ["string", "null"], "description": "Comma-delimited tags associated with the key." },
+    "teamId": { "type": "integer", "format": "int32", "description": "Identifier of the owning team." },
+    "active": { "type": "boolean", "description": "Whether the key record is active." },
+    "title": { "type": ["string", "null"], "readOnly": true, "description": "Derived display title for the key." }
+  }
+}

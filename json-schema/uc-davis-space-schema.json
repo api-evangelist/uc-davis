@@ -1,0 +1,28 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/uc-davis/main/json-schema/uc-davis-space-schema.json",
+  "title": "PEAKS Space",
+  "description": "A physical space (building/floor/room) referenced by the UC Davis CAES PEAKS API.",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "id": { "type": "integer", "format": "int32", "description": "System-assigned identifier for the space." },
+    "deptKey": { "type": ["string", "null"], "description": "Department key." },
+    "bldgKey": { "type": ["string", "null"], "description": "Building key." },
+    "roomKey": { "type": ["string", "null"], "description": "Room key." },
+    "floorKey": { "type": ["string", "null"], "description": "Floor key." },
+    "bldgName": { "type": ["string", "null"], "description": "Building name." },
+    "floorName": { "type": ["string", "null"], "description": "Floor name." },
+    "roomNumber": { "type": ["string", "null"], "description": "Room number." },
+    "roomName": { "type": ["string", "null"], "description": "Room name." },
+    "roomCategoryName": { "type": ["string", "null"], "description": "Room category name." },
+    "roomCategoryCode": { "type": ["string", "null"], "description": "Room category code." },
+    "chartNum": { "type": ["string", "null"], "description": "Chart number." },
+    "orgId": { "type": ["string", "null"], "description": "Organization identifier." },
+    "deptName": { "type": ["string", "null"], "description": "Department name." },
+    "source": { "type": ["string", "null"], "description": "Source system for the space record." },
+    "active": { "type": "boolean", "description": "Whether the space record is active." },
+    "sqFt": { "type": ["integer", "null"], "format": "int32", "description": "Square footage of the space." },
+    "shortName": { "type": ["string", "null"], "readOnly": true, "description": "Derived short name." }
+  }
+}

@@ -1,0 +1,47 @@
+---
+vocabulary:
+  name: UC Davis CAES PEAKS Vocabulary
+  description: >-
+    Controlled vocabulary of the core domain terms exposed by the UC Davis College of
+    Agricultural and Environmental Sciences (CAES) PEAKS API. PEAKS stands for People,
+    Equipment, Access, Keys, and Space. Terms and definitions are derived from the real
+    PEAKS OpenAPI 3.0.1 description published at
+    https://peaks.ucdavis.edu/swagger/v1/swagger.json.
+  version: v1
+  terms:
+    - term: Person
+      definition: An individual managed within a PEAKS team, identified by first name, last name, and email.
+      tags: [ people, identity ]
+    - term: Equipment
+      definition: A piece of inventoried equipment with make, model, serial number, and protection/availability levels.
+      tags: [ equipment, inventory ]
+    - term: Access
+      definition: A named access right that can be assigned to people within a team.
+      tags: [ access, authorization ]
+    - term: Key
+      definition: A physical or logical key identified by name and code, which may have multiple serials.
+      tags: [ keys, access ]
+    - term: KeySerial
+      definition: An individually numbered instance of a Key that can be assigned to a person.
+      tags: [ keys, serial ]
+    - term: Space
+      definition: A physical location described by building, floor, room, and department keys.
+      tags: [ space, facilities ]
+    - term: Workstation
+      definition: A workstation asset located in a space and assignable to a person.
+      tags: [ equipment, workstation ]
+    - term: Document
+      definition: A document (e.g. onboarding agreement) associated with a person and tracked through completion status.
+      tags: [ documents, workflow ]
+    - term: Team
+      definition: The organizational tenant that scopes all PEAKS resources, identified by a slug.
+      tags: [ team, tenant ]
+    - term: Assignment
+      definition: The relationship binding a key serial, equipment, access, or workstation to a person for a time period.
+      tags: [ assignment, lifecycle ]
+    - term: ProtectionLevel
+      definition: A classification code describing the data protection requirement of an asset.
+      tags: [ classification, security ]
+    - term: AvailabilityLevel
+      definition: A classification code describing the availability requirement of an asset.
+      tags: [ classification, security ]

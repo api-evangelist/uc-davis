@@ -1,0 +1,57 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "schema": "https://schema.org/",
+    "peaks": "https://peaks.ucdavis.edu/vocab#",
+    "@vocab": "https://peaks.ucdavis.edu/vocab#",
+
+    "institution": {
+      "@id": "schema:CollegeOrUniversity",
+      "@type": "@id"
+    },
+    "name": "schema:name",
+    "url": "schema:url",
+    "description": "schema:description",
+
+    "Person": "schema:Person",
+    "firstName": "schema:givenName",
+    "lastName": "schema:familyName",
+    "email": "schema:email",
+    "title": "schema:jobTitle",
+    "homePhone": "schema:telephone",
+
+    "Equipment": "peaks:Equipment",
+    "make": "schema:manufacturer",
+    "model": "schema:model",
+    "serialNumber": "schema:serialNumber",
+    "type": "schema:category",
+
+    "Key": "peaks:Key",
+    "code": "schema:identifier",
+    "KeySerial": "peaks:KeySerial",
+    "number": "schema:serialNumber",
+
+    "Access": "peaks:Access",
+    "Workstation": "peaks:Workstation",
+
+    "Space": "schema:Place",
+    "bldgName": "schema:name",
+    "roomNumber": "schema:identifier",
+    "sqFt": "schema:floorSize",
+
+    "Document": "schema:DigitalDocument",
+    "status": "schema:creativeWorkStatus",
+    "createdAt": "schema:dateCreated",
+    "completedAt": "schema:dateModified",
+
+    "Team": "schema:Organization",
+    "slug": "schema:identifier",
+
+    "active": "schema:disambiguatingDescription",
+    "tags": "schema:keywords",
+    "notes": "schema:comment"
+  },
+  "@type": "CollegeOrUniversity",
+  "name": "University of California, Davis",
+  "url": "https://www.ucdavis.edu/"
+}
