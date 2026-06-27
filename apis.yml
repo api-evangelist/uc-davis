@@ -55,7 +55,7 @@ apis:
     properties:
       - type: Documentation
         url: https://health.ucdavis.edu/systems-integration/developers
-      - type: SignUp
+      - type: Signup
         url: https://health.ucdavis.edu/systems-integration/developers
   - aid: uc-davis:peaks
     name: CAES PEAKS API
