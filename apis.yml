@@ -94,6 +94,10 @@ apis:
       - type: Documentation
         url: https://computing.caes.ucdavis.edu/documentation/ace/api
 common:
+  - type: DomainSecurity
+    url: security/uc-davis-domain-security.yml
+  - type: Authentication
+    url: authentication/uc-davis-authentication.yml
   - type: Website
     url: https://www.ucdavis.edu/
   - type: DeveloperPortal

@@ -1,0 +1,16 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/uc-davis-peaks.yaml
+summary:
+  types:
+  - apiKey
+  api_key_in:
+  - header
+schemes:
+- name: ApiKey
+  type: apiKey
+  in: header
+  parameter: X-Auth-Token
+  description: API Key Authentication
+  sources:
+  - openapi/uc-davis-peaks.yaml
