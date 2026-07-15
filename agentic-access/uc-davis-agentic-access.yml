@@ -1,0 +1,1088 @@
+generated: '2026-07-15'
+method: generated
+source: openapi/uc-davis-peaks.yaml
+description: Recommended x-agentic-access execution contracts, classified heuristically from
+  the OpenAPI. A governance starting point for exposing this API to AI agents — review and bind
+  audience per deployment. See research/curity/agentic-governance/.
+summary:
+  operations: 81
+  by_action_class:
+    connected: 51
+    acting: 30
+  by_consequence:
+    read: 51
+    write: 26
+    safety-critical: 4
+  human_in_the_loop_required: 4
+operations:
+- path: /api/{teamName}/access/Search
+  method: get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - AccessMasterAccess
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/{teamName}/access/ListAssigned
+  method: get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - AccessMasterAccess
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/{teamName}/access/List
+  method: get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - AccessMasterAccess
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/{teamName}/access/Details/{id}
+  method: get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - AccessMasterAccess
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/{teamName}/access/Create
+  method: post
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - AccessMasterAccess
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/{teamName}/access/Assign
+  method: post
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - AccessMasterAccess
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/{teamName}/access/Update
+  method: post
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - AccessMasterAccess
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/{teamName}/access/Revoke/{id}
+  method: post
+  x-agentic-access:
+    action-class: acting
+    consequence: safety-critical
+    subject: required
+    scope:
+    - AccessMasterAccess
+    audience: null
+    token:
+      max-ttl: 120
+      exchange: true
+      purpose-required: true
+      proof-of-possession: true
+    escalation:
+      human-in-the-loop: required
+    audit: required
+- path: /api/{teamName}/access/Delete/{id}
+  method: post
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - AccessMasterAccess
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/{teamName}/access/GetHistory/{id}
+  method: get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - AccessMasterAccess
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/{teamName}/documents/List
+  method: get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - DocumentMasterAccess
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/{teamName}/documents/Find/{id}
+  method: get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - DocumentMasterAccess
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/{teamName}/documents/Get/{id}
+  method: get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - DocumentMasterAccess
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/{teamName}/documents/TeamSettings
+  method: get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - DocumentMasterAccess
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/{teamName}/documents/Create
+  method: post
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - DocumentMasterAccess
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/{teamName}/documents/Delete/{id}
+  method: post
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - DocumentMasterAccess
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/{teamName}/equipment/Search
+  method: get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - EquipMasterAccess
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/{teamName}/equipment/SearchAttributes
+  method: get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - EquipMasterAccess
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/{teamName}/equipment/GetEquipmentInSpace
+  method: get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - EquipMasterAccess
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/{teamName}/equipment/CommonAttributeKeys
+  method: get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - EquipMasterAccess
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/{teamName}/equipment/ListEquipmentTypes
+  method: get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - EquipMasterAccess
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/{teamName}/equipment/ListAssigned
+  method: get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - EquipMasterAccess
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/{teamName}/equipment/List
+  method: get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - EquipMasterAccess
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/{teamName}/equipment/Details/{id}
+  method: get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - EquipMasterAccess
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/{teamName}/equipment/Create
+  method: post
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - EquipMasterAccess
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/{teamName}/equipment/Duplicate
+  method: post
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - EquipMasterAccess
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/{teamName}/equipment/Assign
+  method: post
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - EquipMasterAccess
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/{teamName}/equipment/Update
+  method: post
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - EquipMasterAccess
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/{teamName}/equipment/Revoke/{id}
+  method: post
+  x-agentic-access:
+    action-class: acting
+    consequence: safety-critical
+    subject: required
+    scope:
+    - EquipMasterAccess
+    audience: null
+    token:
+      max-ttl: 120
+      exchange: true
+      purpose-required: true
+      proof-of-possession: true
+    escalation:
+      human-in-the-loop: required
+    audit: required
+- path: /api/{teamName}/equipment/Delete/{id}
+  method: post
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - EquipMasterAccess
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/{teamName}/equipment/GetHistory/{id}
+  method: get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - EquipMasterAccess
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/{teamName}/equipment/GetComputer/{id}
+  method: get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - EquipMasterAccess
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/{teamName}/equipment/GetComputersBySearch
+  method: get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - EquipMasterAccess
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/{teamName}/keys/Search
+  method: get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - KeyMasterAccess
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/{teamName}/keys/List
+  method: get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - KeyMasterAccess
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/{teamName}/keys/Details/{id}
+  method: get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - KeyMasterAccess
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/{teamName}/keys/GetKeysInSpace
+  method: get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - KeyMasterAccess
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/{teamName}/keys/Create
+  method: post
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - KeyMasterAccess
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/{teamName}/keys/Update/{id}
+  method: post
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - KeyMasterAccess
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/{teamName}/keys/Delete/{id}
+  method: post
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - KeyMasterAccess
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/{teamName}/keys/AssociateSpace/{id}
+  method: post
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - KeyMasterAccess
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/{teamName}/keys/DisassociateSpace/{id}
+  method: post
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - KeyMasterAccess
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/{teamName}/keys/GetHistory/{id}
+  method: get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - KeyMasterAccess
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/{teamName}/KeySerials/Search
+  method: get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - KeyMasterAccess
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/{teamName}/KeySerials/SearchInKey
+  method: get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - KeyMasterAccess
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/{teamName}/KeySerials/GetForKey
+  method: get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - KeyMasterAccess
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/{teamName}/KeySerials/GetForPerson
+  method: get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - KeyMasterAccess
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/{teamName}/KeySerials/Details/{id}
+  method: get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - KeyMasterAccess
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/{teamName}/KeySerials/Create
+  method: post
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - KeyMasterAccess
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/{teamName}/KeySerials/Update/{id}
+  method: post
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - KeyMasterAccess
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/{teamName}/KeySerials/Assign
+  method: post
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - KeyMasterAccess
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/{teamName}/KeySerials/Revoke/{id}
+  method: post
+  x-agentic-access:
+    action-class: acting
+    consequence: safety-critical
+    subject: required
+    scope:
+    - KeyMasterAccess
+    audience: null
+    token:
+      max-ttl: 120
+      exchange: true
+      purpose-required: true
+      proof-of-possession: true
+    escalation:
+      human-in-the-loop: required
+    audit: required
+- path: /api/{teamName}/KeySerials/GetHistory/{id}
+  method: get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - KeyMasterAccess
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/{teamName}/KeySerials/ListKeySerialStatus
+  method: get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - KeyMasterAccess
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/{teamName}/people/List
+  method: get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - AnyRole
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/{teamName}/people/SearchPeople
+  method: get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - AnyRole
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/{teamName}/people/SearchUsers
+  method: get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - AnyRole
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/{teamName}/people/Create
+  method: post
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - AnyRole
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/{teamName}/peopleadmin/Update
+  method: post
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - PersonManagerAccess
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/{teamName}/peopleadmin/Delete/{id}
+  method: post
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - PersonManagerAccess
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/{teamName}/peopleadmin/Details/{id}
+  method: get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - PersonManagerAccess
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/{teamName}/peopleadmin/GetHistory/{id}
+  method: get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - PersonManagerAccess
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/{teamName}/spaces/SearchSpaces
+  method: get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - AnyRole
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/{teamName}/spaces/List
+  method: get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - AnyRole
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/{teamName}/spaces/ShortList
+  method: get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - AnyRole
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/{teamName}/spaces/GetSpacesForKey
+  method: get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - AnyRole
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/{teamName}/spaces/GetTagsInSpace
+  method: get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - AnyRole
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/{teamName}/spaces/Details/{id}
+  method: get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - AnyRole
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/{teamName}/workstations/Search
+  method: get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - SpaceMasterAccess
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/{teamName}/workstations/SearchInSpace
+  method: get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - SpaceMasterAccess
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/{teamName}/workstations/GetWorkstationsInSpace
+  method: get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - SpaceMasterAccess
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/{teamName}/workstations/CommonAttributeKeys
+  method: get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - SpaceMasterAccess
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/{teamName}/workstations/ListAssigned
+  method: get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - SpaceMasterAccess
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/{teamName}/workstations/List
+  method: get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - SpaceMasterAccess
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/{teamName}/workstations/Details/{id}
+  method: get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - SpaceMasterAccess
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/{teamName}/workstations/Create
+  method: post
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - SpaceMasterAccess
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/{teamName}/workstations/Assign
+  method: post
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - SpaceMasterAccess
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/{teamName}/workstations/Revoke/{id}
+  method: post
+  x-agentic-access:
+    action-class: acting
+    consequence: safety-critical
+    subject: required
+    scope:
+    - SpaceMasterAccess
+    audience: null
+    token:
+      max-ttl: 120
+      exchange: true
+      purpose-required: true
+      proof-of-possession: true
+    escalation:
+      human-in-the-loop: required
+    audit: required
+- path: /api/{teamName}/workstations/Update
+  method: post
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - SpaceMasterAccess
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/{teamName}/workstations/Delete/{id}
+  method: post
+  x-agentic-access:
+    action-class: acting
+    consequence: write
+    subject: required
+    scope:
+    - SpaceMasterAccess
+    audience: null
+    token:
+      max-ttl: 900
+    escalation:
+      human-in-the-loop: conditional
+      triggers:
+      - abnormal
+      - high-value
+    audit: required
+- path: /api/{teamName}/workstations/GetHistory/{id}
+  method: get
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    scope:
+    - SpaceMasterAccess
+    token:
+      max-ttl: 3600
+    audit: none

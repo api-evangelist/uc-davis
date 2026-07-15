@@ -94,6 +94,8 @@ apis:
       - type: Documentation
         url: https://computing.caes.ucdavis.edu/documentation/ace/api
 common:
+  - type: AgenticAccess
+    url: agentic-access/uc-davis-agentic-access.yml
   - type: DomainSecurity
     url: security/uc-davis-domain-security.yml
   - type: Authentication
