@@ -13,9 +13,22 @@ description: >-
   repositories. Most administrative and identity APIs are gated behind institutional
   affiliation, SSO, or partner agreements rather than open self-service signup.
 type: Index
+accessModel:
+  pricing: free
+  onboarding: self-serve
+  trial: false
+  try_now: true
+  public: false
+  label: Free · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
 position: Consumer
 access: 3rd-Party
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/uc-davis.png
 url: https://raw.githubusercontent.com/api-evangelist/uc-davis/refs/heads/main/apis.yml
 tags:
   - Education
@@ -30,69 +43,269 @@ created: '2026-06-03'
 modified: '2026-06-03'
 specificationVersion: '0.19'
 apis:
-  - aid: uc-davis:iet-middleware
-    name: IET Middleware Web Service APIs
-    description: >-
-      Information and Educational Technology (IET) Middleware Web Service APIs provide
-      campus integration and identity-related middleware services. Usage instructions
-      are published via the IET Application Development documentation; access is
-      typically gated for affiliated campus developers.
-    humanURL: https://iet-ws.ucdavis.edu/api/
-    tags: [ Identity, Middleware, Integration ]
-    properties:
-      - type: Documentation
-        url: https://iet-ws.ucdavis.edu/api/
-  - aid: uc-davis:health-integration
-    name: UC Davis Health Systems Integration APIs
-    description: >-
-      UC Davis Health offers Epic (EHR), HL7 FHIR, and custom APIs accessed via SOAP
-      or REST using JSON/XML. Authentication methods include API Key, OAuth2, and
-      Direct Interconnect for existing Epic users, with traffic governed through
-      InterSystems API Manager. Access is arranged through the systems integration
-      team rather than open self-service.
-    humanURL: https://health.ucdavis.edu/systems-integration/developers
-    tags: [ Health, FHIR, Epic, Integration ]
-    properties:
-      - type: Documentation
-        url: https://health.ucdavis.edu/systems-integration/developers
-      - type: Signup
-        url: https://health.ucdavis.edu/systems-integration/developers
-  - aid: uc-davis:peaks
-    name: CAES PEAKS API
-    description: >-
-      The College of Agricultural and Environmental Sciences (CAES) Computing Resources
-      Unit publishes the PEAKS API with Swagger/OpenAPI documentation. PEAKS supports
-      CAES administrative and computing workflows.
-    humanURL: https://computing.caes.ucdavis.edu/documentation/peaks/api
-    tags: [ Administration, Swagger, OpenAPI ]
-    baseURL: https://peaks.ucdavis.edu
-    properties:
-      - type: Documentation
-        url: https://computing.caes.ucdavis.edu/documentation/peaks/api
-      - type: OpenAPI
-        url: openapi/uc-davis-peaks.yaml
-      - type: x-json-schema
-        url: json-schema/uc-davis-key-schema.json
-      - type: x-json-structure
-        url: json-structure/uc-davis-key-structure.json
-      - type: x-examples
-        url: examples/uc-davis-keys-list-example.json
-      - type: x-rules
-        url: rules/uc-davis-rules.yml
-      - type: x-vocabulary
-        url: vocabulary/uc-davis-vocabulary.yml
-      - type: x-json-ld
-        url: json-ld/uc-davis-context.jsonld
-  - aid: uc-davis:ace
-    name: CAES ACE API
-    description: >-
-      The CAES Computing Resources Unit publishes the ACE API with documentation
-      supporting college administrative and content workflows.
-    humanURL: https://computing.caes.ucdavis.edu/documentation/ace/api
-    tags: [ Administration, Integration ]
-    properties:
-      - type: Documentation
-        url: https://computing.caes.ucdavis.edu/documentation/ace/api
+- aid: uc-davis:iet-middleware
+  name: IET Middleware Web Service APIs
+  description: >-
+    Information and Educational Technology (IET) Middleware Web Service APIs provide campus integration
+    and identity-related middleware services. Usage instructions are published via the IET Application
+    Development documentation; access is typically gated for affiliated campus developers.
+  humanURL: https://iet-ws.ucdavis.edu/api/
+  tags:
+  - Identity
+  - Middleware
+  - Integration
+  properties:
+  - type: Documentation
+    url: https://iet-ws.ucdavis.edu/api/
+- aid: uc-davis:health-integration
+  name: UC Davis Health Systems Integration APIs
+  description: >-
+    UC Davis Health offers Epic (EHR), HL7 FHIR, and custom APIs accessed via SOAP or REST using JSON/XML.
+    Authentication methods include API Key, OAuth2, and Direct Interconnect for existing Epic users, with
+    traffic governed through InterSystems API Manager. Access is arranged through the systems integration
+    team rather than open self-service.
+  humanURL: https://health.ucdavis.edu/systems-integration/developers
+  tags:
+  - Health
+  - FHIR
+  - Epic
+  - Integration
+  properties:
+  - type: Documentation
+    url: https://health.ucdavis.edu/systems-integration/developers
+  - type: Signup
+    url: https://health.ucdavis.edu/systems-integration/developers
+- aid: uc-davis:ace
+  name: CAES ACE API
+  description: >-
+    The CAES Computing Resources Unit publishes the ACE API with documentation supporting college administrative
+    and content workflows.
+  humanURL: https://computing.caes.ucdavis.edu/documentation/ace/api
+  tags:
+  - Administration
+  - Integration
+  properties:
+  - type: Documentation
+    url: https://computing.caes.ucdavis.edu/documentation/ace/api
+- aid: uc-davis:uc-davis-access-api
+  name: University of California, Davis Access API
+  description: The Access API from University of California, Davis — 10 operation(s) for access.
+  humanURL: https://iet-ws.ucdavis.edu/api/
+  baseURL: https://peaks.ucdavis.edu
+  tags:
+  - Access
+  properties:
+  - type: OpenAPI
+    url: openapi/uc-davis-access-api-openapi.yml
+  - type: Documentation
+    url: https://computing.caes.ucdavis.edu/documentation/peaks/api
+  - type: x-json-schema
+    url: json-schema/uc-davis-key-schema.json
+  - type: x-json-structure
+    url: json-structure/uc-davis-key-structure.json
+  - type: x-examples
+    url: examples/uc-davis-keys-list-example.json
+  - type: x-rules
+    url: rules/uc-davis-rules.yml
+  - type: x-vocabulary
+    url: vocabulary/uc-davis-vocabulary.yml
+  - type: x-json-ld
+    url: json-ld/uc-davis-context.jsonld
+- aid: uc-davis:uc-davis-documents-api
+  name: University of California, Davis Documents API
+  description: The Documents API from University of California, Davis — 6 operation(s) for documents.
+  humanURL: https://iet-ws.ucdavis.edu/api/
+  baseURL: https://peaks.ucdavis.edu
+  tags:
+  - Documents
+  properties:
+  - type: OpenAPI
+    url: openapi/uc-davis-documents-api-openapi.yml
+  - type: Documentation
+    url: https://computing.caes.ucdavis.edu/documentation/peaks/api
+  - type: x-json-schema
+    url: json-schema/uc-davis-key-schema.json
+  - type: x-json-structure
+    url: json-structure/uc-davis-key-structure.json
+  - type: x-examples
+    url: examples/uc-davis-keys-list-example.json
+  - type: x-rules
+    url: rules/uc-davis-rules.yml
+  - type: x-vocabulary
+    url: vocabulary/uc-davis-vocabulary.yml
+  - type: x-json-ld
+    url: json-ld/uc-davis-context.jsonld
+- aid: uc-davis:uc-davis-equipment-api
+  name: University of California, Davis Equipment API
+  description: The Equipment API from University of California, Davis — 17 operation(s) for equipment.
+  humanURL: https://iet-ws.ucdavis.edu/api/
+  baseURL: https://peaks.ucdavis.edu
+  tags:
+  - Equipment
+  properties:
+  - type: OpenAPI
+    url: openapi/uc-davis-equipment-api-openapi.yml
+  - type: Documentation
+    url: https://computing.caes.ucdavis.edu/documentation/peaks/api
+  - type: x-json-schema
+    url: json-schema/uc-davis-key-schema.json
+  - type: x-json-structure
+    url: json-structure/uc-davis-key-structure.json
+  - type: x-examples
+    url: examples/uc-davis-keys-list-example.json
+  - type: x-rules
+    url: rules/uc-davis-rules.yml
+  - type: x-vocabulary
+    url: vocabulary/uc-davis-vocabulary.yml
+  - type: x-json-ld
+    url: json-ld/uc-davis-context.jsonld
+- aid: uc-davis:uc-davis-keys-api
+  name: University of California, Davis Keys API
+  description: The Keys API from University of California, Davis — 10 operation(s) for keys.
+  humanURL: https://iet-ws.ucdavis.edu/api/
+  baseURL: https://peaks.ucdavis.edu
+  tags:
+  - Keys
+  properties:
+  - type: OpenAPI
+    url: openapi/uc-davis-keys-api-openapi.yml
+  - type: Documentation
+    url: https://computing.caes.ucdavis.edu/documentation/peaks/api
+  - type: x-json-schema
+    url: json-schema/uc-davis-key-schema.json
+  - type: x-json-structure
+    url: json-structure/uc-davis-key-structure.json
+  - type: x-examples
+    url: examples/uc-davis-keys-list-example.json
+  - type: x-rules
+    url: rules/uc-davis-rules.yml
+  - type: x-vocabulary
+    url: vocabulary/uc-davis-vocabulary.yml
+  - type: x-json-ld
+    url: json-ld/uc-davis-context.jsonld
+- aid: uc-davis:uc-davis-keyserials-api
+  name: University of California, Davis KeySerials API
+  description: >-
+    The KeySerials API from University of California, Davis — 11 operation(s) for keyserials.
+  humanURL: https://iet-ws.ucdavis.edu/api/
+  baseURL: https://peaks.ucdavis.edu
+  tags:
+  - KeySerials
+  properties:
+  - type: OpenAPI
+    url: openapi/uc-davis-keyserials-api-openapi.yml
+  - type: Documentation
+    url: https://computing.caes.ucdavis.edu/documentation/peaks/api
+  - type: x-json-schema
+    url: json-schema/uc-davis-key-schema.json
+  - type: x-json-structure
+    url: json-structure/uc-davis-key-structure.json
+  - type: x-examples
+    url: examples/uc-davis-keys-list-example.json
+  - type: x-rules
+    url: rules/uc-davis-rules.yml
+  - type: x-vocabulary
+    url: vocabulary/uc-davis-vocabulary.yml
+  - type: x-json-ld
+    url: json-ld/uc-davis-context.jsonld
+- aid: uc-davis:uc-davis-people-api
+  name: University of California, Davis People API
+  description: The People API from University of California, Davis — 4 operation(s) for people.
+  humanURL: https://iet-ws.ucdavis.edu/api/
+  baseURL: https://peaks.ucdavis.edu
+  tags:
+  - People
+  properties:
+  - type: OpenAPI
+    url: openapi/uc-davis-people-api-openapi.yml
+  - type: Documentation
+    url: https://computing.caes.ucdavis.edu/documentation/peaks/api
+  - type: x-json-schema
+    url: json-schema/uc-davis-key-schema.json
+  - type: x-json-structure
+    url: json-structure/uc-davis-key-structure.json
+  - type: x-examples
+    url: examples/uc-davis-keys-list-example.json
+  - type: x-rules
+    url: rules/uc-davis-rules.yml
+  - type: x-vocabulary
+    url: vocabulary/uc-davis-vocabulary.yml
+  - type: x-json-ld
+    url: json-ld/uc-davis-context.jsonld
+- aid: uc-davis:uc-davis-peopleadmin-api
+  name: University of California, Davis PeopleAdmin API
+  description: >-
+    The PeopleAdmin API from University of California, Davis — 4 operation(s) for peopleadmin.
+  humanURL: https://iet-ws.ucdavis.edu/api/
+  baseURL: https://peaks.ucdavis.edu
+  tags:
+  - PeopleAdmin
+  properties:
+  - type: OpenAPI
+    url: openapi/uc-davis-peopleadmin-api-openapi.yml
+  - type: Documentation
+    url: https://computing.caes.ucdavis.edu/documentation/peaks/api
+  - type: x-json-schema
+    url: json-schema/uc-davis-key-schema.json
+  - type: x-json-structure
+    url: json-structure/uc-davis-key-structure.json
+  - type: x-examples
+    url: examples/uc-davis-keys-list-example.json
+  - type: x-rules
+    url: rules/uc-davis-rules.yml
+  - type: x-vocabulary
+    url: vocabulary/uc-davis-vocabulary.yml
+  - type: x-json-ld
+    url: json-ld/uc-davis-context.jsonld
+- aid: uc-davis:uc-davis-spaces-api
+  name: University of California, Davis Spaces API
+  description: The Spaces API from University of California, Davis — 6 operation(s) for spaces.
+  humanURL: https://iet-ws.ucdavis.edu/api/
+  baseURL: https://peaks.ucdavis.edu
+  tags:
+  - Spaces
+  properties:
+  - type: OpenAPI
+    url: openapi/uc-davis-spaces-api-openapi.yml
+  - type: Documentation
+    url: https://computing.caes.ucdavis.edu/documentation/peaks/api
+  - type: x-json-schema
+    url: json-schema/uc-davis-key-schema.json
+  - type: x-json-structure
+    url: json-structure/uc-davis-key-structure.json
+  - type: x-examples
+    url: examples/uc-davis-keys-list-example.json
+  - type: x-rules
+    url: rules/uc-davis-rules.yml
+  - type: x-vocabulary
+    url: vocabulary/uc-davis-vocabulary.yml
+  - type: x-json-ld
+    url: json-ld/uc-davis-context.jsonld
+- aid: uc-davis:uc-davis-workstations-api
+  name: University of California, Davis Workstations API
+  description: >-
+    The Workstations API from University of California, Davis — 13 operation(s) for workstations.
+  humanURL: https://iet-ws.ucdavis.edu/api/
+  baseURL: https://peaks.ucdavis.edu
+  tags:
+  - Workstations
+  properties:
+  - type: OpenAPI
+    url: openapi/uc-davis-workstations-api-openapi.yml
+  - type: Documentation
+    url: https://computing.caes.ucdavis.edu/documentation/peaks/api
+  - type: x-json-schema
+    url: json-schema/uc-davis-key-schema.json
+  - type: x-json-structure
+    url: json-structure/uc-davis-key-structure.json
+  - type: x-examples
+    url: examples/uc-davis-keys-list-example.json
+  - type: x-rules
+    url: rules/uc-davis-rules.yml
+  - type: x-vocabulary
+    url: vocabulary/uc-davis-vocabulary.yml
+  - type: x-json-ld
+    url: json-ld/uc-davis-context.jsonld
 common:
   - type: AgenticAccess
     url: agentic-access/uc-davis-agentic-access.yml
