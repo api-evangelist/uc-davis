@@ -1,0 +1,5926 @@
+openapi: 3.0.1
+info:
+  title: PEAKS API v1
+  description: People Equipment Access Keys Space
+  contact:
+    name: Application Support
+    url: https://caeshelp.ucdavis.edu/?appname=Peaks
+  license:
+    name: MIT
+    url: https://github.com/ucdavis/Peaks/blob/master/LICENSE
+  version: v1
+  ProjectUrl: https://github.com/ucdavis/Peaks/
+paths:
+  /api/{teamName}/access/Search:
+    get:
+      tags:
+      - Access
+      parameters:
+      - name: q
+        in: query
+        schema:
+          type: string
+      - name: teamName
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: X-Auth-Token
+        in: header
+        description: access token
+        required: true
+        schema:
+          type: string
+          default: ApiKey
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Access'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+      security:
+      - ApiKey:
+        - AccessMasterAccess
+  /api/{teamName}/access/ListAssigned:
+    get:
+      tags:
+      - Access
+      parameters:
+      - name: personId
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: teamName
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: X-Auth-Token
+        in: header
+        description: access token
+        required: true
+        schema:
+          type: string
+          default: ApiKey
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Access'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+      security:
+      - ApiKey:
+        - AccessMasterAccess
+  /api/{teamName}/access/List:
+    get:
+      tags:
+      - Access
+      summary: List Access
+      parameters:
+      - name: filter
+        in: query
+        description: 0 = ShowActive, 1 = ShowInactive, 2 = ShowAll. Defaults to Show Active
+        schema:
+          $ref: '#/components/schemas/Filter'
+      - name: teamName
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: X-Auth-Token
+        in: header
+        description: access token
+        required: true
+        schema:
+          type: string
+          default: ApiKey
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Access'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+      security:
+      - ApiKey:
+        - AccessMasterAccess
+  /api/{teamName}/access/Details/{id}:
+    get:
+      tags:
+      - Access
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: teamName
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: X-Auth-Token
+        in: header
+        description: access token
+        required: true
+        schema:
+          type: string
+          default: ApiKey
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Access'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+      security:
+      - ApiKey:
+        - AccessMasterAccess
+  /api/{teamName}/access/Create:
+    post:
+      tags:
+      - Access
+      parameters:
+      - name: teamName
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: X-Auth-Token
+        in: header
+        description: access token
+        required: true
+        schema:
+          type: string
+          default: ApiKey
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Access'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Access'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+      security:
+      - ApiKey:
+        - AccessMasterAccess
+  /api/{teamName}/access/Assign:
+    post:
+      tags:
+      - Access
+      parameters:
+      - name: accessId
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: personId
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: date
+        in: query
+        schema:
+          type: string
+      - name: teamName
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: X-Auth-Token
+        in: header
+        description: access token
+        required: true
+        schema:
+          type: string
+          default: ApiKey
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessAssignment'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+      security:
+      - ApiKey:
+        - AccessMasterAccess
+  /api/{teamName}/access/Update:
+    post:
+      tags:
+      - Access
+      summary: Only Name, Notes, and Tags fields are updated
+      parameters:
+      - name: teamName
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: X-Auth-Token
+        in: header
+        description: access token
+        required: true
+        schema:
+          type: string
+          default: ApiKey
+      requestBody:
+        description: ''
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Access'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Access'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+      security:
+      - ApiKey:
+        - AccessMasterAccess
+  /api/{teamName}/access/Revoke/{id}:
+    post:
+      tags:
+      - Access
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: teamName
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: X-Auth-Token
+        in: header
+        description: access token
+        required: true
+        schema:
+          type: string
+          default: ApiKey
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccessAssignment'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+      security:
+      - ApiKey:
+        - AccessMasterAccess
+  /api/{teamName}/access/Delete/{id}:
+    post:
+      tags:
+      - Access
+      summary: If there are any assignments, they will be removed before the access record is set to inactive
+      parameters:
+      - name: id
+        in: path
+        description: ''
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: teamName
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: X-Auth-Token
+        in: header
+        description: access token
+        required: true
+        schema:
+          type: string
+          default: ApiKey
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Access'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+      security:
+      - ApiKey:
+        - AccessMasterAccess
+  /api/{teamName}/access/GetHistory/{id}:
+    get:
+      tags:
+      - Access
+      summary: "Return history records\r\nDefaults to a max of 5 records returned"
+      parameters:
+      - name: id
+        in: path
+        description: ''
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: max
+        in: query
+        description: the max number of record to take. Defaults to 5
+        schema:
+          type: integer
+          format: int32
+          default: 5
+      - name: teamName
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: X-Auth-Token
+        in: header
+        description: access token
+        required: true
+        schema:
+          type: string
+          default: ApiKey
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/History'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+      security:
+      - ApiKey:
+        - AccessMasterAccess
+  /api/{teamName}/documents/List:
+    get:
+      tags:
+      - Documents
+      parameters:
+      - name: teamName
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: X-Auth-Token
+        in: header
+        description: access token
+        required: true
+        schema:
+          type: string
+          default: ApiKey
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Document'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+      security:
+      - ApiKey:
+        - DocumentMasterAccess
+  /api/{teamName}/documents/Find/{id}:
+    get:
+      tags:
+      - Documents
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: teamName
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: X-Auth-Token
+        in: header
+        description: access token
+        required: true
+        schema:
+          type: string
+          default: ApiKey
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Document'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+      security:
+      - ApiKey:
+        - DocumentMasterAccess
+  /api/{teamName}/documents/Get/{id}:
+    get:
+      tags:
+      - Documents
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: teamName
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: X-Auth-Token
+        in: header
+        description: access token
+        required: true
+        schema:
+          type: string
+          default: ApiKey
+      responses:
+        '200':
+          description: Success
+          content:
+            application/pdf:
+              schema:
+                type: string
+                format: binary
+            application/json:
+              schema:
+                type: string
+                format: binary
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+      security:
+      - ApiKey:
+        - DocumentMasterAccess
+  /api/{teamName}/documents/TeamSettings:
+    get:
+      tags:
+      - Documents
+      parameters:
+      - name: teamName
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: X-Auth-Token
+        in: header
+        description: access token
+        required: true
+        schema:
+          type: string
+          default: ApiKey
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/DocumentTemplateInfo'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+      security:
+      - ApiKey:
+        - DocumentMasterAccess
+  /api/{teamName}/documents/Create:
+    post:
+      tags:
+      - Documents
+      parameters:
+      - name: teamName
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: X-Auth-Token
+        in: header
+        description: access token
+        required: true
+        schema:
+          type: string
+          default: ApiKey
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Document'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Document'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+      security:
+      - ApiKey:
+        - DocumentMasterAccess
+  /api/{teamName}/documents/Delete/{id}:
+    post:
+      tags:
+      - Documents
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: teamName
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: X-Auth-Token
+        in: header
+        description: access token
+        required: true
+        schema:
+          type: string
+          default: ApiKey
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Document'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+      security:
+      - ApiKey:
+        - DocumentMasterAccess
+  /api/{teamName}/equipment/Search:
+    get:
+      tags:
+      - Equipment
+      parameters:
+      - name: q
+        in: query
+        schema:
+          type: string
+      - name: teamName
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: X-Auth-Token
+        in: header
+        description: access token
+        required: true
+        schema:
+          type: string
+          default: ApiKey
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Equipment'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+      security:
+      - ApiKey:
+        - EquipMasterAccess
+  /api/{teamName}/equipment/SearchAttributes:
+    get:
+      tags:
+      - Equipment
+      parameters:
+      - name: q
+        in: query
+        schema:
+          type: string
+      - name: teamName
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: X-Auth-Token
+        in: header
+        description: access token
+        required: true
+        schema:
+          type: string
+          default: ApiKey
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Equipment'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+      security:
+      - ApiKey:
+        - EquipMasterAccess
+  /api/{teamName}/equipment/GetEquipmentInSpace:
+    get:
+      tags:
+      - Equipment
+      parameters:
+      - name: spaceId
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: teamName
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: X-Auth-Token
+        in: header
+        description: access token
+        required: true
+        schema:
+          type: string
+          default: ApiKey
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Equipment'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+      security:
+      - ApiKey:
+        - EquipMasterAccess
+  /api/{teamName}/equipment/CommonAttributeKeys:
+    get:
+      tags:
+      - Equipment
+      parameters:
+      - name: teamName
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: X-Auth-Token
+        in: header
+        description: access token
+        required: true
+        schema:
+          type: string
+          default: ApiKey
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/EquipmentAttributeKey'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+      security:
+      - ApiKey:
+        - EquipMasterAccess
+  /api/{teamName}/equipment/ListEquipmentTypes:
+    get:
+      tags:
+      - Equipment
+      parameters:
+      - name: teamName
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: X-Auth-Token
+        in: header
+        description: access token
+        required: true
+        schema:
+          type: string
+          default: ApiKey
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Type'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+      security:
+      - ApiKey:
+        - EquipMasterAccess
+  /api/{teamName}/equipment/ListAssigned:
+    get:
+      tags:
+      - Equipment
+      parameters:
+      - name: personId
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: teamName
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: X-Auth-Token
+        in: header
+        description: access token
+        required: true
+        schema:
+          type: string
+          default: ApiKey
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Equipment'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+      security:
+      - ApiKey:
+        - EquipMasterAccess
+  /api/{teamName}/equipment/List:
+    get:
+      tags:
+      - Equipment
+      summary: List all equipments for a team
+      parameters:
+      - name: filter
+        in: query
+        description: 0 = ShowActive, 1 = ShowInactive, 2 = ShowAll. Defaults to Show Active
+        schema:
+          $ref: '#/components/schemas/Filter'
+      - name: teamName
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: X-Auth-Token
+        in: header
+        description: access token
+        required: true
+        schema:
+          type: string
+          default: ApiKey
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Equipment'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+      security:
+      - ApiKey:
+        - EquipMasterAccess
+  /api/{teamName}/equipment/Details/{id}:
+    get:
+      tags:
+      - Equipment
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: showDeleted
+        in: query
+        schema:
+          type: boolean
+          default: false
+      - name: teamName
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: X-Auth-Token
+        in: header
+        description: access token
+        required: true
+        schema:
+          type: string
+          default: ApiKey
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Equipment'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+      security:
+      - ApiKey:
+        - EquipMasterAccess
+  /api/{teamName}/equipment/Create:
+    post:
+      tags:
+      - Equipment
+      parameters:
+      - name: teamName
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: X-Auth-Token
+        in: header
+        description: access token
+        required: true
+        schema:
+          type: string
+          default: ApiKey
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Equipment'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Equipment'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+      security:
+      - ApiKey:
+        - EquipMasterAccess
+  /api/{teamName}/equipment/Duplicate:
+    post:
+      tags:
+      - Equipment
+      parameters:
+      - name: teamName
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: X-Auth-Token
+        in: header
+        description: access token
+        required: true
+        schema:
+          type: string
+          default: ApiKey
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Equipment'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Equipment'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+      security:
+      - ApiKey:
+        - EquipMasterAccess
+  /api/{teamName}/equipment/Assign:
+    post:
+      tags:
+      - Equipment
+      parameters:
+      - name: equipmentId
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: personId
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: date
+        in: query
+        schema:
+          type: string
+      - name: teamName
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: X-Auth-Token
+        in: header
+        description: access token
+        required: true
+        schema:
+          type: string
+          default: ApiKey
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Equipment'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+      security:
+      - ApiKey:
+        - EquipMasterAccess
+  /api/{teamName}/equipment/Update:
+    post:
+      tags:
+      - Equipment
+      parameters:
+      - name: teamName
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: X-Auth-Token
+        in: header
+        description: access token
+        required: true
+        schema:
+          type: string
+          default: ApiKey
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Equipment'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Equipment'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+      security:
+      - ApiKey:
+        - EquipMasterAccess
+  /api/{teamName}/equipment/Revoke/{id}:
+    post:
+      tags:
+      - Equipment
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: teamName
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: X-Auth-Token
+        in: header
+        description: access token
+        required: true
+        schema:
+          type: string
+          default: ApiKey
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Equipment'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+      security:
+      - ApiKey:
+        - EquipMasterAccess
+  /api/{teamName}/equipment/Delete/{id}:
+    post:
+      tags:
+      - Equipment
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: teamName
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: X-Auth-Token
+        in: header
+        description: access token
+        required: true
+        schema:
+          type: string
+          default: ApiKey
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Equipment'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+      security:
+      - ApiKey:
+        - EquipMasterAccess
+  /api/{teamName}/equipment/GetHistory/{id}:
+    get:
+      tags:
+      - Equipment
+      summary: Takes the top 5 history records
+      parameters:
+      - name: id
+        in: path
+        description: ''
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: max
+        in: query
+        description: Defaults to 5
+        schema:
+          type: integer
+          format: int32
+          default: 5
+      - name: teamName
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: X-Auth-Token
+        in: header
+        description: access token
+        required: true
+        schema:
+          type: string
+          default: ApiKey
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/History'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+      security:
+      - ApiKey:
+        - EquipMasterAccess
+  /api/{teamName}/equipment/GetComputer/{id}:
+    get:
+      tags:
+      - Equipment
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: teamName
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: X-Auth-Token
+        in: header
+        description: access token
+        required: true
+        schema:
+          type: string
+          default: ApiKey
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ServiceNowPropertyWrapper'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+      security:
+      - ApiKey:
+        - EquipMasterAccess
+  /api/{teamName}/equipment/GetComputersBySearch:
+    get:
+      tags:
+      - Equipment
+      parameters:
+      - name: value
+        in: query
+        schema:
+          type: string
+      - name: teamName
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: X-Auth-Token
+        in: header
+        description: access token
+        required: true
+        schema:
+          type: string
+          default: ApiKey
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ServiceNowPropertyWrapper'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+      security:
+      - ApiKey:
+        - EquipMasterAccess
+  /api/{teamName}/keys/Search:
+    get:
+      tags:
+      - Keys
+      parameters:
+      - name: q
+        in: query
+        schema:
+          type: string
+      - name: teamName
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: X-Auth-Token
+        in: header
+        description: access token
+        required: true
+        schema:
+          type: string
+          default: ApiKey
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Key'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+      security:
+      - ApiKey:
+        - KeyMasterAccess
+  /api/{teamName}/keys/List:
+    get:
+      tags:
+      - Keys
+      summary: List all keys for a team
+      parameters:
+      - name: filter
+        in: query
+        description: 0 = ShowActive, 1 = ShowInactive, 2 = ShowAll. Defaults to Show Active
+        schema:
+          $ref: '#/components/schemas/Filter'
+      - name: teamName
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: X-Auth-Token
+        in: header
+        description: access token
+        required: true
+        schema:
+          type: string
+          default: ApiKey
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Key'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+      security:
+      - ApiKey:
+        - KeyMasterAccess
+  /api/{teamName}/keys/Details/{id}:
+    get:
+      tags:
+      - Keys
+      summary: Show details of a key
+      parameters:
+      - name: id
+        in: path
+        description: The Key Id
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: includeSerial
+        in: query
+        description: Includes serials any related assignments, and the person
+        schema:
+          type: boolean
+          default: false
+      - name: includeSpace
+        in: query
+        description: Include any related spaces
+        schema:
+          type: boolean
+          default: false
+      - name: teamName
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: X-Auth-Token
+        in: header
+        description: access token
+        required: true
+        schema:
+          type: string
+          default: ApiKey
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Key'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+      security:
+      - ApiKey:
+        - KeyMasterAccess
+  /api/{teamName}/keys/GetKeysInSpace:
+    get:
+      tags:
+      - Keys
+      parameters:
+      - name: spaceId
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: teamName
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: X-Auth-Token
+        in: header
+        description: access token
+        required: true
+        schema:
+          type: string
+          default: ApiKey
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Key'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+      security:
+      - ApiKey:
+        - KeyMasterAccess
+  /api/{teamName}/keys/Create:
+    post:
+      tags:
+      - Keys
+      parameters:
+      - name: teamName
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: X-Auth-Token
+        in: header
+        description: access token
+        required: true
+        schema:
+          type: string
+          default: ApiKey
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateKeyViewModel'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Key'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+      security:
+      - ApiKey:
+        - KeyMasterAccess
+  /api/{teamName}/keys/Update/{id}:
+    post:
+      tags:
+      - Keys
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: teamName
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: X-Auth-Token
+        in: header
+        description: access token
+        required: true
+        schema:
+          type: string
+          default: ApiKey
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateKeyViewModel'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Key'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+      security:
+      - ApiKey:
+        - KeyMasterAccess
+  /api/{teamName}/keys/Delete/{id}:
+    post:
+      tags:
+      - Keys
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: teamName
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: X-Auth-Token
+        in: header
+        description: access token
+        required: true
+        schema:
+          type: string
+          default: ApiKey
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Key'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+      security:
+      - ApiKey:
+        - KeyMasterAccess
+  /api/{teamName}/keys/AssociateSpace/{id}:
+    post:
+      tags:
+      - Keys
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: teamName
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: X-Auth-Token
+        in: header
+        description: access token
+        required: true
+        schema:
+          type: string
+          default: ApiKey
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AssociateKeyViewModel'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/KeyXSpace'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+      security:
+      - ApiKey:
+        - KeyMasterAccess
+  /api/{teamName}/keys/DisassociateSpace/{id}:
+    post:
+      tags:
+      - Keys
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: teamName
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: X-Auth-Token
+        in: header
+        description: access token
+        required: true
+        schema:
+          type: string
+          default: ApiKey
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DisassociateKeyViewModel'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Key'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+      security:
+      - ApiKey:
+        - KeyMasterAccess
+  /api/{teamName}/keys/GetHistory/{id}:
+    get:
+      tags:
+      - Keys
+      summary: Takes the top 5 history records
+      parameters:
+      - name: id
+        in: path
+        description: ''
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: max
+        in: query
+        description: Defaults to 5
+        schema:
+          type: integer
+          format: int32
+          default: 5
+      - name: teamName
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: X-Auth-Token
+        in: header
+        description: access token
+        required: true
+        schema:
+          type: string
+          default: ApiKey
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/History'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+      security:
+      - ApiKey:
+        - KeyMasterAccess
+  /api/{teamName}/KeySerials/Search:
+    get:
+      tags:
+      - KeySerials
+      parameters:
+      - name: q
+        in: query
+        schema:
+          type: string
+      - name: teamName
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: X-Auth-Token
+        in: header
+        description: access token
+        required: true
+        schema:
+          type: string
+          default: ApiKey
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/KeySerial'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+      security:
+      - ApiKey:
+        - KeyMasterAccess
+  /api/{teamName}/KeySerials/SearchInKey:
+    get:
+      tags:
+      - KeySerials
+      parameters:
+      - name: keyId
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: q
+        in: query
+        schema:
+          type: string
+      - name: teamName
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: X-Auth-Token
+        in: header
+        description: access token
+        required: true
+        schema:
+          type: string
+          default: ApiKey
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/KeySerial'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+      security:
+      - ApiKey:
+        - KeyMasterAccess
+  /api/{teamName}/KeySerials/GetForKey:
+    get:
+      tags:
+      - KeySerials
+      parameters:
+      - name: keyid
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: teamName
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: X-Auth-Token
+        in: header
+        description: access token
+        required: true
+        schema:
+          type: string
+          default: ApiKey
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/KeySerial'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+      security:
+      - ApiKey:
+        - KeyMasterAccess
+  /api/{teamName}/KeySerials/GetForPerson:
+    get:
+      tags:
+      - KeySerials
+      parameters:
+      - name: personId
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: teamName
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: X-Auth-Token
+        in: header
+        description: access token
+        required: true
+        schema:
+          type: string
+          default: ApiKey
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/KeySerial'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+      security:
+      - ApiKey:
+        - KeyMasterAccess
+  /api/{teamName}/KeySerials/Details/{id}:
+    get:
+      tags:
+      - KeySerials
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: teamName
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: X-Auth-Token
+        in: header
+        description: access token
+        required: true
+        schema:
+          type: string
+          default: ApiKey
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/KeySerial'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+      security:
+      - ApiKey:
+        - KeyMasterAccess
+  /api/{teamName}/KeySerials/Create:
+    post:
+      tags:
+      - KeySerials
+      parameters:
+      - name: teamName
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: X-Auth-Token
+        in: header
+        description: access token
+        required: true
+        schema:
+          type: string
+          default: ApiKey
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateKeySerialViewModel'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/KeySerial'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+      security:
+      - ApiKey:
+        - KeyMasterAccess
+  /api/{teamName}/KeySerials/Update/{id}:
+    post:
+      tags:
+      - KeySerials
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: teamName
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: X-Auth-Token
+        in: header
+        description: access token
+        required: true
+        schema:
+          type: string
+          default: ApiKey
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateKeySerialViewModel'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/KeySerial'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+      security:
+      - ApiKey:
+        - KeyMasterAccess
+  /api/{teamName}/KeySerials/Assign:
+    post:
+      tags:
+      - KeySerials
+      parameters:
+      - name: teamName
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: X-Auth-Token
+        in: header
+        description: access token
+        required: true
+        schema:
+          type: string
+          default: ApiKey
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AssignKeySerialViewModel'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/KeySerial'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+      security:
+      - ApiKey:
+        - KeyMasterAccess
+  /api/{teamName}/KeySerials/Revoke/{id}:
+    post:
+      tags:
+      - KeySerials
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: teamName
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: X-Auth-Token
+        in: header
+        description: access token
+        required: true
+        schema:
+          type: string
+          default: ApiKey
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/KeySerial'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+      security:
+      - ApiKey:
+        - KeyMasterAccess
+  /api/{teamName}/KeySerials/GetHistory/{id}:
+    get:
+      tags:
+      - KeySerials
+      summary: Takes the top 5 history records
+      parameters:
+      - name: id
+        in: path
+        description: ''
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: max
+        in: query
+        description: Defaults to 5
+        schema:
+          type: integer
+          format: int32
+          default: 5
+      - name: teamName
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: X-Auth-Token
+        in: header
+        description: access token
+        required: true
+        schema:
+          type: string
+          default: ApiKey
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/History'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+      security:
+      - ApiKey:
+        - KeyMasterAccess
+  /api/{teamName}/KeySerials/ListKeySerialStatus:
+    get:
+      tags:
+      - KeySerials
+      parameters:
+      - name: teamName
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: X-Auth-Token
+        in: header
+        description: access token
+        required: true
+        schema:
+          type: string
+          default: ApiKey
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+      security:
+      - ApiKey:
+        - KeyMasterAccess
+  /api/{teamName}/people/List:
+    get:
+      tags:
+      - People
+      summary: ''
+      parameters:
+      - name: filter
+        in: query
+        description: 0 = ShowActive, 1 = ShowInactive, 2 = ShowAll. Defaults to Show Active
+        schema:
+          $ref: '#/components/schemas/Filter'
+      - name: teamName
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: X-Auth-Token
+        in: header
+        description: access token
+        required: true
+        schema:
+          type: string
+          default: ApiKey
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Person'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+      security:
+      - ApiKey:
+        - AnyRole
+  /api/{teamName}/people/SearchPeople:
+    get:
+      tags:
+      - People
+      parameters:
+      - name: q
+        in: query
+        schema:
+          type: string
+      - name: teamName
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: X-Auth-Token
+        in: header
+        description: access token
+        required: true
+        schema:
+          type: string
+          default: ApiKey
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Person'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+      security:
+      - ApiKey:
+        - AnyRole
+  /api/{teamName}/people/SearchUsers:
+    get:
+      tags:
+      - People
+      parameters:
+      - name: searchTerm
+        in: query
+        schema:
+          type: string
+      - name: teamName
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: X-Auth-Token
+        in: header
+        description: access token
+        required: true
+        schema:
+          type: string
+          default: ApiKey
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Person'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+      security:
+      - ApiKey:
+        - AnyRole
+  /api/{teamName}/people/Create:
+    post:
+      tags:
+      - People
+      parameters:
+      - name: teamName
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: X-Auth-Token
+        in: header
+        description: access token
+        required: true
+        schema:
+          type: string
+          default: ApiKey
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Person'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Person'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+      security:
+      - ApiKey:
+        - AnyRole
+  /api/{teamName}/peopleadmin/Update:
+    post:
+      tags:
+      - PeopleAdmin
+      parameters:
+      - name: teamName
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: X-Auth-Token
+        in: header
+        description: access token
+        required: true
+        schema:
+          type: string
+          default: ApiKey
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Person'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Person'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+      security:
+      - ApiKey:
+        - PersonManagerAccess
+  /api/{teamName}/peopleadmin/Delete/{id}:
+    post:
+      tags:
+      - PeopleAdmin
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: teamName
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: X-Auth-Token
+        in: header
+        description: access token
+        required: true
+        schema:
+          type: string
+          default: ApiKey
+      responses:
+        '200':
+          description: Success
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+      security:
+      - ApiKey:
+        - PersonManagerAccess
+  /api/{teamName}/peopleadmin/Details/{id}:
+    get:
+      tags:
+      - PeopleAdmin
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: showAccessAssignments
+        in: query
+        schema:
+          type: boolean
+          default: false
+      - name: showKeySerialAssignments
+        in: query
+        schema:
+          type: boolean
+          default: false
+      - name: showEquipmentAssignments
+        in: query
+        schema:
+          type: boolean
+          default: false
+      - name: showWorkstationAssignments
+        in: query
+        schema:
+          type: boolean
+          default: false
+      - name: showDocuments
+        in: query
+        schema:
+          type: boolean
+          default: false
+      - name: teamName
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: X-Auth-Token
+        in: header
+        description: access token
+        required: true
+        schema:
+          type: string
+          default: ApiKey
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Person'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+      security:
+      - ApiKey:
+        - PersonManagerAccess
+  /api/{teamName}/peopleadmin/GetHistory/{id}:
+    get:
+      tags:
+      - PeopleAdmin
+      summary: "Return history records\r\nDefaults to a max of 5 records returned"
+      parameters:
+      - name: id
+        in: path
+        description: ''
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: max
+        in: query
+        description: the max number of record to take. Defaults to 5
+        schema:
+          type: integer
+          format: int32
+          default: 5
+      - name: teamName
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: X-Auth-Token
+        in: header
+        description: access token
+        required: true
+        schema:
+          type: string
+          default: ApiKey
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/History'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+      security:
+      - ApiKey:
+        - PersonManagerAccess
+  /api/{teamName}/spaces/SearchSpaces:
+    get:
+      tags:
+      - Spaces
+      parameters:
+      - name: q
+        in: query
+        schema:
+          type: string
+      - name: teamName
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: X-Auth-Token
+        in: header
+        description: access token
+        required: true
+        schema:
+          type: string
+          default: ApiKey
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Space'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+      security:
+      - ApiKey:
+        - AnyRole
+  /api/{teamName}/spaces/List:
+    get:
+      tags:
+      - Spaces
+      parameters:
+      - name: teamName
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: X-Auth-Token
+        in: header
+        description: access token
+        required: true
+        schema:
+          type: string
+          default: ApiKey
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Space'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+      security:
+      - ApiKey:
+        - AnyRole
+  /api/{teamName}/spaces/ShortList:
+    get:
+      tags:
+      - Spaces
+      parameters:
+      - name: teamName
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: X-Auth-Token
+        in: header
+        description: access token
+        required: true
+        schema:
+          type: string
+          default: ApiKey
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Space'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+      security:
+      - ApiKey:
+        - AnyRole
+  /api/{teamName}/spaces/GetSpacesForKey:
+    get:
+      tags:
+      - Spaces
+      parameters:
+      - name: keyId
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: teamName
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: X-Auth-Token
+        in: header
+        description: access token
+        required: true
+        schema:
+          type: string
+          default: ApiKey
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/KeyXSpace'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+      security:
+      - ApiKey:
+        - AnyRole
+  /api/{teamName}/spaces/GetTagsInSpace:
+    get:
+      tags:
+      - Spaces
+      parameters:
+      - name: spaceId
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: teamName
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: X-Auth-Token
+        in: header
+        description: access token
+        required: true
+        schema:
+          type: string
+          default: ApiKey
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Workstation'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+      security:
+      - ApiKey:
+        - AnyRole
+  /api/{teamName}/spaces/Details/{id}:
+    get:
+      tags:
+      - Spaces
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: teamName
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: X-Auth-Token
+        in: header
+        description: access token
+        required: true
+        schema:
+          type: string
+          default: ApiKey
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Space'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+      security:
+      - ApiKey:
+        - AnyRole
+  /api/{teamName}/workstations/Search:
+    get:
+      tags:
+      - Workstations
+      parameters:
+      - name: q
+        in: query
+        schema:
+          type: string
+      - name: teamName
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: X-Auth-Token
+        in: header
+        description: access token
+        required: true
+        schema:
+          type: string
+          default: ApiKey
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Workstation'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+      security:
+      - ApiKey:
+        - SpaceMasterAccess
+  /api/{teamName}/workstations/SearchInSpace:
+    get:
+      tags:
+      - Workstations
+      parameters:
+      - name: spaceId
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: q
+        in: query
+        schema:
+          type: string
+      - name: teamName
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: X-Auth-Token
+        in: header
+        description: access token
+        required: true
+        schema:
+          type: string
+          default: ApiKey
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Workstation'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+      security:
+      - ApiKey:
+        - SpaceMasterAccess
+  /api/{teamName}/workstations/GetWorkstationsInSpace:
+    get:
+      tags:
+      - Workstations
+      parameters:
+      - name: spaceId
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: teamName
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: X-Auth-Token
+        in: header
+        description: access token
+        required: true
+        schema:
+          type: string
+          default: ApiKey
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Workstation'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+      security:
+      - ApiKey:
+        - SpaceMasterAccess
+  /api/{teamName}/workstations/CommonAttributeKeys:
+    get:
+      tags:
+      - Workstations
+      parameters:
+      - name: teamName
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: X-Auth-Token
+        in: header
+        description: access token
+        required: true
+        schema:
+          type: string
+          default: ApiKey
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/WorkstationAttribute'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+      security:
+      - ApiKey:
+        - SpaceMasterAccess
+  /api/{teamName}/workstations/ListAssigned:
+    get:
+      tags:
+      - Workstations
+      parameters:
+      - name: personId
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: teamName
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: X-Auth-Token
+        in: header
+        description: access token
+        required: true
+        schema:
+          type: string
+          default: ApiKey
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Workstation'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+      security:
+      - ApiKey:
+        - SpaceMasterAccess
+  /api/{teamName}/workstations/List:
+    get:
+      tags:
+      - Workstations
+      summary: ''
+      parameters:
+      - name: filter
+        in: query
+        description: 0 = ShowActive, 1 = ShowInactive, 2 = ShowAll. Defaults to Show Active
+        schema:
+          $ref: '#/components/schemas/Filter'
+      - name: includeAssignment
+        in: query
+        description: ''
+        schema:
+          type: boolean
+          default: true
+      - name: includeSpace
+        in: query
+        description: ''
+        schema:
+          type: boolean
+          default: true
+      - name: includeAttributes
+        in: query
+        description: ''
+        schema:
+          type: boolean
+          default: true
+      - name: includeTeam
+        in: query
+        description: ''
+        schema:
+          type: boolean
+          default: true
+      - name: teamName
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: X-Auth-Token
+        in: header
+        description: access token
+        required: true
+        schema:
+          type: string
+          default: ApiKey
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Workstation'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+      security:
+      - ApiKey:
+        - SpaceMasterAccess
+  /api/{teamName}/workstations/Details/{id}:
+    get:
+      tags:
+      - Workstations
+      summary: ''
+      parameters:
+      - name: id
+        in: path
+        description: ''
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: includeAssignment
+        in: query
+        description: ''
+        schema:
+          type: boolean
+          default: true
+      - name: includeSpace
+        in: query
+        description: ''
+        schema:
+          type: boolean
+          default: true
+      - name: includeAttributes
+        in: query
+        description: ''
+        schema:
+          type: boolean
+          default: true
+      - name: includeTeam
+        in: query
+        description: ''
+        schema:
+          type: boolean
+          default: true
+      - name: teamName
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: X-Auth-Token
+        in: header
+        description: access token
+        required: true
+        schema:
+          type: string
+          default: ApiKey
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Workstation'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+      security:
+      - ApiKey:
+        - SpaceMasterAccess
+  /api/{teamName}/workstations/Create:
+    post:
+      tags:
+      - Workstations
+      parameters:
+      - name: teamName
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: X-Auth-Token
+        in: header
+        description: access token
+        required: true
+        schema:
+          type: string
+          default: ApiKey
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Workstation'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Workstation'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+      security:
+      - ApiKey:
+        - SpaceMasterAccess
+  /api/{teamName}/workstations/Assign:
+    post:
+      tags:
+      - Workstations
+      parameters:
+      - name: workstationId
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: personId
+        in: query
+        schema:
+          type: integer
+          format: int32
+      - name: date
+        in: query
+        schema:
+          type: string
+      - name: teamName
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: X-Auth-Token
+        in: header
+        description: access token
+        required: true
+        schema:
+          type: string
+          default: ApiKey
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Workstation'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+      security:
+      - ApiKey:
+        - SpaceMasterAccess
+  /api/{teamName}/workstations/Revoke/{id}:
+    post:
+      tags:
+      - Workstations
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: teamName
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: X-Auth-Token
+        in: header
+        description: access token
+        required: true
+        schema:
+          type: string
+          default: ApiKey
+      responses:
+        '200':
+          description: Success
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+      security:
+      - ApiKey:
+        - SpaceMasterAccess
+  /api/{teamName}/workstations/Update:
+    post:
+      tags:
+      - Workstations
+      parameters:
+      - name: teamName
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: X-Auth-Token
+        in: header
+        description: access token
+        required: true
+        schema:
+          type: string
+          default: ApiKey
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Workstation'
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Workstation'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+      security:
+      - ApiKey:
+        - SpaceMasterAccess
+  /api/{teamName}/workstations/Delete/{id}:
+    post:
+      tags:
+      - Workstations
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: teamName
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: X-Auth-Token
+        in: header
+        description: access token
+        required: true
+        schema:
+          type: string
+          default: ApiKey
+      responses:
+        '200':
+          description: Success
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+      security:
+      - ApiKey:
+        - SpaceMasterAccess
+  /api/{teamName}/workstations/GetHistory/{id}:
+    get:
+      tags:
+      - Workstations
+      summary: "Return history records\r\nDefaults to a max of 5 records returned"
+      parameters:
+      - name: id
+        in: path
+        description: ''
+        required: true
+        schema:
+          type: integer
+          format: int32
+      - name: max
+        in: query
+        description: Defaults to 5
+        schema:
+          type: integer
+          format: int32
+          default: 5
+      - name: teamName
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: X-Auth-Token
+        in: header
+        description: access token
+        required: true
+        schema:
+          type: string
+          default: ApiKey
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/History'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+      security:
+      - ApiKey:
+        - SpaceMasterAccess
+components:
+  schemas:
+    Access:
+      required:
+      - name
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        name:
+          maxLength: 64
+          minLength: 0
+          type: string
+        notes:
+          type: string
+          nullable: true
+        tags:
+          type: string
+          nullable: true
+        team:
+          $ref: '#/components/schemas/Team'
+        teamId:
+          type: integer
+          format: int32
+        active:
+          type: boolean
+        title:
+          type: string
+          nullable: true
+          readOnly: true
+        assignments:
+          type: array
+          items:
+            $ref: '#/components/schemas/AccessAssignment'
+          nullable: true
+      additionalProperties: false
+    AccessAssignment:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        person:
+          $ref: '#/components/schemas/Person'
+        personId:
+          type: integer
+          format: int32
+        requestedAt:
+          type: string
+          format: date-time
+        requestedBy:
+          $ref: '#/components/schemas/User'
+        requestedById:
+          type: string
+          nullable: true
+        requestedByName:
+          type: string
+          nullable: true
+        approvedAt:
+          type: string
+          format: date-time
+          nullable: true
+        expiresAt:
+          type: string
+          format: date-time
+        isConfirmed:
+          type: boolean
+        confirmedAt:
+          type: string
+          format: date-time
+          nullable: true
+        nextNotificationDate:
+          type: string
+          format: date-time
+          nullable: true
+        accessId:
+          type: integer
+          format: int32
+        access:
+          $ref: '#/components/schemas/Access'
+      additionalProperties: false
+    Assembly:
+      type: object
+      properties:
+        definedTypes:
+          type: array
+          items:
+            $ref: '#/components/schemas/TypeInfo'
+          nullable: true
+          readOnly: true
+        exportedTypes:
+          type: array
+          items:
+            $ref: '#/components/schemas/Type'
+          nullable: true
+          readOnly: true
+        codeBase:
+          type: string
+          nullable: true
+          readOnly: true
+        entryPoint:
+          $ref: '#/components/schemas/MethodInfo'
+        fullName:
+          type: string
+          nullable: true
+          readOnly: true
+        imageRuntimeVersion:
+          type: string
+          nullable: true
+          readOnly: true
+        isDynamic:
+          type: boolean
+          readOnly: true
+        location:
+          type: string
+          nullable: true
+          readOnly: true
+        reflectionOnly:
+          type: boolean
+          readOnly: true
+        isCollectible:
+          type: boolean
+          readOnly: true
+        isFullyTrusted:
+          type: boolean
+          readOnly: true
+        customAttributes:
+          type: array
+          items:
+            $ref: '#/components/schemas/CustomAttributeData'
+          nullable: true
+          readOnly: true
+        escapedCodeBase:
+          type: string
+          nullable: true
+          readOnly: true
+        manifestModule:
+          $ref: '#/components/schemas/Module'
+        modules:
+          type: array
+          items:
+            $ref: '#/components/schemas/Module'
+          nullable: true
+          readOnly: true
+        globalAssemblyCache:
+          type: boolean
+          readOnly: true
+          deprecated: true
+        hostContext:
+          type: integer
+          format: int64
+          readOnly: true
+        securityRuleSet:
+          $ref: '#/components/schemas/SecurityRuleSet'
+      additionalProperties: false
+    AssignKeySerialViewModel:
+      type: object
+      properties:
+        keySerialId:
+          type: integer
+          format: int32
+        personId:
+          type: integer
+          format: int32
+        expiresAt:
+          type: string
+          format: date-time
+      additionalProperties: false
+    AssociateKeyViewModel:
+      type: object
+      properties:
+        spaceId:
+          type: integer
+          format: int32
+      additionalProperties: false
+    CallingConventions:
+      enum:
+      - 1
+      - 2
+      - 3
+      - 32
+      - 64
+      type: integer
+      format: int32
+    ConstructorInfo:
+      type: object
+      properties:
+        name:
+          type: string
+          nullable: true
+          readOnly: true
+        declaringType:
+          $ref: '#/components/schemas/Type'
+        reflectedType:
+          $ref: '#/components/schemas/Type'
+        module:
+          $ref: '#/components/schemas/Module'
+        customAttributes:
+          type: array
+          items:
+            $ref: '#/components/schemas/CustomAttributeData'
+          nullable: true
+          readOnly: true
+        isCollectible:
+          type: boolean
+          readOnly: true
+        metadataToken:
+          type: integer
+          format: int32
+          readOnly: true
+        attributes:
+          $ref: '#/components/schemas/MethodAttributes'
+        methodImplementationFlags:
+          $ref: '#/components/schemas/MethodImplAttributes'
+        callingConvention:
+          $ref: '#/components/schemas/CallingConventions'
+        isAbstract:
+          type: boolean
+          readOnly: true
+        isConstructor:
+          type: boolean
+          readOnly: true
+        isFinal:
+          type: boolean
+          readOnly: true
+        isHideBySig:
+          type: boolean
+          readOnly: true
+        isSpecialName:
+          type: boolean
+          readOnly: true
+        isStatic:
+          type: boolean
+          readOnly: true
+        isVirtual:
+          type: boolean
+          readOnly: true
+        isAssembly:
+          type: boolean
+          readOnly: true
+        isFamily:
+          type: boolean
+          readOnly: true
+        isFamilyAndAssembly:
+          type: boolean
+          readOnly: true
+        isFamilyOrAssembly:
+          type: boolean
+          readOnly: true
+        isPrivate:
+          type: boolean
+          readOnly: true
+        isPublic:
+          type: boolean
+          readOnly: true
+        isConstructedGenericMethod:
+          type: boolean
+          readOnly: true
+        isGenericMethod:
+          type: boolean
+          readOnly: true
+        isGenericMethodDefinition:
+          type: boolean
+          readOnly: true
+        containsGenericParameters:
+          type: boolean
+          readOnly: true
+        methodHandle:
+          $ref: '#/components/schemas/RuntimeMethodHandle'
+        isSecurityCritical:
+          type: boolean
+          readOnly: true
+        isSecuritySafeCritical:
+          type: boolean
+          readOnly: true
+        isSecurityTransparent:
+          type: boolean
+          readOnly: true
+        memberType:
+          $ref: '#/components/schemas/MemberTypes'
+      additionalProperties: false
+    CreateKeySerialViewModel:
+      required:
+      - number
+      type: object
+      properties:
+        keyId:
+          type: integer
+          format: int32
+        number:
+          maxLength: 64
+          minLength: 0
+          type: string
+        status:
+          type: string
+          nullable: true
+        notes:
+          type: string
+          nullable: true
+      additionalProperties: false
+    CreateKeyViewModel:
+      required:
+      - code
+      - name
+      type: object
+      properties:
+        name:
+          maxLength: 64
+          minLength: 0
+          type: string
+        code:
+          maxLength: 64
+          minLength: 0
+          type: string
+        notes:
+          type: string
+          nullable: true
+        tags:
+          type: string
+          nullable: true
+      additionalProperties: false
+    CustomAttributeData:
+      type: object
+      properties:
+        attributeType:
+          $ref: '#/components/schemas/Type'
+        constructor:
+          $ref: '#/components/schemas/ConstructorInfo'
+        constructorArguments:
+          type: array
+          items:
+            $ref: '#/components/schemas/CustomAttributeTypedArgument'
+          nullable: true
+          readOnly: true
+        namedArguments:
+          type: array
+          items:
+            $ref: '#/components/schemas/CustomAttributeNamedArgument'
+          nullable: true
+          readOnly: true
+      additionalProperties: false
+    CustomAttributeNamedArgument:
+      type: object
+      properties:
+        memberInfo:
+          $ref: '#/components/schemas/MemberInfo'
+        typedValue:
+          $ref: '#/components/schemas/CustomAttributeTypedArgument'
+        memberName:
+          type: string
+          nullable: true
+          readOnly: true
+        isField:
+          type: boolean
+          readOnly: true
+      additionalProperties: false
+    CustomAttributeTypedArgument:
+      type: object
+      properties:
+        argumentType:
+          $ref: '#/components/schemas/Type'
+        value:
+          nullable: true
+      additionalProperties: false
+    DisassociateKeyViewModel:
+      type: object
+      properties:
+        spaceId:
+          type: integer
+          format: int32
+      additionalProperties: false
+    Document:
+      required:
+      - name
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        name:
+          maxLength: 64
+          minLength: 0
+          type: string
+        notes:
+          type: string
+          nullable: true
+        tags:
+          type: string
+          nullable: true
+        team:
+          $ref: '#/components/schemas/Team'
+        teamId:
+          type: integer
+          format: int32
+        active:
+          type: boolean
+        title:
+          type: string
+          nullable: true
+          readOnly: true
+        person:
+          $ref: '#/components/schemas/Person'
+        personId:
+          type: integer
+          format: int32
+        envelopeId:
+          type: string
+          nullable: true
+        templateId:
+          type: string
+          nullable: true
+        status:
+          type: string
+          nullable: true
+        createdAt:
+          type: string
+          format: date-time
+        completedAt:
+          type: string
+          format: date-time
+          nullable: true
+        accountId:
+          type: string
+          nullable: true
+        apiBasePath:
+          type: string
+          nullable: true
+      additionalProperties: false
+    DocumentTemplateInfo:
+      type: object
+      properties:
+        teamId:
+          type: integer
+          format: int32
+        templateId:
+          type: string
+          nullable: true
+        name:
+          type: string
+          nullable: true
+        accountId:
+          type: string
+          nullable: true
+        apiBasePath:
+          type: string
+          nullable: true
+      additionalProperties: false
+    Equipment:
+      required:
+      - name
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        name:
+          maxLength: 64
+          minLength: 0
+          type: string
+        notes:
+          type: string
+          nullable: true
+        tags:
+          type: string
+          nullable: true
+        team:
+          $ref: '#/components/schemas/Team'
+        teamId:
+          type: integer
+          format: int32
+        active:
+          type: boolean
+        title:
+          type: string
+          nullable: true
+          readOnly: true
+        type:
+          type: string
+          nullable: true
+        serialNumber:
+          type: string
+          nullable: true
+        make:
+          type: string
+          nullable: true
+        model:
+          type: string
+          nullable: true
+        protectionLevel:
+          maxLength: 2
+          minLength: 0
+          type: string
+          nullable: true
+        availabilityLevel:
+          maxLength: 2
+          minLength: 0
+          type: string
+          nullable: true
+        systemManagementId:
+          maxLength: 16
+          minLength: 0
+          type: string
+          nullable: true
+        space:
+          $ref: '#/components/schemas/Space'
+        spaceId:
+          type: integer
+          format: int32
+          nullable: true
+        assignment:
+          $ref: '#/components/schemas/EquipmentAssignment'
+        equipmentAssignmentId:
+          type: integer
+          format: int32
+          nullable: true
+        attributes:
+          type: array
+          items:
+            $ref: '#/components/schemas/EquipmentAttribute'
+          nullable: true
+      additionalProperties: false
+    EquipmentAssignment:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        person:
+          $ref: '#/components/schemas/Person'
+        personId:
+          type: integer
+          format: int32
+        requestedAt:
+          type: string
+          format: date-time
+        requestedBy:
+          $ref: '#/components/schemas/User'
+        requestedById:
+          type: string
+          nullable: true
+        requestedByName:
+          type: string
+          nullable: true
+        approvedAt:
+          type: string
+          format: date-time
+          nullable: true
+        expiresAt:
+          type: string
+          format: date-time
+        isConfirmed:
+          type: boolean
+        confirmedAt:
+          type: string
+          format: date-time
+          nullable: true
+        nextNotificationDate:
+          type: string
+          format: date-time
+          nullable: true
+        equipment:
+          $ref: '#/components/schemas/Equipment'
+      additionalProperties: false
+    EquipmentAttribute:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        equipment:
+          $ref: '#/components/schemas/Equipment'
+        equipmentId:
+          type: integer
+          format: int32
+        key:
+          type: string
+          nullable: true
+        value:
+          type: string
+          nullable: true
+      additionalProperties: false
+    EquipmentAttributeKey:
+      required:
+      - description
+      - key
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        team:
+          $ref: '#/components/schemas/Team'
+        teamId:
+          type: integer
+          format: int32
+          nullable: true
+        key:
+          minLength: 1
+          type: string
+        description:
+          maxLength: 50
+          minLength: 0
+          type: string
+      additionalProperties: false
+    EventAttributes:
+      enum:
+      - 0
+      - 512
+      - 1024
+      type: integer
+      format: int32
+    EventInfo:
+      type: object
+      properties:
+        name:
+          type: string
+          nullable: true
+          readOnly: true
+        declaringType:
+          $ref: '#/components/schemas/Type'
+        reflectedType:
+          $ref: '#/components/schemas/Type'
+        module:
+          $ref: '#/components/schemas/Module'
+        customAttributes:
+          type: array
+          items:
+            $ref: '#/components/schemas/CustomAttributeData'
+          nullable: true
+          readOnly: true
+        isCollectible:
+          type: boolean
+          readOnly: true
+        metadataToken:
+          type: integer
+          format: int32
+          readOnly: true
+        memberType:
+          $ref: '#/components/schemas/MemberTypes'
+        attributes:
+          $ref: '#/components/schemas/EventAttributes'
+        isSpecialName:
+          type: boolean
+          readOnly: true
+        addMethod:
+          $ref: '#/components/schemas/MethodInfo'
+        removeMethod:
+          $ref: '#/components/schemas/MethodInfo'
+        raiseMethod:
+          $ref: '#/components/schemas/MethodInfo'
+        isMulticast:
+          type: boolean
+          readOnly: true
+        eventHandlerType:
+          $ref: '#/components/schemas/Type'
+      additionalProperties: false
+    FieldAttributes:
+      enum:
+      - 0
+      - 1
+      - 2
+      - 3
+      - 4
+      - 5
+      - 6
+      - 7
+      - 16
+      - 32
+      - 64
+      - 128
+      - 256
+      - 512
+      - 1024
+      - 4096
+      - 8192
+      - 32768
+      - 38144
+      type: integer
+      format: int32
+    FieldInfo:
+      type: object
+      properties:
+        name:
+          type: string
+          nullable: true
+          readOnly: true
+        declaringType:
+          $ref: '#/components/schemas/Type'
+        reflectedType:
+          $ref: '#/components/schemas/Type'
+        module:
+          $ref: '#/components/schemas/Module'
+        customAttributes:
+          type: array
+          items:
+            $ref: '#/components/schemas/CustomAttributeData'
+          nullable: true
+          readOnly: true
+        isCollectible:
+          type: boolean
+          readOnly: true
+        metadataToken:
+          type: integer
+          format: int32
+          readOnly: true
+        memberType:
+          $ref: '#/components/schemas/MemberTypes'
+        attributes:
+          $ref: '#/components/schemas/FieldAttributes'
+        fieldType:
+          $ref: '#/components/schemas/Type'
+        isInitOnly:
+          type: boolean
+          readOnly: true
+        isLiteral:
+          type: boolean
+          readOnly: true
+        isNotSerialized:
+          type: boolean
+          readOnly: true
+        isPinvokeImpl:
+          type: boolean
+          readOnly: true
+        isSpecialName:
+          type: boolean
+          readOnly: true
+        isStatic:
+          type: boolean
+          readOnly: true
+        isAssembly:
+          type: boolean
+          readOnly: true
+        isFamily:
+          type: boolean
+          readOnly: true
+        isFamilyAndAssembly:
+          type: boolean
+          readOnly: true
+        isFamilyOrAssembly:
+          type: boolean
+          readOnly: true
+        isPrivate:
+          type: boolean
+          readOnly: true
+        isPublic:
+          type: boolean
+          readOnly: true
+        isSecurityCritical:
+          type: boolean
+          readOnly: true
+        isSecuritySafeCritical:
+          type: boolean
+          readOnly: true
+        isSecurityTransparent:
+          type: boolean
+          readOnly: true
+        fieldHandle:
+          $ref: '#/components/schemas/RuntimeFieldHandle'
+      additionalProperties: false
+    Filter:
+      enum:
+      - 0
+      - 1
+      - 2
+      type: integer
+      format: int32
+    FinancialOrganization:
+      required:
+      - chart
+      - orgCode
+      - team
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        chart:
+          maxLength: 1
+          minLength: 0
+          type: string
+        orgCode:
+          maxLength: 4
+          minLength: 0
+          type: string
+        team:
+          $ref: '#/components/schemas/Team'
+        teamId:
+          type: integer
+          format: int32
+        chartAndOrg:
+          type: string
+          nullable: true
+          readOnly: true
+      additionalProperties: false
+    GenericParameterAttributes:
+      enum:
+      - 0
+      - 1
+      - 2
+      - 3
+      - 4
+      - 8
+      - 16
+      - 28
+      type: integer
+      format: int32
+    Group:
+      required:
+      - name
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        name:
+          maxLength: 128
+          minLength: 0
+          type: string
+        groupPermissions:
+          type: array
+          items:
+            $ref: '#/components/schemas/GroupPermission'
+          nullable: true
+        teams:
+          type: array
+          items:
+            $ref: '#/components/schemas/GroupXTeam'
+          nullable: true
+      additionalProperties: false
+    GroupPermission:
+      required:
+      - group
+      - user
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        group:
+          $ref: '#/components/schemas/Group'
+        groupId:
+          type: integer
+          format: int32
+        user:
+          $ref: '#/components/schemas/User'
+        userId:
+          type: string
+          nullable: true
+      additionalProperties: false
+    GroupXTeam:
+      required:
+      - group
+      - team
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        group:
+          $ref: '#/components/schemas/Group'
+        groupId:
+          type: integer
+          format: int32
+        team:
+          $ref: '#/components/schemas/Team'
+        teamId:
+          type: integer
+          format: int32
+      additionalProperties: false
+    History:
+      required:
+      - description
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        description:
+          minLength: 1
+          type: string
+        actor:
+          $ref: '#/components/schemas/User'
+        actorId:
+          type: string
+          nullable: true
+        actedDate:
+          type: string
+          format: date-time
+        target:
+          $ref: '#/components/schemas/Person'
+        targetId:
+          type: integer
+          format: int32
+          nullable: true
+        assetType:
+          type: string
+          nullable: true
+        actionType:
+          type: string
+          nullable: true
+        key:
+          $ref: '#/components/schemas/Key'
+        keyId:
+          type: integer
+          format: int32
+          nullable: true
+        keySerial:
+          $ref: '#/components/schemas/KeySerial'
+        keySerialId:
+          type: integer
+          format: int32
+          nullable: true
+        equipment:
+          $ref: '#/components/schemas/Equipment'
+        equipmentId:
+          type: integer
+          format: int32
+          nullable: true
+        access:
+          $ref: '#/components/schemas/Access'
+        accessId:
+          type: integer
+          format: int32
+          nullable: true
+        workstation:
+          $ref: '#/components/schemas/Workstation'
+        workstationId:
+          type: integer
+          format: int32
+          nullable: true
+        document:
+          $ref: '#/components/schemas/Document'
+        documentId:
+          type: integer
+          format: int32
+          nullable: true
+        link:
+          type: string
+          nullable: true
+          readOnly: true
+      additionalProperties: false
+    ICustomAttributeProvider:
+      type: object
+      additionalProperties: false
+    IntPtr:
+      type: object
+      additionalProperties: false
+    Key:
+      required:
+      - code
+      - name
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        name:
+          maxLength: 64
+          minLength: 0
+          type: string
+        notes:
+          type: string
+          nullable: true
+        tags:
+          type: string
+          nullable: true
+        team:
+          $ref: '#/components/schemas/Team'
+        teamId:
+          type: integer
+          format: int32
+        active:
+          type: boolean
+        code:
+          maxLength: 64
+          minLength: 0
+          type: string
+        keyXSpaces:
+          type: array
+          items:
+            $ref: '#/components/schemas/KeyXSpace'
+          nullable: true
+        serials:
+          type: array
+          items:
+            $ref: '#/components/schemas/KeySerial'
+          nullable: true
+        title:
+          type: string
+          nullable: true
+          readOnly: true
+      additionalProperties: false
+    KeySerial:
+      required:
+      - name
+      - number
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        name:
+          maxLength: 64
+          minLength: 0
+          type: string
+        notes:
+          type: string
+          nullable: true
+        tags:
+          type: string
+          nullable: true
+        team:
+          $ref: '#/components/schemas/Team'
+        teamId:
+          type: integer
+          format: int32
+        active:
+          type: boolean
+        number:
+          maxLength: 64
+          minLength: 0
+          type: string
+        status:
+          type: string
+          nullable: true
+        key:
+          $ref: '#/components/schemas/Key'
+        keyId:
+          type: integer
+          format: int32
+        keySerialAssignment:
+          $ref: '#/components/schemas/KeySerialAssignment'
+        keySerialAssignmentId:
+          type: integer
+          format: int32
+          nullable: true
+        title:
+          type: string
+          nullable: true
+          readOnly: true
+      additionalProperties: false
+    KeySerialAssignment:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        person:
+          $ref: '#/components/schemas/Person'
+        personId:
+          type: integer
+          format: int32
+        requestedAt:
+          type: string
+          format: date-time
+        requestedBy:
+          $ref: '#/components/schemas/User'
+        requestedById:
+          type: string
+          nullable: true
+        requestedByName:
+          type: string
+          nullable: true
+        approvedAt:
+          type: string
+          format: date-time
+          nullable: true
+        expiresAt:
+          type: string
+          format: date-time
+        isConfirmed:
+          type: boolean
+        confirmedAt:
+          type: string
+          format: date-time
+          nullable: true
+        nextNotificationDate:
+          type: string
+          format: date-time
+          nullable: true
+        keySerialId:
+          type: integer
+          format: int32
+        keySerial:
+          $ref: '#/components/schemas/KeySerial'
+      additionalProperties: false
+    KeyXSpace:
+      required:
+      - key
+      - space
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        key:
+          $ref: '#/components/schemas/Key'
+        keyId:
+          type: integer
+          format: int32
+        space:
+          $ref: '#/components/schemas/Space'
+        spaceId:
+          type: integer
+          format: int32
+          nullable: true
+      additionalProperties: false
+    LayoutKind:
+      enum:
+      - 0
+      - 2
+      - 3
+      type: integer
+      format: int32
+    MemberInfo:
+      type: object
+      properties:
+        memberType:
+          $ref: '#/components/schemas/MemberTypes'
+        declaringType:
+          $ref: '#/components/schemas/Type'
+        reflectedType:
+          $ref: '#/components/schemas/Type'
+        name:
+          type: string
+          nullable: true
+          readOnly: true
+        module:
+          $ref: '#/components/schemas/Module'
+        customAttributes:
+          type: array
+          items:
+            $ref: '#/components/schemas/CustomAttributeData'
+          nullable: true
+          readOnly: true
+        isCollectible:
+          type: boolean
+          readOnly: true
+        metadataToken:
+          type: integer
+          format: int32
+          readOnly: true
+      additionalProperties: false
+    MemberTypes:
+      enum:
+      - 1
+      - 2
+      - 4
+      - 8
+      - 16
+      - 32
+      - 64
+      - 128
+      - 191
+      type: integer
+      format: int32
+    MethodAttributes:
+      enum:
+      - 0
+      - 1
+      - 2
+      - 3
+      - 4
+      - 5
+      - 6
+      - 7
+      - 8
+      - 16
+      - 32
+      - 64
+      - 128
+      - 256
+      - 512
+      - 1024
+      - 2048
+      - 4096
+      - 8192
+      - 16384
+      - 32768
+      - 53248
+      type: integer
+      format: int32
+    MethodBase:
+      type: object
+      properties:
+        memberType:
+          $ref: '#/components/schemas/MemberTypes'
+        name:
+          type: string
+          nullable: true
+          readOnly: true
+        declaringType:
+          $ref: '#/components/schemas/Type'
+        reflectedType:
+          $ref: '#/components/schemas/Type'
+        module:
+          $ref: '#/components/schemas/Module'
+        customAttributes:
+          type: array
+          items:
+            $ref: '#/components/schemas/CustomAttributeData'
+          nullable: true
+          readOnly: true
+        isCollectible:
+          type: boolean
+          readOnly: true
+        metadataToken:
+          type: integer
+          format: int32
+          readOnly: true
+        attributes:
+          $ref: '#/components/schemas/MethodAttributes'
+        methodImplementationFlags:
+          $ref: '#/components/schemas/MethodImplAttributes'
+        callingConvention:
+          $ref: '#/components/schemas/CallingConventions'
+        isAbstract:
+          type: boolean
+          readOnly: true
+        isConstructor:
+          type: boolean
+          readOnly: true
+        isFinal:
+          type: boolean
+          readOnly: true
+        isHideBySig:
+          type: boolean
+          readOnly: true
+        isSpecialName:
+          type: boolean
+          readOnly: true
+        isStatic:
+          type: boolean
+          readOnly: true
+        isVirtual:
+          type: boolean
+          readOnly: true
+        isAssembly:
+          type: boolean
+          readOnly: true
+        isFamily:
+          type: boolean
+          readOnly: true
+        isFamilyAndAssembly:
+          type: boolean
+          readOnly: true
+        isFamilyOrAssembly:
+          type: boolean
+          readOnly: true
+        isPrivate:
+          type: boolean
+          readOnly: true
+        isPublic:
+          type: boolean
+          readOnly: true
+        isConstructedGenericMethod:
+          type: boolean
+          readOnly: true
+        isGenericMethod:
+          type: boolean
+          readOnly: true
+        isGenericMethodDefinition:
+          type: boolean
+          readOnly: true
+        containsGenericParameters:
+          type: boolean
+          readOnly: true
+        methodHandle:
+          $ref: '#/components/schemas/RuntimeMethodHandle'
+        isSecurityCritical:
+          type: boolean
+          readOnly: true
+        isSecuritySafeCritical:
+          type: boolean
+          readOnly: true
+        isSecurityTransparent:
+          type: boolean
+          readOnly: true
+      additionalProperties: false
+    MethodImplAttributes:
+      enum:
+      - 0
+      - 1
+      - 2
+      - 3
+      - 4
+      - 8
+      - 16
+      - 32
+      - 64
+      - 128
+      - 256
+      - 512
+      - 4096
+      - 65535
+      type: integer
+      format: int32
+    MethodInfo:
+      type: object
+      properties:
+        name:
+          type: string
+          nullable: true
+          readOnly: true
+        declaringType:
+          $ref: '#/components/schemas/Type'
+        reflectedType:
+          $ref: '#/components/schemas/Type'
+        module:
+          $ref: '#/components/schemas/Module'
+        customAttributes:
+          type: array
+          items:
+            $ref: '#/components/schemas/CustomAttributeData'
+          nullable: true
+          readOnly: true
+        isCollectible:
+          type: boolean
+          readOnly: true
+        metadataToken:
+          type: integer
+          format: int32
+          readOnly: true
+        attributes:
+          $ref: '#/components/schemas/MethodAttributes'
+        methodImplementationFlags:
+          $ref: '#/components/schemas/MethodImplAttributes'
+        callingConvention:
+          $ref: '#/components/schemas/CallingConventions'
+        isAbstract:
+          type: boolean
+          readOnly: true
+        isConstructor:
+          type: boolean
+          readOnly: true
+        isFinal:
+          type: boolean
+          readOnly: true
+        isHideBySig:
+          type: boolean
+          readOnly: true
+        isSpecialName:
+          type: boolean
+          readOnly: true
+        isStatic:
+          type: boolean
+          readOnly: true
+        isVirtual:
+          type: boolean
+          readOnly: true
+        isAssembly:
+          type: boolean
+          readOnly: true
+        isFamily:
+          type: boolean
+          readOnly: true
+        isFamilyAndAssembly:
+          type: boolean
+          readOnly: true
+        isFamilyOrAssembly:
+          type: boolean
+          readOnly: true
+        isPrivate:
+          type: boolean
+          readOnly: true
+        isPublic:
+          type: boolean
+          readOnly: true
+        isConstructedGenericMethod:
+          type: boolean
+          readOnly: true
+        isGenericMethod:
+          type: boolean
+          readOnly: true
+        isGenericMethodDefinition:
+          type: boolean
+          readOnly: true
+        containsGenericParameters:
+          type: boolean
+          readOnly: true
+        methodHandle:
+          $ref: '#/components/schemas/RuntimeMethodHandle'
+        isSecurityCritical:
+          type: boolean
+          readOnly: true
+        isSecuritySafeCritical:
+          type: boolean
+          readOnly: true
+        isSecurityTransparent:
+          type: boolean
+          readOnly: true
+        memberType:
+          $ref: '#/components/schemas/MemberTypes'
+        returnParameter:
+          $ref: '#/components/schemas/ParameterInfo'
+        returnType:
+          $ref: '#/components/schemas/Type'
+        returnTypeCustomAttributes:
+          $ref: '#/components/schemas/ICustomAttributeProvider'
+      additionalProperties: false
+    Module:
+      type: object
+      properties:
+        assembly:
+          $ref: '#/components/schemas/Assembly'
+        fullyQualifiedName:
+          type: string
+          nullable: true
+          readOnly: true
+        name:
+          type: string
+          nullable: true
+          readOnly: true
+        mdStreamVersion:
+          type: integer
+          format: int32
+          readOnly: true
+        moduleVersionId:
+          type: string
+          format: uuid
+          readOnly: true
+        scopeName:
+          type: string
+          nullable: true
+          readOnly: true
+        moduleHandle:
+          $ref: '#/components/schemas/ModuleHandle'
+        customAttributes:
+          type: array
+          items:
+            $ref: '#/components/schemas/CustomAttributeData'
+          nullable: true
+          readOnly: true
+        metadataToken:
+          type: integer
+          format: int32
+          readOnly: true
+      additionalProperties: false
+    ModuleHandle:
+      type: object
+      properties:
+        mdStreamVersion:
+          type: integer
+          format: int32
+          readOnly: true
+      additionalProperties: false
+    ParameterAttributes:
+      enum:
+      - 0
+      - 1
+      - 2
+      - 4
+      - 8
+      - 16
+      - 4096
+      - 8192
+      - 16384
+      - 32768
+      - 61440
+      type: integer
+      format: int32
+    ParameterInfo:
+      type: object
+      properties:
+        attributes:
+          $ref: '#/components/schemas/ParameterAttributes'
+        member:
+          $ref: '#/components/schemas/MemberInfo'
+        name:
+          type: string
+          nullable: true
+          readOnly: true
+        parameterType:
+          $ref: '#/components/schemas/Type'
+        position:
+          type: integer
+          format: int32
+          readOnly: true
+        isIn:
+          type: boolean
+          readOnly: true
+        isLcid:
+          type: boolean
+          readOnly: true
+        isOptional:
+          type: boolean
+          readOnly: true
+        isOut:
+          type: boolean
+          readOnly: true
+        isRetval:
+          type: boolean
+          readOnly: true
+        defaultValue:
+          nullable: true
+          readOnly: true
+        rawDefaultValue:
+          nullable: true
+          readOnly: true
+        hasDefaultValue:
+          type: boolean
+          readOnly: true
+        customAttributes:
+          type: array
+          items:
+            $ref: '#/components/schemas/CustomAttributeData'
+          nullable: true
+          readOnly: true
+        metadataToken:
+          type: integer
+          format: int32
+          readOnly: true
+      additionalProperties: false
+    Person:
+      required:
+      - email
+      - firstName
+      - lastName
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        active:
+          type: boolean
+        team:
+          $ref: '#/components/schemas/Team'
+        teamId:
+          type: integer
+          format: int32
+        user:
+          $ref: '#/components/schemas/User'
+        userId:
+          type: string
+          nullable: true
+        firstName:
+          maxLength: 50
+          minLength: 0
+          type: string
+        lastName:
+          maxLength: 50
+          minLength: 0
+          type: string
+        name:
+          maxLength: 256
+          minLength: 0
+          type: string
+          nullable: true
+          readOnly: true
+        nameV2:
+          maxLength: 256
+          minLength: 0
+          type: string
+          nullable: true
+          readOnly: true
+        email:
+          maxLength: 256
+          minLength: 0
+          type: string
+          format: email
+        tags:
+          type: string
+          nullable: true
+        title:
+          type: string
+          nullable: true
+        homePhone:
+          type: string
+          nullable: true
+        teamPhone:
+          type: string
+          nullable: true
+        supervisorId:
+          type: integer
+          format: int32
+          nullable: true
+        supervisor:
+          $ref: '#/components/schemas/Person'
+        startDate:
+          type: string
+          format: date-time
+          nullable: true
+        endDate:
+          type: string
+          format: date-time
+          nullable: true
+        category:
+          type: string
+          nullable: true
+        notes:
+          type: string
+          format: multiline
+          nullable: true
+        isSupervisor:
+          type: boolean
+        accessAssignments:
+          type: array
+          items:
+            $ref: '#/components/schemas/AccessAssignment'
+          nullable: true
+        keySerialAssignments:
+          type: array
+          items:
+            $ref: '#/components/schemas/KeySerialAssignment'
+          nullable: true
+        equipmentAssignments:
+          type: array
+          items:
+            $ref: '#/components/schemas/EquipmentAssignment'
+          nullable: true
+        workstationAssignments:
+          type: array
+          items:
+            $ref: '#/components/schemas/WorkstationAssignment'
+          nullable: true
+        documents:
+          type: array
+          items:
+            $ref: '#/components/schemas/Document'
+          nullable: true
+      additionalProperties: false
+    PropertyAttributes:
+      enum:
+      - 0
+      - 512
+      - 1024
+      - 4096
+      - 8192
+      - 16384
+      - 32768
+      - 62464
+      type: integer
+      format: int32
+    PropertyInfo:
+      type: object
+      properties:
+        name:
+          type: string
+          nullable: true
+          readOnly: true
+        declaringType:
+          $ref: '#/components/schemas/Type'
+        reflectedType:
+          $ref: '#/components/schemas/Type'
+        module:
+          $ref: '#/components/schemas/Module'
+        customAttributes:
+          type: array
+          items:
+            $ref: '#/components/schemas/CustomAttributeData'
+          nullable: true
+          readOnly: true
+        isCollectible:
+          type: boolean
+          readOnly: true
+        metadataToken:
+          type: integer
+          format: int32
+          readOnly: true
+        memberType:
+          $ref: '#/components/schemas/MemberTypes'
+        propertyType:
+          $ref: '#/components/schemas/Type'
+        attributes:
+          $ref: '#/components/schemas/PropertyAttributes'
+        isSpecialName:
+          type: boolean
+          readOnly: true
+        canRead:
+          type: boolean
+          readOnly: true
+        canWrite:
+          type: boolean
+          readOnly: true
+        getMethod:
+          $ref: '#/components/schemas/MethodInfo'
+        setMethod:
+          $ref: '#/components/schemas/MethodInfo'
+      additionalProperties: false
+    Role:
+      required:
+      - name
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        name:
+          maxLength: 50
+          minLength: 0
+          type: string
+        isAdmin:
+          type: boolean
+      additionalProperties: false
+    RuntimeFieldHandle:
+      type: object
+      properties:
+        value:
+          $ref: '#/components/schemas/IntPtr'
+      additionalProperties: false
+    RuntimeMethodHandle:
+      type: object
+      properties:
+        value:
+          $ref: '#/components/schemas/IntPtr'
+      additionalProperties: false
+    RuntimeTypeHandle:
+      type: object
+      properties:
+        value:
+          $ref: '#/components/schemas/IntPtr'
+      additionalProperties: false
+    SecurityRuleSet:
+      enum:
+      - 0
+      - 1
+      - 2
+      type: integer
+      format: int32
+    ServiceNowProperties:
+      type: object
+      properties:
+        department:
+          type: string
+          nullable: true
+        modelCategory:
+          type: string
+          nullable: true
+        deviceName:
+          type: string
+          nullable: true
+        comments:
+          type: string
+          nullable: true
+        bigFixId:
+          type: string
+          nullable: true
+        userSysId:
+          type: string
+          nullable: true
+        serialNumber:
+          type: string
+          nullable: true
+        building:
+          type: string
+          nullable: true
+        securityClassification:
+          type: string
+          nullable: true
+        supportGroup:
+          type: string
+          nullable: true
+        userSysDomain:
+          type: string
+          nullable: true
+        userSysClassName:
+          type: string
+          nullable: true
+        deviceType:
+          type: string
+          nullable: true
+        macAddress:
+          type: string
+          nullable: true
+        userName:
+          type: string
+          nullable: true
+        installStatus:
+          type: string
+          nullable: true
+        sysId:
+          type: string
+          nullable: true
+        sysClassName:
+          type: string
+          nullable: true
+        assignedTo:
+          type: string
+          nullable: true
+        ipAddress:
+          type: string
+          nullable: true
+        quantity:
+          type: string
+          nullable: true
+        room:
+          type: string
+          nullable: true
+        displayName:
+          type: string
+          nullable: true
+        sysDomain:
+          type: string
+          nullable: true
+        model:
+          type: string
+          nullable: true
+      additionalProperties: false
+    ServiceNowPropertyWrapper:
+      type: object
+      properties:
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/ServiceNowProperties'
+          nullable: true
+      additionalProperties: false
+    Space:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        deptKey:
+          type: string
+          nullable: true
+        bldgKey:
+          type: string
+          nullable: true
+        roomKey:
+          type: string
+          nullable: true
+        floorKey:
+          type: string
+          nullable: true
+        bldgName:
+          type: string
+          nullable: true
+        floorName:
+          type: string
+          nullable: true
+        roomNumber:
+          type: string
+          nullable: true
+        roomName:
+          type: string
+          nullable: true
+        roomCategoryName:
+          type: string
+          nullable: true
+        roomCategoryCode:
+          type: string
+          nullable: true
+        chartNum:
+          type: string
+          nullable: true
+        orgId:
+          type: string
+          nullable: true
+        deptName:
+          type: string
+          nullable: true
+        source:
+          type: string
+          nullable: true
+        active:
+          type: boolean
+        sqFt:
+          type: integer
+          format: int32
+          nullable: true
+        shortName:
+          type: string
+          nullable: true
+          readOnly: true
+      additionalProperties: false
+    StructLayoutAttribute:
+      type: object
+      properties:
+        typeId:
+          nullable: true
+          readOnly: true
+        value:
+          $ref: '#/components/schemas/LayoutKind'
+      additionalProperties: false
+    Team:
+      required:
+      - name
+      - slug
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        name:
+          maxLength: 128
+          minLength: 0
+          type: string
+        slug:
+          maxLength: 40
+          minLength: 3
+          pattern: ^([a-z0-9]+[a-z0-9\-]?)+[a-z0-9]$
+          type: string
+        boardingNotificationEmail:
+          maxLength: 256
+          minLength: 0
+          type: string
+          format: email
+          nullable: true
+        people:
+          type: array
+          items:
+            $ref: '#/components/schemas/Person'
+          nullable: true
+        teamPermissions:
+          type: array
+          items:
+            $ref: '#/components/schemas/TeamPermission'
+          nullable: true
+        fisOrgs:
+          type: array
+          items:
+            $ref: '#/components/schemas/FinancialOrganization'
+          nullable: true
+        ppsDepartments:
+          type: array
+          items:
+            $ref: '#/components/schemas/TeamPpsDepartment'
+          nullable: true
+        groups:
+          type: array
+          items:
+            $ref: '#/components/schemas/GroupXTeam'
+          nullable: true
+        teamApiCode:
+          $ref: '#/components/schemas/TeamApiCode'
+        documentAccountName:
+          type: string
+          nullable: true
+        documentAccountId:
+          type: string
+          nullable: true
+        documentApiBasePath:
+          type: string
+          nullable: true
+      additionalProperties: false
+    TeamApiCode:
+      required:
+      - team
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        team:
+          $ref: '#/components/schemas/Team'
+        teamId:
+          type: integer
+          format: int32
+        apiCode:
+          type: string
+          format: uuid
+      additionalProperties: false
+    TeamPermission:
+      required:
+      - role
+      - team
+      - user
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        team:
+          $ref: '#/components/schemas/Team'
+        teamId:
+          type: integer
+          format: int32
+        user:
+          $ref: '#/components/schemas/User'
+        userId:
+          type: string
+          nullable: true
+        role:
+          $ref: '#/components/schemas/Role'
+        roleId:
+          type: integer
+          format: int32
+      additionalProperties: false
+    TeamPpsDepartment:
+      required:
+      - ppsDepartmentCode
+      - team
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        ppsDepartmentCode:
+          maxLength: 6
+          minLength: 0
+          type: string
+        departmentName:
+          type: string
+          nullable: true
+        team:
+          $ref: '#/components/schemas/Team'
+        teamId:
+          type: integer
+          format: int32
+      additionalProperties: false
+    Type:
+      type: object
+      properties:
+        name:
+          type: string
+          nullable: true
+          readOnly: true
+        customAttributes:
+          type: array
+          items:
+            $ref: '#/components/schemas/CustomAttributeData'
+          nullable: true
+          readOnly: true
+        isCollectible:
+          type: boolean
+          readOnly: true
+        metadataToken:
+          type: integer
+          format: int32
+          readOnly: true
+        isInterface:
+          type: boolean
+          readOnly: true
+        memberType:
+          $ref: '#/components/schemas/MemberTypes'
+        namespace:
+          type: string
+          nullable: true
+          readOnly: true
+        assemblyQualifiedName:
+          type: string
+          nullable: true
+          readOnly: true
+        fullName:
+          type: string
+          nullable: true
+          readOnly: true
+        assembly:
+          $ref: '#/components/schemas/Assembly'
+        module:
+          $ref: '#/components/schemas/Module'
+        isNested:
+          type: boolean
+          readOnly: true
+        declaringType:
+          $ref: '#/components/schemas/Type'
+        declaringMethod:
+          $ref: '#/components/schemas/MethodBase'
+        reflectedType:
+          $ref: '#/components/schemas/Type'
+        underlyingSystemType:
+          $ref: '#/components/schemas/Type'
+        isTypeDefinition:
+          type: boolean
+          readOnly: true
+        isArray:
+          type: boolean
+          readOnly: true
+        isByRef:
+          type: boolean
+          readOnly: true
+        isPointer:
+          type: boolean
+          readOnly: true
+        isConstructedGenericType:
+          type: boolean
+          readOnly: true
+        isGenericParameter:
+          type: boolean
+          readOnly: true
+        isGenericTypeParameter:
+          type: boolean
+          readOnly: true
+        isGenericMethodParameter:
+          type: boolean
+          readOnly: true
+        isGenericType:
+          type: boolean
+          readOnly: true
+        isGenericTypeDefinition:
+          type: boolean
+          readOnly: true
+        isSZArray:
+          type: boolean
+          readOnly: true
+        isVariableBoundArray:
+          type: boolean
+          readOnly: true
+        isByRefLike:
+          type: boolean
+          readOnly: true
+        hasElementType:
+          type: boolean
+          readOnly: true
+        genericTypeArguments:
+          type: array
+          items:
+            $ref: '#/components/schemas/Type'
+          nullable: true
+          readOnly: true
+        genericParameterPosition:
+          type: integer
+          format: int32
+          readOnly: true
+        genericParameterAttributes:
+          $ref: '#/components/schemas/GenericParameterAttributes'
+        attributes:
+          $ref: '#/components/schemas/TypeAttributes'
+        isAbstract:
+          type: boolean
+          readOnly: true
+        isImport:
+          type: boolean
+          readOnly: true
+        isSealed:
+          type: boolean
+          readOnly: true
+        isSpecialName:
+          type: boolean
+          readOnly: true
+        isClass:
+          type: boolean
+          readOnly: true
+        isNestedAssembly:
+          type: boolean
+          readOnly: true
+        isNestedFamANDAssem:
+          type: boolean
+          readOnly: true
+        isNestedFamily:
+          type: boolean
+          readOnly: true
+        isNestedFamORAssem:
+          type: boolean
+          readOnly: true
+        isNestedPrivate:
+          type: boolean
+          readOnly: true
+        isNestedPublic:
+          type: boolean
+          readOnly: true
+        isNotPublic:
+          type: boolean
+          readOnly: true
+        isPublic:
+          type: boolean
+          readOnly: true
+        isAutoLayout:
+          type: boolean
+          readOnly: true
+        isExplicitLayout:
+          type: boolean
+          readOnly: true
+        isLayoutSequential:
+          type: boolean
+          readOnly: true
+        isAnsiClass:
+          type: boolean
+          readOnly: true
+        isAutoClass:
+          type: boolean
+          readOnly: true
+        isUnicodeClass:
+          type: boolean
+          readOnly: true
+        isCOMObject:
+          type: boolean
+          readOnly: true
+        isContextful:
+          type: boolean
+          readOnly: true
+        isEnum:
+          type: boolean
+          readOnly: true
+        isMarshalByRef:
+          type: boolean
+          readOnly: true
+        isPrimitive:
+          type: boolean
+          readOnly: true
+        isValueType:
+          type: boolean
+          readOnly: true
+        isSignatureType:
+          type: boolean
+          readOnly: true
+        isSecurityCritical:
+          type: boolean
+          readOnly: true
+        isSecuritySafeCritical:
+          type: boolean
+          readOnly: true
+        isSecurityTransparent:
+          type: boolean
+          readOnly: true
+        structLayoutAttribute:
+          $ref: '#/components/schemas/StructLayoutAttribute'
+        typeInitializer:
+          $ref: '#/components/schemas/ConstructorInfo'
+        typeHandle:
+          $ref: '#/components/schemas/RuntimeTypeHandle'
+        guid:
+          type: string
+          format: uuid
+          readOnly: true
+        baseType:
+          $ref: '#/components/schemas/Type'
+        isSerializable:
+          type: boolean
+          readOnly: true
+        containsGenericParameters:
+          type: boolean
+          readOnly: true
+        isVisible:
+          type: boolean
+          readOnly: true
+      additionalProperties: false
+    TypeAttributes:
+      enum:
+      - 0
+      - 1
+      - 2
+      - 3
+      - 4
+      - 5
+      - 6
+      - 7
+      - 8
+      - 16
+      - 24
+      - 32
+      - 128
+      - 256
+      - 1024
+      - 2048
+      - 4096
+      - 8192
+      - 16384
+      - 65536
+      - 131072
+      - 196608
+      - 262144
+      - 264192
+      - 1048576
+      - 12582912
+      type: integer
+      format: int32
+    TypeInfo:
+      type: object
+      properties:
+        name:
+          type: string
+          nullable: true
+          readOnly: true
+        customAttributes:
+          type: array
+          items:
+            $ref: '#/components/schemas/CustomAttributeData'
+          nullable: true
+          readOnly: true
+        isCollectible:
+          type: boolean
+          readOnly: true
+        metadataToken:
+          type: integer
+          format: int32
+          readOnly: true
+        isInterface:
+          type: boolean
+          readOnly: true
+        memberType:
+          $ref: '#/components/schemas/MemberTypes'
+        namespace:
+          type: string
+          nullable: true
+          readOnly: true
+        assemblyQualifiedName:
+          type: string
+          nullable: true
+          readOnly: true
+        fullName:
+          type: string
+          nullable: true
+          readOnly: true
+        assembly:
+          $ref: '#/components/schemas/Assembly'
+        module:
+          $ref: '#/components/schemas/Module'
+        isNested:
+          type: boolean
+          readOnly: true
+        declaringType:
+          $ref: '#/components/schemas/Type'
+        declaringMethod:
+          $ref: '#/components/schemas/MethodBase'
+        reflectedType:
+          $ref: '#/components/schemas/Type'
+        underlyingSystemType:
+          $ref: '#/components/schemas/Type'
+        isTypeDefinition:
+          type: boolean
+          readOnly: true
+        isArray:
+          type: boolean
+          readOnly: true
+        isByRef:
+          type: boolean
+          readOnly: true
+        isPointer:
+          type: boolean
+          readOnly: true
+        isConstructedGenericType:
+          type: boolean
+          readOnly: true
+        isGenericParameter:
+          type: boolean
+          readOnly: true
+        isGenericTypeParameter:
+          type: boolean
+          readOnly: true
+        isGenericMethodParameter:
+          type: boolean
+          readOnly: true
+        isGenericType:
+          type: boolean
+          readOnly: true
+        isGenericTypeDefinition:
+          type: boolean
+          readOnly: true
+        isSZArray:
+          type: boolean
+          readOnly: true
+        isVariableBoundArray:
+          type: boolean
+          readOnly: true
+        isByRefLike:
+          type: boolean
+          readOnly: true
+        hasElementType:
+          type: boolean
+          readOnly: true
+        genericTypeArguments:
+          type: array
+          items:
+            $ref: '#/components/schemas/Type'
+          nullable: true
+          readOnly: true
+        genericParameterPosition:
+          type: integer
+          format: int32
+          readOnly: true
+        genericParameterAttributes:
+          $ref: '#/components/schemas/GenericParameterAttributes'
+        attributes:
+          $ref: '#/components/schemas/TypeAttributes'
+        isAbstract:
+          type: boolean
+          readOnly: true
+        isImport:
+          type: boolean
+          readOnly: true
+        isSealed:
+          type: boolean
+          readOnly: true
+        isSpecialName:
+          type: boolean
+          readOnly: true
+        isClass:
+          type: boolean
+          readOnly: true
+        isNestedAssembly:
+          type: boolean
+          readOnly: true
+        isNestedFamANDAssem:
+          type: boolean
+          readOnly: true
+        isNestedFamily:
+          type: boolean
+          readOnly: true
+        isNestedFamORAssem:
+          type: boolean
+          readOnly: true
+        isNestedPrivate:
+          type: boolean
+          readOnly: true
+        isNestedPublic:
+          type: boolean
+          readOnly: true
+        isNotPublic:
+          type: boolean
+          readOnly: true
+        isPublic:
+          type: boolean
+          readOnly: true
+        isAutoLayout:
+          type: boolean
+          readOnly: true
+        isExplicitLayout:
+          type: boolean
+          readOnly: true
+        isLayoutSequential:
+          type: boolean
+          readOnly: true
+        isAnsiClass:
+          type: boolean
+          readOnly: true
+        isAutoClass:
+          type: boolean
+          readOnly: true
+        isUnicodeClass:
+          type: boolean
+          readOnly: true
+        isCOMObject:
+          type: boolean
+          readOnly: true
+        isContextful:
+          type: boolean
+          readOnly: true
+        isEnum:
+          type: boolean
+          readOnly: true
+        isMarshalByRef:
+          type: boolean
+          readOnly: true
+        isPrimitive:
+          type: boolean
+          readOnly: true
+        isValueType:
+          type: boolean
+          readOnly: true
+        isSignatureType:
+          type: boolean
+          readOnly: true
+        isSecurityCritical:
+          type: boolean
+          readOnly: true
+        isSecuritySafeCritical:
+          type: boolean
+          readOnly: true
+        isSecurityTransparent:
+          type: boolean
+          readOnly: true
+        structLayoutAttribute:
+          $ref: '#/components/schemas/StructLayoutAttribute'
+        typeInitializer:
+          $ref: '#/components/schemas/ConstructorInfo'
+        typeHandle:
+          $ref: '#/components/schemas/RuntimeTypeHandle'
+        guid:
+          type: string
+          format: uuid
+          readOnly: true
+        baseType:
+          $ref: '#/components/schemas/Type'
+        isSerializable:
+          type: boolean
+          readOnly: true
+        containsGenericParameters:
+          type: boolean
+          readOnly: true
+        isVisible:
+          type: boolean
+          readOnly: true
+        genericTypeParameters:
+          type: array
+          items:
+            $ref: '#/components/schemas/Type'
+          nullable: true
+          readOnly: true
+        declaredConstructors:
+          type: array
+          items:
+            $ref: '#/components/schemas/ConstructorInfo'
+          nullable: true
+          readOnly: true
+        declaredEvents:
+          type: array
+          items:
+            $ref: '#/components/schemas/EventInfo'
+          nullable: true
+          readOnly: true
+        declaredFields:
+          type: array
+          items:
+            $ref: '#/components/schemas/FieldInfo'
+          nullable: true
+          readOnly: true
+        declaredMembers:
+          type: array
+          items:
+            $ref: '#/components/schemas/MemberInfo'
+          nullable: true
+          readOnly: true
+        declaredMethods:
+          type: array
+          items:
+            $ref: '#/components/schemas/MethodInfo'
+          nullable: true
+          readOnly: true
+        declaredNestedTypes:
+          type: array
+          items:
+            $ref: '#/components/schemas/TypeInfo'
+          nullable: true
+          readOnly: true
+        declaredProperties:
+          type: array
+          items:
+            $ref: '#/components/schemas/PropertyInfo'
+          nullable: true
+          readOnly: true
+        implementedInterfaces:
+          type: array
+          items:
+            $ref: '#/components/schemas/Type'
+          nullable: true
+          readOnly: true
+      additionalProperties: false
+    UpdateKeySerialViewModel:
+      required:
+      - number
+      - status
+      type: object
+      properties:
+        number:
+          maxLength: 64
+          minLength: 0
+          type: string
+        status:
+          minLength: 1
+          type: string
+        notes:
+          type: string
+          nullable: true
+      additionalProperties: false
+    UpdateKeyViewModel:
+      required:
+      - code
+      - name
+      type: object
+      properties:
+        name:
+          maxLength: 64
+          minLength: 0
+          type: string
+        code:
+          maxLength: 64
+          minLength: 0
+          type: string
+        notes:
+          type: string
+          nullable: true
+        tags:
+          type: string
+          nullable: true
+      additionalProperties: false
+    User:
+      required:
+      - email
+      - firstName
+      - lastName
+      type: object
+      properties:
+        id:
+          type: string
+          nullable: true
+        iam:
+          type: string
+          nullable: true
+        firstName:
+          maxLength: 50
+          minLength: 0
+          type: string
+        lastName:
+          maxLength: 50
+          minLength: 0
+          type: string
+        name:
+          maxLength: 256
+          minLength: 0
+          type: string
+          nullable: true
+          readOnly: true
+        email:
+          maxLength: 256
+          minLength: 0
+          type: string
+          format: email
+        pronouns:
+          maxLength: 50
+          minLength: 0
+          type: string
+          nullable: true
+        people:
+          type: array
+          items:
+            $ref: '#/components/schemas/Person'
+          nullable: true
+        teamPermissions:
+          type: array
+          items:
+            $ref: '#/components/schemas/TeamPermission'
+          nullable: true
+      additionalProperties: false
+    Workstation:
+      required:
+      - name
+      - space
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        name:
+          maxLength: 64
+          minLength: 0
+          type: string
+        notes:
+          type: string
+          nullable: true
+        tags:
+          type: string
+          nullable: true
+        team:
+          $ref: '#/components/schemas/Team'
+        teamId:
+          type: integer
+          format: int32
+        active:
+          type: boolean
+        title:
+          type: string
+          nullable: true
+          readOnly: true
+        type:
+          type: string
+          nullable: true
+        space:
+          $ref: '#/components/schemas/Space'
+        spaceId:
+          type: integer
+          format: int32
+        assignment:
+          $ref: '#/components/schemas/WorkstationAssignment'
+        workstationAssignmentId:
+          type: integer
+          format: int32
+          nullable: true
+        attributes:
+          type: array
+          items:
+            $ref: '#/components/schemas/WorkstationAttribute'
+          nullable: true
+      additionalProperties: false
+    WorkstationAssignment:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        person:
+          $ref: '#/components/schemas/Person'
+        personId:
+          type: integer
+          format: int32
+        requestedAt:
+          type: string
+          format: date-time
+        requestedBy:
+          $ref: '#/components/schemas/User'
+        requestedById:
+          type: string
+          nullable: true
+        requestedByName:
+          type: string
+          nullable: true
+        approvedAt:
+          type: string
+          format: date-time
+          nullable: true
+        expiresAt:
+          type: string
+          format: date-time
+        isConfirmed:
+          type: boolean
+        confirmedAt:
+          type: string
+          format: date-time
+          nullable: true
+        nextNotificationDate:
+          type: string
+          format: date-time
+          nullable: true
+        workstation:
+          $ref: '#/components/schemas/Workstation'
+      additionalProperties: false
+    WorkstationAttribute:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        workstation:
+          $ref: '#/components/schemas/Workstation'
+        workstationId:
+          type: integer
+          format: int32
+        key:
+          type: string
+          nullable: true
+        value:
+          type: string
+          nullable: true
+      additionalProperties: false
+  securitySchemes:
+    ApiKey:
+      type: apiKey
+      description: API Key Authentication
+      name: X-Auth-Token
+      in: header
+servers:
+- url: https://peaks.ucdavis.edu
+  description: PEAKS production API

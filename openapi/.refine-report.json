@@ -1,0 +1,30 @@
+{
+  "provider": "uc-davis",
+  "sources": [
+    "uc-davis-access-api-openapi.yml",
+    "uc-davis-documents-api-openapi.yml",
+    "uc-davis-equipment-api-openapi.yml",
+    "uc-davis-keys-api-openapi.yml",
+    "uc-davis-keyserials-api-openapi.yml",
+    "uc-davis-people-api-openapi.yml",
+    "uc-davis-peopleadmin-api-openapi.yml",
+    "uc-davis-spaces-api-openapi.yml",
+    "uc-davis-workstations-api-openapi.yml"
+  ],
+  "outputs": [
+    "uc-davis-access-api-openapi.yml",
+    "uc-davis-documents-api-openapi.yml",
+    "uc-davis-equipment-api-openapi.yml",
+    "uc-davis-keys-api-openapi.yml",
+    "uc-davis-keyserials-api-openapi.yml",
+    "uc-davis-people-api-openapi.yml",
+    "uc-davis-peopleadmin-api-openapi.yml",
+    "uc-davis-spaces-api-openapi.yml",
+    "uc-davis-workstations-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
