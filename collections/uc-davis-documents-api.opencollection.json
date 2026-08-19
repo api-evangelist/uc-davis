@@ -1,0 +1,211 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "PEAKS API v1 Access Documents API",
+    "version": "v1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Documents",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "GET /api/{teamName}/documents/List",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://peaks.ucdavis.edu/api/:teamName/documents/List",
+            "headers": [
+              {
+                "name": "X-Auth-Token",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "teamName",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "X-Auth-Token",
+              "value": "{{X-Auth-Token}}",
+              "placement": "header"
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "GET /api/{teamName}/documents/Find/{id}",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://peaks.ucdavis.edu/api/:teamName/documents/Find/:id",
+            "headers": [
+              {
+                "name": "X-Auth-Token",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "teamName",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "X-Auth-Token",
+              "value": "{{X-Auth-Token}}",
+              "placement": "header"
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "GET /api/{teamName}/documents/Get/{id}",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://peaks.ucdavis.edu/api/:teamName/documents/Get/:id",
+            "headers": [
+              {
+                "name": "X-Auth-Token",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "teamName",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "X-Auth-Token",
+              "value": "{{X-Auth-Token}}",
+              "placement": "header"
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "GET /api/{teamName}/documents/TeamSettings",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://peaks.ucdavis.edu/api/:teamName/documents/TeamSettings",
+            "headers": [
+              {
+                "name": "X-Auth-Token",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "teamName",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "X-Auth-Token",
+              "value": "{{X-Auth-Token}}",
+              "placement": "header"
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "POST /api/{teamName}/documents/Create",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://peaks.ucdavis.edu/api/:teamName/documents/Create",
+            "headers": [
+              {
+                "name": "X-Auth-Token",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "teamName",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "X-Auth-Token",
+              "value": "{{X-Auth-Token}}",
+              "placement": "header"
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "POST /api/{teamName}/documents/Delete/{id}",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://peaks.ucdavis.edu/api/:teamName/documents/Delete/:id",
+            "headers": [
+              {
+                "name": "X-Auth-Token",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "teamName",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "X-Auth-Token",
+              "value": "{{X-Auth-Token}}",
+              "placement": "header"
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

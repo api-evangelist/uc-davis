@@ -1,0 +1,154 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "PEAKS API v1 Access People API",
+    "version": "v1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "People",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "GET /api/{teamName}/people/List",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://peaks.ucdavis.edu/api/:teamName/people/List",
+            "headers": [
+              {
+                "name": "X-Auth-Token",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "filter",
+                "value": "",
+                "type": "query",
+                "description": "0 = ShowActive, 1 = ShowInactive, 2 = ShowAll. Defaults to Show Active"
+              },
+              {
+                "name": "teamName",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "X-Auth-Token",
+              "value": "{{X-Auth-Token}}",
+              "placement": "header"
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "GET /api/{teamName}/people/SearchPeople",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://peaks.ucdavis.edu/api/:teamName/people/SearchPeople",
+            "headers": [
+              {
+                "name": "X-Auth-Token",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "q",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "teamName",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "X-Auth-Token",
+              "value": "{{X-Auth-Token}}",
+              "placement": "header"
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "GET /api/{teamName}/people/SearchUsers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://peaks.ucdavis.edu/api/:teamName/people/SearchUsers",
+            "headers": [
+              {
+                "name": "X-Auth-Token",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "searchTerm",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "teamName",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "X-Auth-Token",
+              "value": "{{X-Auth-Token}}",
+              "placement": "header"
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "POST /api/{teamName}/people/Create",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://peaks.ucdavis.edu/api/:teamName/people/Create",
+            "headers": [
+              {
+                "name": "X-Auth-Token",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "teamName",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "X-Auth-Token",
+              "value": "{{X-Auth-Token}}",
+              "placement": "header"
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

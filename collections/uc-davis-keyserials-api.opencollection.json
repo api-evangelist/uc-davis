@@ -1,0 +1,401 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "PEAKS API v1 Access KeySerials API",
+    "version": "v1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "KeySerials",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "GET /api/{teamName}/KeySerials/Search",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://peaks.ucdavis.edu/api/:teamName/KeySerials/Search",
+            "headers": [
+              {
+                "name": "X-Auth-Token",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "q",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "teamName",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "X-Auth-Token",
+              "value": "{{X-Auth-Token}}",
+              "placement": "header"
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "GET /api/{teamName}/KeySerials/SearchInKey",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://peaks.ucdavis.edu/api/:teamName/KeySerials/SearchInKey",
+            "headers": [
+              {
+                "name": "X-Auth-Token",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "keyId",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "q",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "teamName",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "X-Auth-Token",
+              "value": "{{X-Auth-Token}}",
+              "placement": "header"
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "GET /api/{teamName}/KeySerials/GetForKey",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://peaks.ucdavis.edu/api/:teamName/KeySerials/GetForKey",
+            "headers": [
+              {
+                "name": "X-Auth-Token",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "keyid",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "teamName",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "X-Auth-Token",
+              "value": "{{X-Auth-Token}}",
+              "placement": "header"
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "GET /api/{teamName}/KeySerials/GetForPerson",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://peaks.ucdavis.edu/api/:teamName/KeySerials/GetForPerson",
+            "headers": [
+              {
+                "name": "X-Auth-Token",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "personId",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "teamName",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "X-Auth-Token",
+              "value": "{{X-Auth-Token}}",
+              "placement": "header"
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "GET /api/{teamName}/KeySerials/Details/{id}",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://peaks.ucdavis.edu/api/:teamName/KeySerials/Details/:id",
+            "headers": [
+              {
+                "name": "X-Auth-Token",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "teamName",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "X-Auth-Token",
+              "value": "{{X-Auth-Token}}",
+              "placement": "header"
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "POST /api/{teamName}/KeySerials/Create",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://peaks.ucdavis.edu/api/:teamName/KeySerials/Create",
+            "headers": [
+              {
+                "name": "X-Auth-Token",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "teamName",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "X-Auth-Token",
+              "value": "{{X-Auth-Token}}",
+              "placement": "header"
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "POST /api/{teamName}/KeySerials/Update/{id}",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://peaks.ucdavis.edu/api/:teamName/KeySerials/Update/:id",
+            "headers": [
+              {
+                "name": "X-Auth-Token",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "teamName",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "X-Auth-Token",
+              "value": "{{X-Auth-Token}}",
+              "placement": "header"
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "POST /api/{teamName}/KeySerials/Assign",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://peaks.ucdavis.edu/api/:teamName/KeySerials/Assign",
+            "headers": [
+              {
+                "name": "X-Auth-Token",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "teamName",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "X-Auth-Token",
+              "value": "{{X-Auth-Token}}",
+              "placement": "header"
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "POST /api/{teamName}/KeySerials/Revoke/{id}",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://peaks.ucdavis.edu/api/:teamName/KeySerials/Revoke/:id",
+            "headers": [
+              {
+                "name": "X-Auth-Token",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "teamName",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "X-Auth-Token",
+              "value": "{{X-Auth-Token}}",
+              "placement": "header"
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "Takes the top 5 history records",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://peaks.ucdavis.edu/api/:teamName/KeySerials/GetHistory/:id",
+            "headers": [
+              {
+                "name": "X-Auth-Token",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "max",
+                "value": "",
+                "type": "query",
+                "description": "Defaults to 5"
+              },
+              {
+                "name": "teamName",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "X-Auth-Token",
+              "value": "{{X-Auth-Token}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Takes the top 5 history records"
+        },
+        {
+          "info": {
+            "name": "GET /api/{teamName}/KeySerials/ListKeySerialStatus",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://peaks.ucdavis.edu/api/:teamName/KeySerials/ListKeySerialStatus",
+            "headers": [
+              {
+                "name": "X-Auth-Token",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "teamName",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "X-Auth-Token",
+              "value": "{{X-Auth-Token}}",
+              "placement": "header"
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

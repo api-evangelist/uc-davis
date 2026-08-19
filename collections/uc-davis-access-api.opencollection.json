@@ -1,0 +1,377 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "PEAKS API v1 Access API",
+    "version": "v1"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Access",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "GET /api/{teamName}/access/Search",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://peaks.ucdavis.edu/api/:teamName/access/Search",
+            "headers": [
+              {
+                "name": "X-Auth-Token",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "q",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "teamName",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "X-Auth-Token",
+              "value": "{{X-Auth-Token}}",
+              "placement": "header"
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "GET /api/{teamName}/access/ListAssigned",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://peaks.ucdavis.edu/api/:teamName/access/ListAssigned",
+            "headers": [
+              {
+                "name": "X-Auth-Token",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "personId",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "teamName",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "X-Auth-Token",
+              "value": "{{X-Auth-Token}}",
+              "placement": "header"
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "List Access",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://peaks.ucdavis.edu/api/:teamName/access/List",
+            "headers": [
+              {
+                "name": "X-Auth-Token",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "filter",
+                "value": "",
+                "type": "query",
+                "description": "0 = ShowActive, 1 = ShowInactive, 2 = ShowAll. Defaults to Show Active"
+              },
+              {
+                "name": "teamName",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "X-Auth-Token",
+              "value": "{{X-Auth-Token}}",
+              "placement": "header"
+            }
+          },
+          "docs": "List Access"
+        },
+        {
+          "info": {
+            "name": "GET /api/{teamName}/access/Details/{id}",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://peaks.ucdavis.edu/api/:teamName/access/Details/:id",
+            "headers": [
+              {
+                "name": "X-Auth-Token",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "teamName",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "X-Auth-Token",
+              "value": "{{X-Auth-Token}}",
+              "placement": "header"
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "POST /api/{teamName}/access/Create",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://peaks.ucdavis.edu/api/:teamName/access/Create",
+            "headers": [
+              {
+                "name": "X-Auth-Token",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "teamName",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "X-Auth-Token",
+              "value": "{{X-Auth-Token}}",
+              "placement": "header"
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "POST /api/{teamName}/access/Assign",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://peaks.ucdavis.edu/api/:teamName/access/Assign",
+            "headers": [
+              {
+                "name": "X-Auth-Token",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "accessId",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "personId",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "date",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "teamName",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "X-Auth-Token",
+              "value": "{{X-Auth-Token}}",
+              "placement": "header"
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "Only Name, Notes, and Tags fields are updated",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://peaks.ucdavis.edu/api/:teamName/access/Update",
+            "headers": [
+              {
+                "name": "X-Auth-Token",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "teamName",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            },
+            "auth": {
+              "type": "apikey",
+              "key": "X-Auth-Token",
+              "value": "{{X-Auth-Token}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Only Name, Notes, and Tags fields are updated"
+        },
+        {
+          "info": {
+            "name": "POST /api/{teamName}/access/Revoke/{id}",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://peaks.ucdavis.edu/api/:teamName/access/Revoke/:id",
+            "headers": [
+              {
+                "name": "X-Auth-Token",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "teamName",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "X-Auth-Token",
+              "value": "{{X-Auth-Token}}",
+              "placement": "header"
+            }
+          }
+        },
+        {
+          "info": {
+            "name": "If there are any assignments, they will be removed before the access record is set to inactive",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://peaks.ucdavis.edu/api/:teamName/access/Delete/:id",
+            "headers": [
+              {
+                "name": "X-Auth-Token",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "teamName",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "X-Auth-Token",
+              "value": "{{X-Auth-Token}}",
+              "placement": "header"
+            }
+          },
+          "docs": "If there are any assignments, they will be removed before the access record is set to inactive"
+        },
+        {
+          "info": {
+            "name": "Return history records\r\nDefaults to a max of 5 records returned",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://peaks.ucdavis.edu/api/:teamName/access/GetHistory/:id",
+            "headers": [
+              {
+                "name": "X-Auth-Token",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              },
+              {
+                "name": "max",
+                "value": "",
+                "type": "query",
+                "description": "the max number of record to take. Defaults to 5"
+              },
+              {
+                "name": "teamName",
+                "value": "",
+                "type": "path"
+              }
+            ],
+            "auth": {
+              "type": "apikey",
+              "key": "X-Auth-Token",
+              "value": "{{X-Auth-Token}}",
+              "placement": "header"
+            }
+          },
+          "docs": "Return history records\r\nDefaults to a max of 5 records returned"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
