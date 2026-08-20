@@ -58,6 +58,21 @@ tags:
 - Digital Collections
 - Library
 - Health
+- Open-Source
+tags_raw:
+- University
+- Higher Education
+- Education
+- United States
+- California
+- UC System
+- Public Research University
+- Research
+- Research Data
+- Identity Federation
+- Digital Collections
+- Library
+- Health
 - Open Source
 created: '2026-06-03'
 modified: '2026-08-19'
@@ -213,6 +228,11 @@ apis:
   - Digital Collections
   - Library
   - Repository
+  - Open-Source
+  tags_raw:
+  - Digital Collections
+  - Library
+  - Repository
   - Open Source
   x-operator: institution
   x-operator-evidence: digital.ucdavis.edu CNAMEs to next.dams.library.ucdavis.edu (136.118.126.184);
@@ -356,6 +376,10 @@ apis:
   baseURL: https://peaks.ucdavis.edu
   tags:
   - Access
+  - peaks
+  - Campus Operations
+  tags_raw:
+  - Access
   - PEAKS
   - Campus Operations
   properties:
@@ -394,6 +418,10 @@ apis:
   humanURL: https://computing.caes.ucdavis.edu/documentation/peaks/api
   baseURL: https://peaks.ucdavis.edu
   tags:
+  - Documents
+  - peaks
+  - Campus Operations
+  tags_raw:
   - Documents
   - PEAKS
   - Campus Operations
@@ -434,6 +462,10 @@ apis:
   baseURL: https://peaks.ucdavis.edu
   tags:
   - Equipment
+  - peaks
+  - Campus Operations
+  tags_raw:
+  - Equipment
   - PEAKS
   - Campus Operations
   properties:
@@ -472,6 +504,10 @@ apis:
   humanURL: https://computing.caes.ucdavis.edu/documentation/peaks/api
   baseURL: https://peaks.ucdavis.edu
   tags:
+  - Keys
+  - peaks
+  - Campus Operations
+  tags_raw:
   - Keys
   - PEAKS
   - Campus Operations
@@ -512,6 +548,10 @@ apis:
   baseURL: https://peaks.ucdavis.edu
   tags:
   - KeySerials
+  - peaks
+  - Campus Operations
+  tags_raw:
+  - KeySerials
   - PEAKS
   - Campus Operations
   properties:
@@ -550,6 +590,10 @@ apis:
   humanURL: https://computing.caes.ucdavis.edu/documentation/peaks/api
   baseURL: https://peaks.ucdavis.edu
   tags:
+  - People
+  - peaks
+  - Campus Operations
+  tags_raw:
   - People
   - PEAKS
   - Campus Operations
@@ -590,6 +634,10 @@ apis:
   baseURL: https://peaks.ucdavis.edu
   tags:
   - PeopleAdmin
+  - peaks
+  - Campus Operations
+  tags_raw:
+  - PeopleAdmin
   - PEAKS
   - Campus Operations
   properties:
@@ -629,6 +677,10 @@ apis:
   baseURL: https://peaks.ucdavis.edu
   tags:
   - Spaces
+  - peaks
+  - Campus Operations
+  tags_raw:
+  - Spaces
   - PEAKS
   - Campus Operations
   properties:
@@ -667,6 +719,10 @@ apis:
   humanURL: https://computing.caes.ucdavis.edu/documentation/peaks/api
   baseURL: https://peaks.ucdavis.edu
   tags:
+  - Workstations
+  - peaks
+  - Campus Operations
+  tags_raw:
   - Workstations
   - PEAKS
   - Campus Operations
@@ -719,6 +775,11 @@ apis:
   properties:
   - type: APIReference
     url: https://escholarship.org/oai?verb=Identify
+  x-audit-reconciliation: 'audit-university-contracts.py grades the bare host escholarship.org as VENDOR
+    because three institutions in the cohort point at it. That is correct about the HOST and does not
+    conflict with the tenant label here: the surface recorded is the UC Davis unit path /uc/ucd, an institution-specific
+    account on a shared platform, which is the definition of tenant. No CDL or eScholarship contract is
+    saved under this slug either way. Do not ''correct'' this back to a saved contract.'
 - aid: uc-davis:library-primo-tenant
   name: UC Davis Library discovery — Ex Libris Primo (tenant)
   description: 'Library discovery at search.library.ucdavis.edu is an Ex Libris Primo instance. The subdomain
@@ -739,6 +800,11 @@ apis:
   properties:
   - type: Documentation
     url: https://library.ucdavis.edu/
+  x-audit-reconciliation: 'audit-university-contracts.py grades search.library.ucdavis.edu as INSTITUTION
+    because the host sits under ucdavis.edu. The tenant label here is the stricter and more accurate read:
+    the host resolves to 216.147.212.109, outside UC Davis address space, and serves an Ex Libris Primo
+    application. A UC Davis-branded subdomain pointed at a vendor''s platform is exactly the tenant case.
+    Do not upgrade this to institution on the strength of the domain alone.'
 common:
 - type: Website
   url: https://www.ucdavis.edu/
