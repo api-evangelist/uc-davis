@@ -169,94 +169,15 @@ x-coverage:
     status: 404
     note: host resolves (18.144.178.99) but serves nothing
 apis:
-- aid: uc-davis:aggie-experts
-  name: Aggie Experts API
-  description: 'Aggie Experts is the UC Davis Library''s research-profile and expertise-discovery system,
-    and its API is the strongest programmable surface the institution operates. Version 5.0, Apache-2.0
-    licensed, twelve documented operations over experts, scholarly works and grants, with published terms
-    of use and a contact address. Verified callable anonymously on 2026-08-19: /api/expert/browse returned
-    196 experts beginning with A and /api/search returned 1,625 hits for ''genomics''. Responses are JSON-LD
-    carrying VIVO and vCard terms, UC Davis ARK identifiers (NAAN 87287), ORCID iDs and Scopus author
-    IDs. UC Davis authored this contract.'
-  humanURL: https://experts.ucdavis.edu/
-  baseURL: https://experts.ucdavis.edu/api
-  tags:
-  - Research
-  - Expertise Discovery
-  - Scholarly Communication
-  - JSON-LD
-  - ORCID
-  x-operator: institution
-  x-operator-evidence: Host experts.ucdavis.edu resolves to 169.237.102.146 (UC Davis address space);
-    info.contact.email is experts@ucdavis.edu; info.termsOfService is on the same host. No vendor appears
-    in servers[], title or contact.
-  properties:
-  - type: OpenAPI
-    url: openapi/uc-davis-aggie-experts-api-openapi.yml
-  - type: x-openapi-original
-    url: openapi/_original/uc-davis-aggie-experts.json
-  - type: APIReference
-    url: https://experts.ucdavis.edu/api/
-  - type: Documentation
-    url: https://library.ucdavis.edu/online-strategy/
-  - type: TermsOfService
-    url: https://experts.ucdavis.edu/termsofuse
-  - type: x-json-schema
-    url: json-schema/uc-davis-aggie-experts-expert-schema.json
-  - type: x-json-schema
-    url: json-schema/uc-davis-aggie-experts-work-schema.json
-  - type: x-json-schema
-    url: json-schema/uc-davis-aggie-experts-grant-schema.json
-  - type: x-examples
-    url: examples/uc-davis-aggie-experts-browse-example.json
-  - type: x-examples
-    url: examples/uc-davis-aggie-experts-work-browse-example.json
-  - type: x-json-ld
-    url: json-ld/uc-davis-aggie-experts-jsonld.yml
-- aid: uc-davis:dams
-  name: DAMS API — UC Davis Library Digital Collections
-  description: 'The Digital Asset Management System API behind digital.ucdavis.edu, built on ''fin'',
-    the UC Davis Library''s own open-source repository framework (github.com/ucd-library/fin). OpenAPI
-    3.0.0, MIT licensed, contact UC Davis Library Online Strategy, four documented paths over collections
-    and items. Verified live on 2026-08-19, but honestly: it is only partly usable anonymously — /api/collection
-    returns HTTP 200 carrying an Elasticsearch parse error and a Node.js stack trace, and item lookups
-    return HTTP 200 with a body of null on a miss. Recorded with those defects rather than presented as
-    clean.'
-  humanURL: https://digital.ucdavis.edu/
-  baseURL: https://digital.ucdavis.edu
-  tags:
-  - Digital Collections
-  - Library
-  - Repository
-  - Open-Source
-  tags_raw:
-  - Digital Collections
-  - Library
-  - Repository
-  - Open Source
-  x-operator: institution
-  x-operator-evidence: digital.ucdavis.edu CNAMEs to next.dams.library.ucdavis.edu (136.118.126.184);
-    info.contact.name is 'Online Strategy - UC Davis Library'. Software is the Library's own open-source
-    project, not a purchased platform.
-  properties:
-  - type: OpenAPI
-    url: openapi/uc-davis-dams-api-openapi.yml
-  - type: x-openapi-original
-    url: openapi/_original/uc-davis-dams.json
-  - type: APIReference
-    url: https://digital.ucdavis.edu/api/
-  - type: Documentation
-    url: https://library.ucdavis.edu/online-strategy/
-  - type: x-source-repository
-    url: https://github.com/ucd-library/fin
 - aid: uc-davis:shibboleth-idp
   name: UC Davis Shibboleth Identity Provider (SAML 2.0 / InCommon)
-  description: 'UC Davis operates its own SAML 2.0 identity provider and publishes signed federation metadata
-    as entityID urn:mace:incommon:ucdavis.edu. This is machine-readable, institution-operated by definition,
-    and almost never catalogued: no vendor can be running it, because the metadata is served from UC Davis
-    address space (shibboleth.gdc.ucdavis.edu, 169.237.248.65) and carries UC Davis''s own organization
-    name. Four SSO bindings and two SLO bindings are advertised across Shibboleth 1.x, SAML 1.1 and SAML
-    2.0. Verified 200 at both the campus endpoint and the InCommon MDQ service on 2026-08-19.'
+  description: >-
+    UC Davis operates its own SAML 2.0 identity provider and publishes signed federation metadata as entityID
+    urn:mace:incommon:ucdavis.edu. This is machine-readable, institution-operated by definition, and almost
+    never catalogued: no vendor can be running it, because the metadata is served from UC Davis address
+    space (shibboleth.gdc.ucdavis.edu, 169.237.248.65) and carries UC Davis's own organization name. Four
+    SSO bindings and two SLO bindings are advertised across Shibboleth 1.x, SAML 1.1 and SAML 2.0. Verified
+    200 at both the campus endpoint and the InCommon MDQ service on 2026-08-19.
   humanURL: https://shibboleth.ucdavis.edu/idp/shibboleth
   tags:
   - Identity Federation
@@ -265,8 +186,9 @@ apis:
   - InCommon
   - Single Sign-On
   x-operator: institution
-  x-operator-evidence: Metadata Organization/OrganizationName is 'University of California, Davis'; all
-    endpoints are on shibboleth.ucdavis.edu.
+  x-operator-evidence: >-
+    Metadata Organization/OrganizationName is 'University of California, Davis'; all endpoints are on
+    shibboleth.ucdavis.edu.
   properties:
   - type: x-identity-federation
     url: identity/uc-davis-identity-federation.yml
@@ -279,15 +201,16 @@ apis:
   x-metadata-url: https://shibboleth.ucdavis.edu/idp/shibboleth
 - aid: uc-davis:health-fhir-r4
   name: UC Davis Health FHIR R4 endpoint
-  description: 'UC Davis Health runs a live HL7 FHIR R4 endpoint on its own domain at emrrp.ucdmc.ucdavis.edu,
-    registered in Epic''s public endpoint directory as ''UC Davis'' and ''UC Davis - MMC'' (active since
-    2024-11-09). Verified 2026-08-19: /metadata returns a 93KB CapabilityStatement instantiating the US
-    Core server profile and the bulk-data profile, and /.well-known/smart-configuration returns a SMART
-    on FHIR discovery document with authorization and token endpoints on the same host. IMPORTANT ATTRIBUTION
-    NOTE: the host and the operation are UC Davis Health''s, but the CapabilityStatement is Epic''s —
-    its own copyright line reads ''Copyright Epic 1979-2026''. Epic''s contract is therefore NOT saved
-    into this repo; only the relationship and the live discovery documents are recorded, so UC Davis is
-    credited for operating a FHIR endpoint and not for Epic''s engineering.'
+  description: >-
+    UC Davis Health runs a live HL7 FHIR R4 endpoint on its own domain at emrrp.ucdmc.ucdavis.edu, registered
+    in Epic's public endpoint directory as 'UC Davis' and 'UC Davis - MMC' (active since 2024-11-09).
+    Verified 2026-08-19: /metadata returns a 93KB CapabilityStatement instantiating the US Core server
+    profile and the bulk-data profile, and /.well-known/smart-configuration returns a SMART on FHIR discovery
+    document with authorization and token endpoints on the same host. IMPORTANT ATTRIBUTION NOTE: the
+    host and the operation are UC Davis Health's, but the CapabilityStatement is Epic's — its own copyright
+    line reads 'Copyright Epic 1979-2026'. Epic's contract is therefore NOT saved into this repo; only
+    the relationship and the live discovery documents are recorded, so UC Davis is credited for operating
+    a FHIR endpoint and not for Epic's engineering.
   humanURL: https://health.ucdavis.edu/systems-integration/developers
   baseURL: https://emrrp.ucdmc.ucdavis.edu/FHIR/api/FHIR/R4/
   tags:
@@ -298,8 +221,9 @@ apis:
   - Epic
   x-operator: institution
   x-contract-author: Epic Systems
-  x-operator-evidence: emrrp.ucdmc.ucdavis.edu resolves to 152.79.5.54 and is under ucdavis.edu; Epic
-    endpoint directory names the managing organization 'UC Davis'.
+  x-operator-evidence: >-
+    emrrp.ucdmc.ucdavis.edu resolves to 152.79.5.54 and is under ucdavis.edu; Epic endpoint directory
+    names the managing organization 'UC Davis'.
   properties:
   - type: APIReference
     url: https://emrrp.ucdmc.ucdavis.edu/FHIR/api/FHIR/R4/metadata
@@ -309,15 +233,17 @@ apis:
     url: https://health.ucdavis.edu/systems-integration/developers
   - type: x-scopes
     url: scopes/uc-davis-scopes.yml
-  x-baseurl-note: A bare GET on the FHIR base returns 404 by design; the base is verified through /metadata
-    (200) and /.well-known/smart-configuration (200), both recorded as properties.
+  x-baseurl-note: >-
+    A bare GET on the FHIR base returns 404 by design; the base is verified through /metadata (200) and
+    /.well-known/smart-configuration (200), both recorded as properties.
 - aid: uc-davis:iet-middleware
   name: IET Middleware Web Service APIs
-  description: 'Information and Educational Technology (IET) Middleware Web Service APIs provide campus
-    integration and identity-related middleware. Probed 2026-08-19: the endpoint returns HTTP 200 but
-    the body is a 1KB HTML welcome page pointing at internal documentation — there is no machine-readable
-    contract, no OpenAPI, and no self-service signup. Access is gated to affiliated campus developers.
-    Listed because the surface is real and institution-operated, not because it is consumable.'
+  description: >-
+    Information and Educational Technology (IET) Middleware Web Service APIs provide campus integration
+    and identity-related middleware. Probed 2026-08-19: the endpoint returns HTTP 200 but the body is
+    a 1KB HTML welcome page pointing at internal documentation — there is no machine-readable contract,
+    no OpenAPI, and no self-service signup. Access is gated to affiliated campus developers. Listed because
+    the surface is real and institution-operated, not because it is consumable.
   humanURL: https://iet-ws.ucdavis.edu/api/
   tags:
   - Identity
@@ -330,11 +256,12 @@ apis:
   x-operator-evidence: iet-ws.ucdavis.edu resolves to 128.120.39.111 in UC Davis address space.
 - aid: uc-davis:health-integration
   name: UC Davis Health Systems Integration APIs
-  description: 'UC Davis Health Systems Integration offers Epic (EHR), HL7 FHIR and custom SOAP/REST APIs,
-    authenticated with API keys, OAuth2 or Epic Interconnect and fronted by InterSystems API Manager.
-    There is no self-service portal and no published contract on this page: onboarding runs through sysintpool@health.ucdavis.edu
+  description: >-
+    UC Davis Health Systems Integration offers Epic (EHR), HL7 FHIR and custom SOAP/REST APIs, authenticated
+    with API keys, OAuth2 or Epic Interconnect and fronted by InterSystems API Manager. There is no self-service
+    portal and no published contract on this page: onboarding runs through sysintpool@health.ucdavis.edu
     or an internal ServiceNow request. The callable FHIR surface behind it is catalogued separately as
-    uc-davis:health-fhir-r4.'
+    uc-davis:health-fhir-r4.
   humanURL: https://health.ucdavis.edu/systems-integration/developers
   tags:
   - Health
@@ -350,10 +277,11 @@ apis:
   x-operator-evidence: health.ucdavis.edu is under ucdavis.edu.
 - aid: uc-davis:ace
   name: CAES ACE API
-  description: 'The CAES Computing Resources Unit documents an ACE API supporting college administrative
-    and content workflows. Probed 2026-08-19: the documentation page returns HTTP 200, but no ACE host
-    resolves (ace.caes.ucdavis.edu NXDOMAIN) and no machine-readable contract was found. Recorded as a
-    documented but unverifiable surface — no spec was generated to fill the gap.'
+  description: >-
+    The CAES Computing Resources Unit documents an ACE API supporting college administrative and content
+    workflows. Probed 2026-08-19: the documentation page returns HTTP 200, but no ACE host resolves (ace.caes.ucdavis.edu
+    NXDOMAIN) and no machine-readable contract was found. Recorded as a documented but unverifiable surface
+    — no spec was generated to fill the gap.
   humanURL: https://computing.caes.ucdavis.edu/documentation/ace/api
   tags:
   - Administration
@@ -362,16 +290,17 @@ apis:
   - type: Documentation
     url: https://computing.caes.ucdavis.edu/documentation/ace/api
   x-operator: institution
-  x-operator-evidence: computing.caes.ucdavis.edu is under ucdavis.edu; built by the CAES Computing Resources
-    Unit.
+  x-operator-evidence: >-
+    computing.caes.ucdavis.edu is under ucdavis.edu; built by the CAES Computing Resources Unit.
 - aid: uc-davis:uc-davis-access-api
   name: PEAKS (CAES) — Access API
-  description: 'The Access resource of PEAKS (People, Equipment, Access, Keys, Space), the asset- and
-    access-tracking application the UC Davis College of Agricultural and Environmental Sciences Computing
-    Resources Unit builds and runs at peaks.ucdavis.edu. 10 operation(s). This entry is ONE TAG of a single
-    application, not a separate API: all nine PEAKS entries in this file split one contract (openapi/_original/uc-davis-peaks.yaml)
-    by tag. PEAKS is UC Davis''s own software — source at github.com/ucdavis/Peaks under MIT — so the
-    engineering is genuinely theirs. Access requires an X-Auth-Token API key issued to a campus team.'
+  description: >-
+    The Access resource of PEAKS (People, Equipment, Access, Keys, Space), the asset- and access-tracking
+    application the UC Davis College of Agricultural and Environmental Sciences Computing Resources Unit
+    builds and runs at peaks.ucdavis.edu. 10 operation(s). This entry is ONE TAG of a single application,
+    not a separate API: all nine PEAKS entries in this file split one contract (openapi/_original/uc-davis-peaks.yaml)
+    by tag. PEAKS is UC Davis's own software — source at github.com/ucdavis/Peaks under MIT — so the engineering
+    is genuinely theirs. Access requires an X-Auth-Token API key issued to a campus team.
   humanURL: https://computing.caes.ucdavis.edu/documentation/peaks/api
   baseURL: https://peaks.ucdavis.edu
   tags:
@@ -405,16 +334,17 @@ apis:
     url: https://github.com/ucdavis/Peaks
   x-operator: institution
   x-application: PEAKS
-  x-operator-evidence: peaks.ucdavis.edu is under ucdavis.edu; info.contact.url is caeshelp.ucdavis.edu;
-    source repo github.com/ucdavis/Peaks.
+  x-operator-evidence: >-
+    peaks.ucdavis.edu is under ucdavis.edu; info.contact.url is caeshelp.ucdavis.edu; source repo github.com/ucdavis/Peaks.
 - aid: uc-davis:uc-davis-documents-api
   name: PEAKS (CAES) — Documents API
-  description: 'The Documents resource of PEAKS (People, Equipment, Access, Keys, Space), the asset- and
-    access-tracking application the UC Davis College of Agricultural and Environmental Sciences Computing
-    Resources Unit builds and runs at peaks.ucdavis.edu. 6 operation(s). This entry is ONE TAG of a single
-    application, not a separate API: all nine PEAKS entries in this file split one contract (openapi/_original/uc-davis-peaks.yaml)
-    by tag. PEAKS is UC Davis''s own software — source at github.com/ucdavis/Peaks under MIT — so the
-    engineering is genuinely theirs. Access requires an X-Auth-Token API key issued to a campus team.'
+  description: >-
+    The Documents resource of PEAKS (People, Equipment, Access, Keys, Space), the asset- and access-tracking
+    application the UC Davis College of Agricultural and Environmental Sciences Computing Resources Unit
+    builds and runs at peaks.ucdavis.edu. 6 operation(s). This entry is ONE TAG of a single application,
+    not a separate API: all nine PEAKS entries in this file split one contract (openapi/_original/uc-davis-peaks.yaml)
+    by tag. PEAKS is UC Davis's own software — source at github.com/ucdavis/Peaks under MIT — so the engineering
+    is genuinely theirs. Access requires an X-Auth-Token API key issued to a campus team.
   humanURL: https://computing.caes.ucdavis.edu/documentation/peaks/api
   baseURL: https://peaks.ucdavis.edu
   tags:
@@ -448,16 +378,17 @@ apis:
     url: https://github.com/ucdavis/Peaks
   x-operator: institution
   x-application: PEAKS
-  x-operator-evidence: peaks.ucdavis.edu is under ucdavis.edu; info.contact.url is caeshelp.ucdavis.edu;
-    source repo github.com/ucdavis/Peaks.
+  x-operator-evidence: >-
+    peaks.ucdavis.edu is under ucdavis.edu; info.contact.url is caeshelp.ucdavis.edu; source repo github.com/ucdavis/Peaks.
 - aid: uc-davis:uc-davis-equipment-api
   name: PEAKS (CAES) — Equipment API
-  description: 'The Equipment resource of PEAKS (People, Equipment, Access, Keys, Space), the asset- and
-    access-tracking application the UC Davis College of Agricultural and Environmental Sciences Computing
-    Resources Unit builds and runs at peaks.ucdavis.edu. 17 operation(s). This entry is ONE TAG of a single
-    application, not a separate API: all nine PEAKS entries in this file split one contract (openapi/_original/uc-davis-peaks.yaml)
-    by tag. PEAKS is UC Davis''s own software — source at github.com/ucdavis/Peaks under MIT — so the
-    engineering is genuinely theirs. Access requires an X-Auth-Token API key issued to a campus team.'
+  description: >-
+    The Equipment resource of PEAKS (People, Equipment, Access, Keys, Space), the asset- and access-tracking
+    application the UC Davis College of Agricultural and Environmental Sciences Computing Resources Unit
+    builds and runs at peaks.ucdavis.edu. 17 operation(s). This entry is ONE TAG of a single application,
+    not a separate API: all nine PEAKS entries in this file split one contract (openapi/_original/uc-davis-peaks.yaml)
+    by tag. PEAKS is UC Davis's own software — source at github.com/ucdavis/Peaks under MIT — so the engineering
+    is genuinely theirs. Access requires an X-Auth-Token API key issued to a campus team.
   humanURL: https://computing.caes.ucdavis.edu/documentation/peaks/api
   baseURL: https://peaks.ucdavis.edu
   tags:
@@ -491,16 +422,17 @@ apis:
     url: https://github.com/ucdavis/Peaks
   x-operator: institution
   x-application: PEAKS
-  x-operator-evidence: peaks.ucdavis.edu is under ucdavis.edu; info.contact.url is caeshelp.ucdavis.edu;
-    source repo github.com/ucdavis/Peaks.
+  x-operator-evidence: >-
+    peaks.ucdavis.edu is under ucdavis.edu; info.contact.url is caeshelp.ucdavis.edu; source repo github.com/ucdavis/Peaks.
 - aid: uc-davis:uc-davis-keys-api
   name: PEAKS (CAES) — Keys API
-  description: 'The Keys resource of PEAKS (People, Equipment, Access, Keys, Space), the asset- and access-tracking
+  description: >-
+    The Keys resource of PEAKS (People, Equipment, Access, Keys, Space), the asset- and access-tracking
     application the UC Davis College of Agricultural and Environmental Sciences Computing Resources Unit
     builds and runs at peaks.ucdavis.edu. 10 operation(s). This entry is ONE TAG of a single application,
     not a separate API: all nine PEAKS entries in this file split one contract (openapi/_original/uc-davis-peaks.yaml)
-    by tag. PEAKS is UC Davis''s own software — source at github.com/ucdavis/Peaks under MIT — so the
-    engineering is genuinely theirs. Access requires an X-Auth-Token API key issued to a campus team.'
+    by tag. PEAKS is UC Davis's own software — source at github.com/ucdavis/Peaks under MIT — so the engineering
+    is genuinely theirs. Access requires an X-Auth-Token API key issued to a campus team.
   humanURL: https://computing.caes.ucdavis.edu/documentation/peaks/api
   baseURL: https://peaks.ucdavis.edu
   tags:
@@ -534,16 +466,17 @@ apis:
     url: https://github.com/ucdavis/Peaks
   x-operator: institution
   x-application: PEAKS
-  x-operator-evidence: peaks.ucdavis.edu is under ucdavis.edu; info.contact.url is caeshelp.ucdavis.edu;
-    source repo github.com/ucdavis/Peaks.
+  x-operator-evidence: >-
+    peaks.ucdavis.edu is under ucdavis.edu; info.contact.url is caeshelp.ucdavis.edu; source repo github.com/ucdavis/Peaks.
 - aid: uc-davis:uc-davis-keyserials-api
   name: PEAKS (CAES) — KeySerials API
-  description: 'The KeySerials resource of PEAKS (People, Equipment, Access, Keys, Space), the asset-
-    and access-tracking application the UC Davis College of Agricultural and Environmental Sciences Computing
-    Resources Unit builds and runs at peaks.ucdavis.edu. 11 operation(s). This entry is ONE TAG of a single
-    application, not a separate API: all nine PEAKS entries in this file split one contract (openapi/_original/uc-davis-peaks.yaml)
-    by tag. PEAKS is UC Davis''s own software — source at github.com/ucdavis/Peaks under MIT — so the
-    engineering is genuinely theirs. Access requires an X-Auth-Token API key issued to a campus team.'
+  description: >-
+    The KeySerials resource of PEAKS (People, Equipment, Access, Keys, Space), the asset- and access-tracking
+    application the UC Davis College of Agricultural and Environmental Sciences Computing Resources Unit
+    builds and runs at peaks.ucdavis.edu. 11 operation(s). This entry is ONE TAG of a single application,
+    not a separate API: all nine PEAKS entries in this file split one contract (openapi/_original/uc-davis-peaks.yaml)
+    by tag. PEAKS is UC Davis's own software — source at github.com/ucdavis/Peaks under MIT — so the engineering
+    is genuinely theirs. Access requires an X-Auth-Token API key issued to a campus team.
   humanURL: https://computing.caes.ucdavis.edu/documentation/peaks/api
   baseURL: https://peaks.ucdavis.edu
   tags:
@@ -577,16 +510,17 @@ apis:
     url: https://github.com/ucdavis/Peaks
   x-operator: institution
   x-application: PEAKS
-  x-operator-evidence: peaks.ucdavis.edu is under ucdavis.edu; info.contact.url is caeshelp.ucdavis.edu;
-    source repo github.com/ucdavis/Peaks.
+  x-operator-evidence: >-
+    peaks.ucdavis.edu is under ucdavis.edu; info.contact.url is caeshelp.ucdavis.edu; source repo github.com/ucdavis/Peaks.
 - aid: uc-davis:uc-davis-people-api
   name: PEAKS (CAES) — People API
-  description: 'The People resource of PEAKS (People, Equipment, Access, Keys, Space), the asset- and
-    access-tracking application the UC Davis College of Agricultural and Environmental Sciences Computing
-    Resources Unit builds and runs at peaks.ucdavis.edu. 4 operation(s). This entry is ONE TAG of a single
-    application, not a separate API: all nine PEAKS entries in this file split one contract (openapi/_original/uc-davis-peaks.yaml)
-    by tag. PEAKS is UC Davis''s own software — source at github.com/ucdavis/Peaks under MIT — so the
-    engineering is genuinely theirs. Access requires an X-Auth-Token API key issued to a campus team.'
+  description: >-
+    The People resource of PEAKS (People, Equipment, Access, Keys, Space), the asset- and access-tracking
+    application the UC Davis College of Agricultural and Environmental Sciences Computing Resources Unit
+    builds and runs at peaks.ucdavis.edu. 4 operation(s). This entry is ONE TAG of a single application,
+    not a separate API: all nine PEAKS entries in this file split one contract (openapi/_original/uc-davis-peaks.yaml)
+    by tag. PEAKS is UC Davis's own software — source at github.com/ucdavis/Peaks under MIT — so the engineering
+    is genuinely theirs. Access requires an X-Auth-Token API key issued to a campus team.
   humanURL: https://computing.caes.ucdavis.edu/documentation/peaks/api
   baseURL: https://peaks.ucdavis.edu
   tags:
@@ -620,16 +554,17 @@ apis:
     url: https://github.com/ucdavis/Peaks
   x-operator: institution
   x-application: PEAKS
-  x-operator-evidence: peaks.ucdavis.edu is under ucdavis.edu; info.contact.url is caeshelp.ucdavis.edu;
-    source repo github.com/ucdavis/Peaks.
+  x-operator-evidence: >-
+    peaks.ucdavis.edu is under ucdavis.edu; info.contact.url is caeshelp.ucdavis.edu; source repo github.com/ucdavis/Peaks.
 - aid: uc-davis:uc-davis-peopleadmin-api
   name: PEAKS (CAES) — PeopleAdmin API
-  description: 'The PeopleAdmin resource of PEAKS (People, Equipment, Access, Keys, Space), the asset-
-    and access-tracking application the UC Davis College of Agricultural and Environmental Sciences Computing
-    Resources Unit builds and runs at peaks.ucdavis.edu. 4 operation(s). This entry is ONE TAG of a single
-    application, not a separate API: all nine PEAKS entries in this file split one contract (openapi/_original/uc-davis-peaks.yaml)
-    by tag. PEAKS is UC Davis''s own software — source at github.com/ucdavis/Peaks under MIT — so the
-    engineering is genuinely theirs. Access requires an X-Auth-Token API key issued to a campus team.'
+  description: >-
+    The PeopleAdmin resource of PEAKS (People, Equipment, Access, Keys, Space), the asset- and access-tracking
+    application the UC Davis College of Agricultural and Environmental Sciences Computing Resources Unit
+    builds and runs at peaks.ucdavis.edu. 4 operation(s). This entry is ONE TAG of a single application,
+    not a separate API: all nine PEAKS entries in this file split one contract (openapi/_original/uc-davis-peaks.yaml)
+    by tag. PEAKS is UC Davis's own software — source at github.com/ucdavis/Peaks under MIT — so the engineering
+    is genuinely theirs. Access requires an X-Auth-Token API key issued to a campus team.
   humanURL: https://computing.caes.ucdavis.edu/documentation/peaks/api
   baseURL: https://peaks.ucdavis.edu
   tags:
@@ -663,16 +598,17 @@ apis:
     url: https://github.com/ucdavis/Peaks
   x-operator: institution
   x-application: PEAKS
-  x-operator-evidence: peaks.ucdavis.edu is under ucdavis.edu; info.contact.url is caeshelp.ucdavis.edu;
-    source repo github.com/ucdavis/Peaks.
+  x-operator-evidence: >-
+    peaks.ucdavis.edu is under ucdavis.edu; info.contact.url is caeshelp.ucdavis.edu; source repo github.com/ucdavis/Peaks.
 - aid: uc-davis:uc-davis-spaces-api
   name: PEAKS (CAES) — Spaces API
-  description: 'The Spaces resource of PEAKS (People, Equipment, Access, Keys, Space), the asset- and
-    access-tracking application the UC Davis College of Agricultural and Environmental Sciences Computing
-    Resources Unit builds and runs at peaks.ucdavis.edu. 6 operation(s). This entry is ONE TAG of a single
-    application, not a separate API: all nine PEAKS entries in this file split one contract (openapi/_original/uc-davis-peaks.yaml)
-    by tag. PEAKS is UC Davis''s own software — source at github.com/ucdavis/Peaks under MIT — so the
-    engineering is genuinely theirs. Access requires an X-Auth-Token API key issued to a campus team.'
+  description: >-
+    The Spaces resource of PEAKS (People, Equipment, Access, Keys, Space), the asset- and access-tracking
+    application the UC Davis College of Agricultural and Environmental Sciences Computing Resources Unit
+    builds and runs at peaks.ucdavis.edu. 6 operation(s). This entry is ONE TAG of a single application,
+    not a separate API: all nine PEAKS entries in this file split one contract (openapi/_original/uc-davis-peaks.yaml)
+    by tag. PEAKS is UC Davis's own software — source at github.com/ucdavis/Peaks under MIT — so the engineering
+    is genuinely theirs. Access requires an X-Auth-Token API key issued to a campus team.
   humanURL: https://computing.caes.ucdavis.edu/documentation/peaks/api
   baseURL: https://peaks.ucdavis.edu
   tags:
@@ -706,16 +642,17 @@ apis:
     url: https://github.com/ucdavis/Peaks
   x-operator: institution
   x-application: PEAKS
-  x-operator-evidence: peaks.ucdavis.edu is under ucdavis.edu; info.contact.url is caeshelp.ucdavis.edu;
-    source repo github.com/ucdavis/Peaks.
+  x-operator-evidence: >-
+    peaks.ucdavis.edu is under ucdavis.edu; info.contact.url is caeshelp.ucdavis.edu; source repo github.com/ucdavis/Peaks.
 - aid: uc-davis:uc-davis-workstations-api
   name: PEAKS (CAES) — Workstations API
-  description: 'The Workstations resource of PEAKS (People, Equipment, Access, Keys, Space), the asset-
-    and access-tracking application the UC Davis College of Agricultural and Environmental Sciences Computing
-    Resources Unit builds and runs at peaks.ucdavis.edu. 13 operation(s). This entry is ONE TAG of a single
-    application, not a separate API: all nine PEAKS entries in this file split one contract (openapi/_original/uc-davis-peaks.yaml)
-    by tag. PEAKS is UC Davis''s own software — source at github.com/ucdavis/Peaks under MIT — so the
-    engineering is genuinely theirs. Access requires an X-Auth-Token API key issued to a campus team.'
+  description: >-
+    The Workstations resource of PEAKS (People, Equipment, Access, Keys, Space), the asset- and access-tracking
+    application the UC Davis College of Agricultural and Environmental Sciences Computing Resources Unit
+    builds and runs at peaks.ucdavis.edu. 13 operation(s). This entry is ONE TAG of a single application,
+    not a separate API: all nine PEAKS entries in this file split one contract (openapi/_original/uc-davis-peaks.yaml)
+    by tag. PEAKS is UC Davis's own software — source at github.com/ucdavis/Peaks under MIT — so the engineering
+    is genuinely theirs. Access requires an X-Auth-Token API key issued to a campus team.
   humanURL: https://computing.caes.ucdavis.edu/documentation/peaks/api
   baseURL: https://peaks.ucdavis.edu
   tags:
@@ -749,19 +686,19 @@ apis:
     url: https://github.com/ucdavis/Peaks
   x-operator: institution
   x-application: PEAKS
-  x-operator-evidence: peaks.ucdavis.edu is under ucdavis.edu; info.contact.url is caeshelp.ucdavis.edu;
-    source repo github.com/ucdavis/Peaks.
+  x-operator-evidence: >-
+    peaks.ucdavis.edu is under ucdavis.edu; info.contact.url is caeshelp.ucdavis.edu; source repo github.com/ucdavis/Peaks.
 - aid: uc-davis:escholarship-tenant
   name: eScholarship — UC Davis unit (tenant)
-  description: 'UC Davis''s open-access scholarly output is deposited into eScholarship, the University
-    of California''s shared repository, under the campus unit path /uc/ucd. The content, the deposits
-    and the DOIs are UC Davis''s; the platform and the contract are the California Digital Library''s,
-    and the OAI-PMH endpoint at escholarship.org/oai serves all ten UC campuses from a single set (''everything'')
-    with no UC Davis setSpec. Recorded as a TENANT relationship: this is a real institutional fact and
-    one of the few programmable research surfaces UC Davis has, but no eScholarship or CDL contract is
-    saved under this slug. Note escholarship.org answers automated clients with an AWS WAF challenge (HTTP
-    202, zero bytes), so the human landing page could not be status-verified — the OAI-PMH verbs did answer
-    200.'
+  description: >-
+    UC Davis's open-access scholarly output is deposited into eScholarship, the University of California's
+    shared repository, under the campus unit path /uc/ucd. The content, the deposits and the DOIs are
+    UC Davis's; the platform and the contract are the California Digital Library's, and the OAI-PMH endpoint
+    at escholarship.org/oai serves all ten UC campuses from a single set ('everything') with no UC Davis
+    setSpec. Recorded as a TENANT relationship: this is a real institutional fact and one of the few programmable
+    research surfaces UC Davis has, but no eScholarship or CDL contract is saved under this slug. Note
+    escholarship.org answers automated clients with an AWS WAF challenge (HTTP 202, zero bytes), so the
+    human landing page could not be status-verified — the OAI-PMH verbs did answer 200.
   humanURL: https://escholarship.org/uc/ucd
   tags:
   - Research Repository
@@ -769,24 +706,27 @@ apis:
   - OAI-PMH
   - Tenant
   x-operator: tenant
-  x-operator-evidence: escholarship.org is operated by the California Digital Library and shared across
-    all UC campuses; it is not under ucdavis.edu.
+  x-operator-evidence: >-
+    escholarship.org is operated by the California Digital Library and shared across all UC campuses;
+    it is not under ucdavis.edu.
   x-platform-operator: California Digital Library (University of California)
   properties:
   - type: APIReference
     url: https://escholarship.org/oai?verb=Identify
-  x-audit-reconciliation: 'audit-university-contracts.py grades the bare host escholarship.org as VENDOR
-    because three institutions in the cohort point at it. That is correct about the HOST and does not
-    conflict with the tenant label here: the surface recorded is the UC Davis unit path /uc/ucd, an institution-specific
-    account on a shared platform, which is the definition of tenant. No CDL or eScholarship contract is
-    saved under this slug either way. Do not ''correct'' this back to a saved contract.'
+  x-audit-reconciliation: >-
+    audit-university-contracts.py grades the bare host escholarship.org as VENDOR because three institutions
+    in the cohort point at it. That is correct about the HOST and does not conflict with the tenant label
+    here: the surface recorded is the UC Davis unit path /uc/ucd, an institution-specific account on a
+    shared platform, which is the definition of tenant. No CDL or eScholarship contract is saved under
+    this slug either way. Do not 'correct' this back to a saved contract.
 - aid: uc-davis:library-primo-tenant
   name: UC Davis Library discovery — Ex Libris Primo (tenant)
-  description: 'Library discovery at search.library.ucdavis.edu is an Ex Libris Primo instance. The subdomain
-    is UC Davis''s and the collection is UC Davis''s, but the application is Ex Libris''s: the served
-    document is a Primo single-page app (id=''primoExploreRoot'') and the host resolves to 216.147.212.109,
-    outside UC Davis''s 128.120/169.237 address space. Recorded as a TENANT relationship. No Primo, Alma
-    or Ex Libris contract is saved under this slug — that contract belongs in the vendor''s own repo.'
+  description: >-
+    Library discovery at search.library.ucdavis.edu is an Ex Libris Primo instance. The subdomain is UC
+    Davis's and the collection is UC Davis's, but the application is Ex Libris's: the served document
+    is a Primo single-page app (id='primoExploreRoot') and the host resolves to 216.147.212.109, outside
+    UC Davis's 128.120/169.237 address space. Recorded as a TENANT relationship. No Primo, Alma or Ex
+    Libris contract is saved under this slug — that contract belongs in the vendor's own repo.
   humanURL: https://search.library.ucdavis.edu/
   tags:
   - Library
@@ -794,17 +734,164 @@ apis:
   - Primo
   - Tenant
   x-operator: tenant
-  x-operator-evidence: Institution subdomain on a vendor platform; DNS resolves outside UC Davis address
-    space and the payload is Ex Libris Primo.
+  x-operator-evidence: >-
+    Institution subdomain on a vendor platform; DNS resolves outside UC Davis address space and the payload
+    is Ex Libris Primo.
   x-platform-operator: Ex Libris (Clarivate)
   properties:
   - type: Documentation
     url: https://library.ucdavis.edu/
-  x-audit-reconciliation: 'audit-university-contracts.py grades search.library.ucdavis.edu as INSTITUTION
-    because the host sits under ucdavis.edu. The tenant label here is the stricter and more accurate read:
-    the host resolves to 216.147.212.109, outside UC Davis address space, and serves an Ex Libris Primo
-    application. A UC Davis-branded subdomain pointed at a vendor''s platform is exactly the tenant case.
-    Do not upgrade this to institution on the strength of the domain alone.'
+  x-audit-reconciliation: >-
+    audit-university-contracts.py grades search.library.ucdavis.edu as INSTITUTION because the host sits
+    under ucdavis.edu. The tenant label here is the stricter and more accurate read: the host resolves
+    to 216.147.212.109, outside UC Davis address space, and serves an Ex Libris Primo application. A UC
+    Davis-branded subdomain pointed at a vendor's platform is exactly the tenant case. Do not upgrade
+    this to institution on the strength of the domain alone.
+- aid: uc-davis:uc-davis-collection-api
+  name: University of California, Davis Collection API
+  description: The collection API from University of California, Davis — 2 operation(s) for collection.
+  humanURL: https://experts.ucdavis.edu/
+  baseURL: https://experts.ucdavis.edu/api
+  tags:
+  - collection
+  properties:
+  - type: OpenAPI
+    url: openapi/uc-davis-collection-api-openapi.yml
+  - type: x-openapi-original
+    url: openapi/_original/uc-davis-aggie-experts.json
+  - type: APIReference
+    url: https://experts.ucdavis.edu/api/
+  - type: Documentation
+    url: https://library.ucdavis.edu/online-strategy/
+  - type: TermsOfService
+    url: https://experts.ucdavis.edu/termsofuse
+  - type: x-json-schema
+    url: json-schema/uc-davis-aggie-experts-expert-schema.json
+  - type: x-json-schema
+    url: json-schema/uc-davis-aggie-experts-work-schema.json
+  - type: x-json-schema
+    url: json-schema/uc-davis-aggie-experts-grant-schema.json
+  - type: x-examples
+    url: examples/uc-davis-aggie-experts-browse-example.json
+  - type: x-examples
+    url: examples/uc-davis-aggie-experts-work-browse-example.json
+  - type: x-json-ld
+    url: json-ld/uc-davis-aggie-experts-jsonld.yml
+  - type: x-openapi-original
+    url: openapi/_original/uc-davis-dams.json
+  - type: APIReference
+    url: https://digital.ucdavis.edu/api/
+  - type: x-source-repository
+    url: https://github.com/ucd-library/fin
+- aid: uc-davis:uc-davis-expert-api
+  name: University of California, Davis Expert API
+  description: Expert Information
+  humanURL: https://experts.ucdavis.edu/
+  baseURL: https://experts.ucdavis.edu/api
+  tags:
+  - expert
+  properties:
+  - type: OpenAPI
+    url: openapi/uc-davis-expert-api-openapi.yml
+  - type: x-openapi-original
+    url: openapi/_original/uc-davis-aggie-experts.json
+  - type: APIReference
+    url: https://experts.ucdavis.edu/api/
+  - type: Documentation
+    url: https://library.ucdavis.edu/online-strategy/
+  - type: TermsOfService
+    url: https://experts.ucdavis.edu/termsofuse
+  - type: x-json-schema
+    url: json-schema/uc-davis-aggie-experts-expert-schema.json
+  - type: x-json-schema
+    url: json-schema/uc-davis-aggie-experts-work-schema.json
+  - type: x-json-schema
+    url: json-schema/uc-davis-aggie-experts-grant-schema.json
+  - type: x-examples
+    url: examples/uc-davis-aggie-experts-browse-example.json
+  - type: x-examples
+    url: examples/uc-davis-aggie-experts-work-browse-example.json
+  - type: x-json-ld
+    url: json-ld/uc-davis-aggie-experts-jsonld.yml
+  - type: x-openapi-original
+    url: openapi/_original/uc-davis-dams.json
+  - type: APIReference
+    url: https://digital.ucdavis.edu/api/
+  - type: x-source-repository
+    url: https://github.com/ucd-library/fin
+- aid: uc-davis:uc-davis-item-api
+  name: University of California, Davis Item API
+  description: The item API from University of California, Davis — 1 operation(s) for item.
+  humanURL: https://experts.ucdavis.edu/
+  baseURL: https://experts.ucdavis.edu/api
+  tags:
+  - item
+  properties:
+  - type: OpenAPI
+    url: openapi/uc-davis-item-api-openapi.yml
+  - type: x-openapi-original
+    url: openapi/_original/uc-davis-aggie-experts.json
+  - type: APIReference
+    url: https://experts.ucdavis.edu/api/
+  - type: Documentation
+    url: https://library.ucdavis.edu/online-strategy/
+  - type: TermsOfService
+    url: https://experts.ucdavis.edu/termsofuse
+  - type: x-json-schema
+    url: json-schema/uc-davis-aggie-experts-expert-schema.json
+  - type: x-json-schema
+    url: json-schema/uc-davis-aggie-experts-work-schema.json
+  - type: x-json-schema
+    url: json-schema/uc-davis-aggie-experts-grant-schema.json
+  - type: x-examples
+    url: examples/uc-davis-aggie-experts-browse-example.json
+  - type: x-examples
+    url: examples/uc-davis-aggie-experts-work-browse-example.json
+  - type: x-json-ld
+    url: json-ld/uc-davis-aggie-experts-jsonld.yml
+  - type: x-openapi-original
+    url: openapi/_original/uc-davis-dams.json
+  - type: APIReference
+    url: https://digital.ucdavis.edu/api/
+  - type: x-source-repository
+    url: https://github.com/ucd-library/fin
+- aid: uc-davis:uc-davis-page-search-api
+  name: University of California, Davis page search API
+  description: >-
+    The page search API from University of California, Davis — 1 operation(s) for page search.
+  humanURL: https://experts.ucdavis.edu/
+  baseURL: https://experts.ucdavis.edu/api
+  tags:
+  - page search
+  properties:
+  - type: OpenAPI
+    url: openapi/uc-davis-page-search-api-openapi.yml
+  - type: x-openapi-original
+    url: openapi/_original/uc-davis-aggie-experts.json
+  - type: APIReference
+    url: https://experts.ucdavis.edu/api/
+  - type: Documentation
+    url: https://library.ucdavis.edu/online-strategy/
+  - type: TermsOfService
+    url: https://experts.ucdavis.edu/termsofuse
+  - type: x-json-schema
+    url: json-schema/uc-davis-aggie-experts-expert-schema.json
+  - type: x-json-schema
+    url: json-schema/uc-davis-aggie-experts-work-schema.json
+  - type: x-json-schema
+    url: json-schema/uc-davis-aggie-experts-grant-schema.json
+  - type: x-examples
+    url: examples/uc-davis-aggie-experts-browse-example.json
+  - type: x-examples
+    url: examples/uc-davis-aggie-experts-work-browse-example.json
+  - type: x-json-ld
+    url: json-ld/uc-davis-aggie-experts-jsonld.yml
+  - type: x-openapi-original
+    url: openapi/_original/uc-davis-dams.json
+  - type: APIReference
+    url: https://digital.ucdavis.edu/api/
+  - type: x-source-repository
+    url: https://github.com/ucd-library/fin
 common:
 - type: Website
   url: https://www.ucdavis.edu/
