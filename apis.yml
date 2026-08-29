@@ -905,6 +905,9 @@ apis:
   - type: x-source-repository
     url: https://github.com/ucd-library/fin
 common:
+- type: CapabilityMap
+  url: capabilities/uc-davis-capability-edges.yml
+  name: University of California, Davis Business Capability Map
 - type: Website
   url: https://www.ucdavis.edu/
 - type: DeveloperPortal
