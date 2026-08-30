@@ -1,0 +1,857 @@
+openapi: 3.2.0
+info:
+  title: Aggie Experts Expert API
+  version: '5.0'
+  description: Allows for the retrieval of expert information.
+  termsOfService: https://experts.ucdavis.edu/termsofuse
+  contact:
+    email: experts@ucdavis.edu
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  x-operator: institution
+  x-operator-note: Operated by the UC Davis Library on experts.ucdavis.edu; UC Davis authored the contract.
+  x-provenance:
+    generated: '2026-08-19'
+    method: searched
+    source: https://experts.ucdavis.edu/api/
+servers:
+- url: https://experts.ucdavis.edu/api
+  description: Aggie Experts production API (institution-operated, UC Davis Library)
+tags:
+- name: expert
+  description: Expert Information
+paths:
+  /api/search/:
+    get:
+      description: Returns matching search results, including the number of matching works and grants
+      parameters:
+      - $ref: '#/components/parameters/q'
+      - $ref: '#/components/parameters/p'
+      - $ref: '#/components/parameters/page'
+      - $ref: '#/components/parameters/size'
+      - $ref: '#/components/parameters/atType'
+      - $ref: '#/components/parameters/type'
+      - $ref: '#/components/parameters/status'
+      - $ref: '#/components/parameters/availability'
+      - $ref: '#/components/parameters/expert'
+      - $ref: '#/components/parameters/dateFrom'
+      - $ref: '#/components/parameters/dateTo'
+      responses:
+        '200':
+          $ref: '#/components/responses/Search'
+        '400':
+          $ref: '#/components/responses/Invalid_request'
+      tags:
+      - expert
+  /api/expert/browse:
+    get:
+      description: Returns for undefined for  A - Z, or if sending query param p={letter}, will return results for undefined with last names of that letter
+      parameters:
+      - $ref: '#/components/parameters/p'
+      - $ref: '#/components/parameters/page'
+      - $ref: '#/components/parameters/size'
+      responses:
+        '200':
+          $ref: '#/components/responses/Browse'
+        '400':
+          $ref: '#/components/responses/Invalid_request'
+      tags:
+      - expert
+  /api/expert/{expertId}:
+    get:
+      description: Get an expert by id
+      parameters:
+      - $ref: '#/components/parameters/expertId'
+      - $ref: '#/components/parameters/include'
+      - $ref: '#/components/parameters/all'
+      - $ref: '#/components/parameters/previewEsIndex'
+      responses:
+        '200':
+          $ref: '#/components/responses/Expert'
+        '400':
+          $ref: '#/components/responses/Missing_id'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/Expert_not_found'
+      tags:
+      - expert
+    post:
+      description: Get an expert by id with subselect options
+      parameters:
+      - $ref: '#/components/parameters/expertId'
+      requestBody:
+        $ref: '#/components/requestBodies/Expert_post'
+      responses:
+        '200':
+          $ref: '#/components/responses/Expert'
+        '404':
+          $ref: '#/components/responses/Expert_not_found'
+      tags:
+      - expert
+  /api/work/search:
+    get:
+      description: Returns matching search results for works.
+      parameters:
+      - $ref: '#/components/parameters/q'
+      - $ref: '#/components/parameters/p'
+      - $ref: '#/components/parameters/page'
+      - $ref: '#/components/parameters/size'
+      - $ref: '#/components/parameters/inner_hit_size'
+      responses:
+        '200':
+          $ref: '#/components/responses/Search'
+        '400':
+          $ref: '#/components/responses/Invalid_request'
+      tags:
+      - expert
+  /api/work/browse:
+    get:
+      description: Returns works A - Z, or if sending query param p={letter}, will return results with that letter
+      parameters:
+      - $ref: '#/components/parameters/p'
+      - $ref: '#/components/parameters/page'
+      - $ref: '#/components/parameters/size'
+      responses:
+        '200':
+          $ref: '#/components/responses/Browse'
+        '400':
+          $ref: '#/components/responses/Invalid_request'
+      tags:
+      - expert
+  /api/work/{id}:
+    get:
+      description: Get a work by id
+      parameters:
+      - $ref: '#/components/parameters/id'
+      responses:
+        '200':
+          $ref: '#/components/responses/Work'
+        '400':
+          $ref: '#/components/responses/Missing_id'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/Not_found'
+      tags:
+      - expert
+  /api/grant/browse:
+    get:
+      description: Returns grants A - Z, or if sending query param p={letter}, will return results with that letter
+      parameters:
+      - $ref: '#/components/parameters/p'
+      - $ref: '#/components/parameters/page'
+      - $ref: '#/components/parameters/size'
+      responses:
+        '200':
+          $ref: '#/components/responses/Browse'
+        '400':
+          $ref: '#/components/responses/Invalid_request'
+      tags:
+      - expert
+  /api/grant/{id}:
+    get:
+      description: Get a grant by id
+      parameters:
+      - $ref: '#/components/parameters/id'
+      responses:
+        '200':
+          $ref: '#/components/responses/Grant'
+        '400':
+          $ref: '#/components/responses/Missing_id'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+        '404':
+          $ref: '#/components/responses/Not_found'
+      tags:
+      - expert
+  /api/sitefarm/experts/{ids}:
+    get:
+      description: Returns a JSON array of expert profiles
+      parameters:
+      - $ref: '#/components/parameters/sitefarmId'
+      responses:
+        '200':
+          $ref: '#/components/responses/Successful_operation'
+        '400':
+          $ref: '#/components/responses/Invalid_ID_supplied'
+        '404':
+          $ref: '#/components/responses/Expert_not_found'
+      tags:
+      - expert
+  /api/miv/user:
+    get:
+      description: Returns the expertId for the currently authenticated MIV user
+      parameters: []
+      responses:
+        '200':
+          $ref: '#/components/responses/Successful_operation'
+        '404':
+          $ref: '#/components/responses/Expert_not_found'
+      tags:
+      - expert
+  /api/miv/grants:
+    get:
+      description: Returns a JSON array of an expert's grants. One of 'email', 'ucdPersonUUID', or 'iamId' must be provided to identify the expert. The 'until' date defaults to today if not provided.
+      parameters:
+      - $ref: '#/components/parameters/since'
+      - $ref: '#/components/parameters/until'
+      - $ref: '#/components/parameters/email'
+      - $ref: '#/components/parameters/ucdPersonUUID'
+      - $ref: '#/components/parameters/iamId'
+      responses:
+        '200':
+          $ref: '#/components/responses/Successful_operation'
+        '400':
+          $ref: '#/components/responses/Invalid_ID_supplied'
+        '404':
+          $ref: '#/components/responses/Expert_not_found'
+      tags:
+      - expert
+  /api/miv/raw_grants:
+    get:
+      description: Returns the raw Elasticsearch grant documents for an expert. One of 'email', 'ucdPersonUUID', or 'iamId' must be provided. The 'until' date defaults to today if not provided.
+      parameters:
+      - $ref: '#/components/parameters/since'
+      - $ref: '#/components/parameters/until'
+      - $ref: '#/components/parameters/email'
+      - $ref: '#/components/parameters/ucdPersonUUID'
+      - $ref: '#/components/parameters/iamId'
+      responses:
+        '200':
+          $ref: '#/components/responses/Successful_operation'
+        '400':
+          $ref: '#/components/responses/Invalid_ID_supplied'
+        '404':
+          $ref: '#/components/responses/Expert_not_found'
+      tags:
+      - expert
+components:
+  parameters:
+    since:
+      in: query
+      name: since
+      description: Filter grants starting from this date (inclusive).
+      required: false
+      schema:
+        type: string
+        format: date
+        pattern: ^[0-9]{4}-(?:0[1-9]|1[0-2])-(?:0[1-9]|[12][0-9]|3[01])$
+        example: '2010-01-01'
+    expert:
+      in: query
+      name: expert
+      description: Comma-separated search filter on experts
+      required: false
+      schema:
+        type: array
+        items:
+          type: string
+      style: simple
+      explode: false
+    all:
+      in: query
+      name: all
+      description: Return all grants and works without pagination (requires owner or admin)
+      required: false
+      schema:
+        type: boolean
+    sitefarmId:
+      name: ids
+      in: path
+      required: true
+      schema:
+        type: string
+      description: A comma separated list of expert IDs. Ids are in the format of '{idType}:{Id}'. For example 'expertId:12345'
+    until:
+      in: query
+      name: until
+      description: Filter grants up to this date (inclusive). Defaults to today if not provided.
+      required: false
+      schema:
+        type: string
+        format: date
+        pattern: ^[0-9]{4}-(?:0[1-9]|1[0-2])-(?:0[1-9]|[12][0-9]|3[01])$
+        example: '2030-12-31'
+    type:
+      in: query
+      name: type
+      description: Comma-separated list of citation-types to return. From https://github.com/Juris-M/schema/blob/master/csl-types.rnc
+      required: false
+      schema:
+        type: array
+        items:
+          type: string
+          enum:
+          - article
+          - article-journal
+          - article-magazine
+          - article-newspaper
+          - bill
+          - book
+          - broadcast
+          - chapter
+          - dataset
+          - entry
+          - entry-dictionary
+          - entry-encyclopedia
+          - figure
+          - graphic
+          - interview
+          - legal_case
+          - legislation
+          - manuscript
+          - map
+          - motion_picture
+          - musical_score
+          - pamphlet
+          - paper-conference
+          - patent
+          - personal_communication
+          - post
+          - post-weblog
+          - report
+          - review
+          - review-book
+          - song
+          - speech
+          - thesis
+          - treaty
+          - webpage
+      style: simple
+      explode: false
+    atType:
+      in: query
+      name: '@type'
+      description: Comma-separated list of item @types to return.
+      required: false
+      schema:
+        type: array
+        default:
+        - expert
+        - grant
+        - work
+        items:
+          type: string
+          enum:
+          - expert
+          - grant
+          - work
+      style: simple
+      explode: false
+    dateFrom:
+      in: query
+      name: dateFrom
+      description: Filter results starting from this date (inclusive). A 4-digit year (YYYY) will automatically expand to the first day of that year (YYYY-01-01).
+      required: false
+      schema:
+        type: string
+        format: date
+        pattern: ^[0-9]{4}(-(?:0[1-9]|1[0-2])-(?:0[1-9]|[12][0-9]|3[01]))?$
+        example: '2017-01-01'
+    dateTo:
+      in: query
+      name: dateTo
+      description: Filter results up to this date (inclusive). A 4-digit year (YYYY) will automatically expand to the last day of that year (YYYY-12-31).
+      required: false
+      schema:
+        type: string
+        format: date
+        pattern: ^[0-9]{4}(-(?:0[1-9]|1[0-2])-(?:0[1-9]|[12][0-9]|3[01]))?$
+        example: '2023-12-31'
+    id:
+      name: id
+      in: path
+      required: true
+      schema:
+        type: string
+    ucdPersonUUID:
+      in: query
+      name: ucdPersonUUID
+      description: Filter grants by UCD Person UUID
+      required: false
+      schema:
+        type: string
+    expertId:
+      name: expertId
+      in: path
+      required: true
+      schema:
+        type: string
+        format: nano(\d{8})
+        description: The unique identifier for the expert
+    previewEsIndex:
+      in: query
+      name: previewEsIndex
+      description: Override the Elasticsearch index used for this request
+      required: false
+      schema:
+        type: string
+    q:
+      in: query
+      name: q
+      description: Text query to search for
+      required: false
+      schema:
+        type: string
+    page:
+      in: query
+      name: page
+      description: The pagination of results to return, defaults to 1
+      required: false
+      schema:
+        type: integer
+    inner_hit_size:
+      in: query
+      name: inner_hit_size
+      description: The number of inner hits (works per expert) to return
+      required: false
+      schema:
+        type: integer
+    status:
+      in: query
+      name: status
+      description: Comma-separated search filter on grant status
+      required: false
+      schema:
+        type: array
+        items:
+          type: string
+          enum:
+          - completed
+          - active
+      style: simple
+      explode: false
+    email:
+      in: query
+      name: email
+      description: Filter grants by email
+      required: false
+      schema:
+        type: string
+    include:
+      in: query
+      name: include
+      description: Pass 'hidden' to include non-visible entries (requires owner or admin)
+      required: false
+      schema:
+        type: string
+        enum:
+        - hidden
+    iamId:
+      in: query
+      name: iamId
+      description: Filter grants by IAM ID
+      required: false
+      schema:
+        type: string
+    availability:
+      in: query
+      name: availability
+      description: Comma-separated search filter on expert availability types
+      required: false
+      schema:
+        type: array
+        items:
+          type: string
+          enum:
+          - community partnerships
+          - collaborative projects
+          - industry Projects
+          - media enquiries
+      style: simple
+      explode: false
+    p:
+      in: query
+      name: p
+      description: The letter the experts last name starts with
+      required: false
+      schema:
+        type: string
+    size:
+      in: query
+      name: size
+      description: The number of results to return per page, defaults to 25
+      required: false
+      schema:
+        type: integer
+        default: 25
+  responses:
+    Not_found:
+      description: Resource not found
+    Work:
+      description: work
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Work'
+    Expert:
+      description: The expert
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Expert'
+    Search:
+      description: The list of search results
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Search'
+    Missing_id:
+      description: Request needs id
+    Browse:
+      description: The list of experts
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Browse'
+    Expert_not_found:
+      description: Expert not found
+    Grant:
+      description: grant
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Grant'
+    Invalid_ID_supplied:
+      description: Invalid ID supplied
+    Successful_operation:
+      description: Successful operation
+    Invalid_request:
+      description: Invalid request
+    Forbidden:
+      description: Request is forbidden
+  schemas:
+    Search:
+      type: object
+      properties:
+        total:
+          type: integer
+        hits:
+          type: array
+          items:
+            type: object
+            properties:
+              contactInfo:
+                type: object
+                properties:
+                  hasEmail:
+                    type: string
+                  hasName:
+                    type: object
+                    properties:
+                      given:
+                        type: string
+                      '@type':
+                        type: string
+                      '@id':
+                        type: string
+                      family:
+                        type: string
+                  name:
+                    type: string
+                  hasTitle:
+                    type: object
+                    properties:
+                      '@type':
+                        type: string
+                      name:
+                        type: string
+                      '@id':
+                        type: string
+                  hasOrganizationalUnit:
+                    type: object
+                    properties:
+                      name:
+                        type: string
+                      '@id':
+                        type: string
+              '@type':
+                type: string
+              name:
+                type: string
+              '@id':
+                type: string
+              _inner_hits:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    volume:
+                      type: string
+                    '@type':
+                      type: array
+                      items:
+                        type: string
+                    author:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          given:
+                            type: string
+                          rank:
+                            type: integer
+                          '@id':
+                            type: string
+                          family:
+                            type: string
+                    container-title:
+                      type: string
+                    ISSN:
+                      type: string
+                    abstract:
+                      type: string
+                    page:
+                      type: string
+                    title:
+                      type: string
+                    type:
+                      type: string
+                    issued:
+                      type: string
+                    status:
+                      type: string
+    Expert:
+      type: object
+      properties:
+        '@id':
+          type: string
+          description: The unique identifier for the expert.
+        '@type':
+          type: array
+          items:
+            type: string
+          description: The type of the expert.
+        rank:
+          type: integer
+          description: The rank of the expert.
+        name:
+          type: string
+          description: The name of the expert.
+        url:
+          type: string
+          format: url
+          description: The URL related to the expert.
+        hasEmail:
+          type: string
+          format: email
+          description: The email address of the expert.
+        hasName:
+          type: object
+          properties:
+            '@id':
+              type: string
+              description: The unique identifier for the name.
+            '@type':
+              type: string
+              description: The type of the name.
+            family:
+              type: string
+              description: The family name of the expert.
+            given:
+              type: string
+              description: The given name of the expert.
+            pronouns:
+              type: string
+              description: The pronouns of the expert.
+          required:
+          - '@id'
+          - '@type'
+          - family
+          - given
+          - pronouns
+        hasTitle:
+          type: object
+          properties:
+            '@id':
+              type: string
+              description: The unique identifier for the title.
+            '@type':
+              type: string
+              description: The type of the title.
+            name:
+              type: string
+              description: The title of the expert.
+          required:
+          - '@id'
+          - '@type'
+          - name
+        hasOrganizationalUnit:
+          type: object
+          properties:
+            '@id':
+              type: string
+              description: The unique identifier for the organizational unit.
+            name:
+              type: string
+              description: The name of the organizational unit.
+          required:
+          - '@id'
+          - name
+        roles:
+          type: array
+          items:
+            type: string
+          description: The roles of the expert.
+      required:
+      - '@id'
+      - '@type'
+      - rank
+      - name
+      - url
+      - hasEmail
+      - hasName
+      - hasTitle
+      - hasOrganizationalUnit
+      - roles
+    Browse:
+      type: object
+      properties:
+        total:
+          type: integer
+        hits:
+          type: array
+          items:
+            type: object
+            properties:
+              contactInfo:
+                type: object
+                properties:
+                  hasURL:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        '@type':
+                          type: array
+                          items:
+                            type: string
+                        '@id':
+                          type: string
+                        url:
+                          type: string
+                        name:
+                          type: string
+                        rank:
+                          type: integer
+                  hasEmail:
+                    type: string
+                  hasName:
+                    type: object
+                    properties:
+                      given:
+                        type: string
+                      '@type':
+                        type: string
+                      pronouns:
+                        type: string
+                      '@id':
+                        type: string
+                      family:
+                        type: string
+                  name:
+                    type: string
+                  hasTitle:
+                    type: object
+                    properties:
+                      '@type':
+                        type: string
+                      name:
+                        type: string
+                      '@id':
+                        type: string
+                  hasOrganizationalUnit:
+                    type: object
+                    properties:
+                      name:
+                        type: string
+                      '@id':
+                        type: string
+              name:
+                type: string
+              '@id':
+                type: string
+    Grant:
+      type: object
+      properties:
+        '@id':
+          type: string
+        '@type':
+          items:
+            type: string
+    Work:
+      type: object
+      properties:
+        '@id':
+          type: string
+        '@type':
+          items:
+            type: string
+  requestBodies:
+    Expert_post:
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              is-visible:
+                type: boolean
+              expert:
+                type: object
+                properties:
+                  include:
+                    type: boolean
+              grants:
+                type: object
+                properties:
+                  include:
+                    type: boolean
+                  page:
+                    type: integer
+                  size:
+                    type: integer
+                  exclude:
+                    type: array
+                    items:
+                      type: string
+                  includeMisformatted:
+                    type: boolean
+                  sort:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        field:
+                          type: string
+                        sort:
+                          type: string
+                        type:
+                          type: string
+              works:
+                type: object
+                properties:
+                  include:
+                    type: boolean
+                  page:
+                    type: integer
+                  size:
+                    type: integer
+                  exclude:
+                    type: array
+                    items:
+                      type: string
+                  includeMisformatted:
+                    type: boolean
+                  sort:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        field:
+                          type: string
+                        sort:
+                          type: string
+                        type:
+                          type: string

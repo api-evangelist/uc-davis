@@ -1,0 +1,134 @@
+{
+  "type": "object",
+  "properties": {
+    "@id": {
+      "type": "string",
+      "description": "The unique identifier for the expert."
+    },
+    "@type": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "The type of the expert."
+    },
+    "rank": {
+      "type": "integer",
+      "description": "The rank of the expert."
+    },
+    "name": {
+      "type": "string",
+      "description": "The name of the expert."
+    },
+    "url": {
+      "type": "string",
+      "format": "url",
+      "description": "The URL related to the expert."
+    },
+    "hasEmail": {
+      "type": "string",
+      "format": "email",
+      "description": "The email address of the expert."
+    },
+    "hasName": {
+      "type": "object",
+      "properties": {
+        "@id": {
+          "type": "string",
+          "description": "The unique identifier for the name."
+        },
+        "@type": {
+          "type": "string",
+          "description": "The type of the name."
+        },
+        "family": {
+          "type": "string",
+          "description": "The family name of the expert."
+        },
+        "given": {
+          "type": "string",
+          "description": "The given name of the expert."
+        },
+        "pronouns": {
+          "type": "string",
+          "description": "The pronouns of the expert."
+        }
+      },
+      "required": [
+        "@id",
+        "@type",
+        "family",
+        "given",
+        "pronouns"
+      ]
+    },
+    "hasTitle": {
+      "type": "object",
+      "properties": {
+        "@id": {
+          "type": "string",
+          "description": "The unique identifier for the title."
+        },
+        "@type": {
+          "type": "string",
+          "description": "The type of the title."
+        },
+        "name": {
+          "type": "string",
+          "description": "The title of the expert."
+        }
+      },
+      "required": [
+        "@id",
+        "@type",
+        "name"
+      ]
+    },
+    "hasOrganizationalUnit": {
+      "type": "object",
+      "properties": {
+        "@id": {
+          "type": "string",
+          "description": "The unique identifier for the organizational unit."
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the organizational unit."
+        }
+      },
+      "required": [
+        "@id",
+        "name"
+      ]
+    },
+    "roles": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "The roles of the expert."
+    }
+  },
+  "required": [
+    "@id",
+    "@type",
+    "rank",
+    "name",
+    "url",
+    "hasEmail",
+    "hasName",
+    "hasTitle",
+    "hasOrganizationalUnit",
+    "roles"
+  ],
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/uc-davis/refs/heads/main/json-schema/uc-davis-aggie-experts-expert-schema.json",
+  "title": "UC Davis Aggie Experts \u2014 Expert",
+  "x-provenance": {
+    "generated": "2026-08-19",
+    "method": "derived",
+    "operator": "institution",
+    "source": "components.schemas.Expert of https://experts.ucdavis.edu/api/ (retrieved 2026-08-19)",
+    "note": "Lifted verbatim from the institution's own contract; no properties added."
+  }
+}

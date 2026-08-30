@@ -1,0 +1,63 @@
+# generated: 2026-08-19 | method: derived (PEAKS) + probed (SMART configuration)
+---
+name: University of California, Davis — authorization scopes
+slug: uc-davis
+generated: '2026-08-19'
+method: derived
+source: Derived from security[] in openapi/_original/uc-davis-peaks.yaml, and probed from the UC Davis
+  Health SMART configuration.
+apis:
+- api: PEAKS API
+  operator: institution
+  scheme: ApiKey (X-Auth-Token header)
+  method: derived
+  source: openapi/_original/uc-davis-peaks.yaml security[] entries
+  scopes:
+  - scheme: ApiKey
+    scope: AccessMasterAccess
+  - scheme: ApiKey
+    scope: AnyRole
+  - scheme: ApiKey
+    scope: DocumentMasterAccess
+  - scheme: ApiKey
+    scope: EquipMasterAccess
+  - scheme: ApiKey
+    scope: KeyMasterAccess
+  - scheme: ApiKey
+    scope: PersonManagerAccess
+  - scheme: ApiKey
+    scope: SpaceMasterAccess
+- api: UC Davis Health FHIR R4
+  operator: institution
+  contract_author: Epic Systems
+  scheme: OAuth 2.0 / SMART on FHIR
+  method: probed
+  source: https://emrrp.ucdmc.ucdavis.edu/FHIR/api/FHIR/R4/.well-known/smart-configuration
+  authorization_endpoint: https://emrrp.ucdmc.ucdavis.edu/FHIR/oauth2/authorize
+  token_endpoint: https://emrrp.ucdmc.ucdavis.edu/FHIR/oauth2/token
+  scopes:
+  - scope: epic.scanning.dmsusername
+    source: smart-configuration scopes_supported
+  - scope: fhirUser
+    source: smart-configuration scopes_supported
+  - scope: launch
+    source: smart-configuration scopes_supported
+  - scope: openid
+    source: smart-configuration scopes_supported
+  - scope: profile
+    source: smart-configuration scopes_supported
+- api: Aggie Experts API
+  operator: institution
+  scheme: none
+  method: probed
+  source: https://experts.ucdavis.edu/api/
+  detail: The contract declares no securitySchemes and read operations answer anonymously (verified live).
+    The /api/miv/* operations describe an authenticated MIV user but no scheme is declared for them —
+    an undocumented auth boundary.
+  scopes: []
+- api: DAMS API
+  operator: institution
+  scheme: none-declared
+  method: probed
+  source: https://digital.ucdavis.edu/api/
+  scopes: []

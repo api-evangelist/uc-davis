@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><EntityDescriptor xmlns="urn:oasis:names:tc:SAML:2.0:metadata" ID="_84e87eb4-6cd8-44b4-9d32-c499537a55d4" entityID="urn:mace:incommon:ucdavis.edu" validUntil="2026-09-02T21:38:00.877Z"><Signature xmlns="http://www.w3.org/2000/09/xmldsig#"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/><SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha256"/><Reference URI="#_84e87eb4-6cd8-44b4-9d32-c499537a55d4"><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#"/></Transforms><DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"/><DigestValue>1AQmJtbq/O0RNkD7dxWl/pGSEC/ip2+ERZ4Os4J4NTk=</DigestValue></Reference></SignedInfo><SignatureValue>Lf05qHCmzzkyeM4PYee2UxOYzMaBgQFOzJHV9WtxlSwgC03IukWDRinpnaQ3wFcpQylH5kp7Q6WQ
+29dSHYYxutT7YBDabJj0oFQk/XfqOWFEDZ075rCHTClwHtyFDWs3CBp8kfc+EZw8htWH/HQxDyw2
+v1xmi45WxIUdvt+MsciLhCEmYhZo9JXpQuP73I/qQMreU0Do0IKqIKIF/DpO7L1jfv3ZmqqWxa3z
+UADacG7qHZ2UOU2uJJRk5Gc8q+/aR8i21/fPkM8am6wcibwyi+5xC0SjudNqL5DZtECZFl2De9jf
+By3FJ75Y80FgSpWNZu1CK2iiTh0zNwXpcDXm8/dUxFLn9jE3grvqCbkBOxdAY9stmXzmTnzrM+Gi
+FXYZ7uzY4OYLw7vRJWkdoki6eFbHgMYkJ2/36WeT5ThFh40UO+rnItAGop03Hv+Ohcm0od83bWKQ
+23QHLAiIX6sW3TM5w3Mr6i4jCUkWqkfg22JFcn3km1ITHNmUbNRZhng8</SignatureValue></Signature>
+  <Extensions>
+    <mdrpi:RegistrationInfo xmlns:mdrpi="urn:oasis:names:tc:SAML:metadata:rpi" registrationAuthority="https://incommon.org"/>
+    <mdattr:EntityAttributes xmlns:mdattr="urn:oasis:names:tc:SAML:metadata:attribute">
+      <saml:Attribute xmlns:saml="urn:oasis:names:tc:SAML:2.0:assertion" Name="urn:oasis:names:tc:SAML:attribute:assurance-certification" NameFormat="urn:oasis:names:tc:SAML:2.0:attrname-format:uri">
+        <saml:AttributeValue>https://refeds.org/sirtfi</saml:AttributeValue>
+      </saml:Attribute>
+      <saml:Attribute xmlns:saml="urn:oasis:names:tc:SAML:2.0:assertion" Name="http://macedir.org/entity-category-support" NameFormat="urn:oasis:names:tc:SAML:2.0:attrname-format:uri">
+        <saml:AttributeValue>http://refeds.org/category/research-and-scholarship</saml:AttributeValue>
+        <saml:AttributeValue>http://id.incommon.org/category/research-and-scholarship</saml:AttributeValue>
+      </saml:Attribute>
+      <saml:Attribute xmlns:saml="urn:oasis:names:tc:SAML:2.0:assertion" Name="http://macedir.org/entity-category" NameFormat="urn:oasis:names:tc:SAML:2.0:attrname-format:uri">
+        <saml:AttributeValue>http://id.incommon.org/category/registered-by-incommon</saml:AttributeValue>
+      </saml:Attribute>
+    </mdattr:EntityAttributes>
+  </Extensions>
+  <IDPSSODescriptor errorURL="https://shibboleth.ucdavis.edu/idp/profile/RaiseError" protocolSupportEnumeration="urn:mace:shibboleth:1.0 urn:oasis:names:tc:SAML:1.1:protocol urn:oasis:names:tc:SAML:2.0:protocol">
+    <Extensions>
+      <shibmd:Scope xmlns:shibmd="urn:mace:shibboleth:metadata:1.0" regexp="false">ucdavis.edu</shibmd:Scope>
+      <mdui:UIInfo xmlns:mdui="urn:oasis:names:tc:SAML:metadata:ui">
+        <mdui:DisplayName xml:lang="en">University of California, Davis</mdui:DisplayName>
+        <mdui:PrivacyStatementURL xml:lang="en">https://privacy.ucdavis.edu</mdui:PrivacyStatementURL>
+        <mdui:Logo height="101" width="396" xml:lang="en">https://shibboleth.ucdavis.edu/icons/ucd_logo.png</mdui:Logo>
+      </mdui:UIInfo>
+    </Extensions>
+    <KeyDescriptor use="signing">
+      <ds:KeyInfo xmlns:ds="http://www.w3.org/2000/09/xmldsig#">
+        <ds:X509Data>
+          <!-- Serial No. 17571969099058729468, expires on Tue May  3 20:14:16 2033 GMT -->
+          <ds:X509Certificate>
+MIIDFTCCAf2gAwIBAgIJAPPcLMuZiVH8MA0GCSqGSIb3DQEBBQUAMCExHzAdBgNV
+BAMMFnNoaWJib2xldGgudWNkYXZpcy5lZHUwHhcNMTMwNDAzMjAxNDE2WhcNMzMw
+NTAzMjAxNDE2WjAhMR8wHQYDVQQDDBZzaGliYm9sZXRoLnVjZGF2aXMuZWR1MIIB
+IjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAsp192eOPILgmh31WyOOXSfAe
+Hy26ZLQPynjO011vO2iN9WfpNnkw10jOYc8n++rmTBt+CPrld6zPm9vyF0YyhFgA
+3np8nEnsX94rdc/x4bZaVHDo5V0yUW7dqeZ0QpxMMBDLiJu+i5QyHzGORgrfA9vb
+ditbtIF2yBKVhtwtuAJ4EMMVXMgDrddh3iwuYDIkizb9ro6wyb+g2BYft/rXYzV1
+Q5y7PJuu7/5tobEELnBPUX96NBtN0xHPRk69BmqIOHb0I3subojQd2mJMHAJZBa3
+1rVSqMoqDc1XvzRoNAnbFGVkoFsDJ7Pub/Bp9TwpY5M4x20xLereaW3XOU3+dQID
+AQABo1AwTjAdBgNVHQ4EFgQUgYNUwHp+5Mcj29XUBc82gYlyAGAwHwYDVR0jBBgw
+FoAUgYNUwHp+5Mcj29XUBc82gYlyAGAwDAYDVR0TBAUwAwEB/zANBgkqhkiG9w0B
+AQUFAAOCAQEAjx0V9ar1jRCHJQ/iZQ27oHbIOTW+eM0LDO6j9vESk5a+4CvpIJ+F
++Wjom1eCaM6Hm1o0ZLcODJRQpJVuWEItoe3vaa3flN5L7KX7txP7/BQrfm6SY+RM
+4HtVAidvTfycM5nTxWpy84E19u2VU4THdwAWEBGcJUNxlNrgT9ELZpOorx5+g2v7
+wNQMjfSwPtyOLPTF/1jGkQcTao1ZdejLuVbwTykBVFPeFQ8kAU6wsQpXeG3atpQl
+zxm9ugFEeQnBFLCckELT9sAV/5yzXtAdSexhyi4+wJ4peM57Kncf/SfdKeMKiyWt
+EyhVP7yaI/7vtaqct2bie69yO4PiaRMyaQ==
+          </ds:X509Certificate>
+        </ds:X509Data>
+      </ds:KeyInfo>
+    </KeyDescriptor>
+    <SingleLogoutService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST" Location="https://shibboleth.ucdavis.edu/idp/profile/SAML2/POST/SLO"/>
+    <SingleLogoutService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect" Location="https://shibboleth.ucdavis.edu/idp/profile/SAML2/Redirect/SLO"/>
+    <SingleSignOnService Binding="urn:mace:shibboleth:1.0:profiles:AuthnRequest" Location="https://shibboleth.ucdavis.edu/idp/profile/Shibboleth/SSO"/>
+    <SingleSignOnService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST" Location="https://shibboleth.ucdavis.edu/idp/profile/SAML2/POST/SSO"/>
+    <SingleSignOnService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST-SimpleSign" Location="https://shibboleth.ucdavis.edu/idp/profile/SAML2/POST-SimpleSign/SSO"/>
+    <SingleSignOnService Binding="urn:oasis:names:tc:SAML:2.0:bindings:HTTP-Redirect" Location="https://shibboleth.ucdavis.edu/idp/profile/SAML2/Redirect/SSO"/>
+  </IDPSSODescriptor>
+  <Organization>
+    <OrganizationName xml:lang="en">University of California, Davis</OrganizationName>
+    <OrganizationDisplayName xml:lang="en">University of California, Davis</OrganizationDisplayName>
+    <OrganizationURL xml:lang="en">http://www.ucdavis.edu/</OrganizationURL>
+  </Organization>
+  <ContactPerson contactType="support">
+    <GivenName>UC Davis IT Express</GivenName>
+    <EmailAddress>mailto:ithelp@ucdavis.edu</EmailAddress>
+  </ContactPerson>
+  <ContactPerson contactType="administrative">
+    <GivenName>EIS Shibboleth Group</GivenName>
+    <EmailAddress>mailto:shibadmin@ucdavis.edu</EmailAddress>
+  </ContactPerson>
+  <ContactPerson xmlns:remd="http://refeds.org/metadata" contactType="other" remd:contactType="http://refeds.org/metadata/contactType/security">
+    <GivenName>IET Information Security</GivenName>
+    <EmailAddress>mailto:abuse@ucdavis.edu</EmailAddress>
+  </ContactPerson>
+  <ContactPerson contactType="technical">
+    <GivenName>IET Infrastructure Systems Management</GivenName>
+    <EmailAddress>mailto:sysadmin@ucdavis.edu</EmailAddress>
+  </ContactPerson>
+</EntityDescriptor>

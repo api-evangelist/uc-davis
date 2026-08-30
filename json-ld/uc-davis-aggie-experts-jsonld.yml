@@ -1,0 +1,51 @@
+# generated: 2026-08-19 | method: derived from a probed live response
+---
+name: UC Davis Aggie Experts — observed JSON-LD terms
+slug: uc-davis
+generated: '2026-08-19'
+method: derived
+source: Terms observed in the live response of https://experts.ucdavis.edu/api/expert/9iH9TgOE (HTTP 200)
+  on 2026-08-19.
+operator: institution
+upstream_context:
+  url: https://stage.experts.library.ucdavis.edu/api/schema/context.jsonld
+  status: 0
+  detail: The production API emits this @context URL; it is a STAGE host and does not resolve (connection
+    timeout after 25s). The emitted JSON-LD is therefore not dereferenceable.
+note: Derived observation only. No context document is asserted on UC Davis's behalf — the real one is
+  unreachable and that absence is the finding.
+observed_terms:
+- '@context'
+- '@graph'
+- '@id'
+- '@type'
+- ScholarlyArticle
+- Work
+- Expert
+- Grant
+- vcard:Organization
+- hasName
+- hasEmail
+- hasURL
+- hasTitle
+- hasOrganizationalUnit
+- orcidId
+- scopusId
+- identifier
+- ucdlib:isHSEmployee
+- is-visible
+- modified-date
+identifier_schemes:
+- scheme: ARK
+  example: ark:/87287/d7c08j
+  naan: '87287'
+  note: UC Davis-controlled ARK NAAN
+- scheme: ORCID
+  example: http://orcid.org/0000-0002-7512-592X
+- scheme: Scopus Author ID
+  example: '7005867805'
+vocabularies_referenced:
+- VIVO (research profile ontology)
+- W3C vCard ontology
+- schema.org ScholarlyArticle
+- ucdlib (local UC Davis Library namespace)

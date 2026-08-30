@@ -1,0 +1,95 @@
+openapi: 3.2.0
+info:
+  title: DAMS page search API
+  version: 1.0.0
+  description: This is the Swagger documentation for DAMS.
+  license:
+    name: Licensed Under MIT
+    url: https://spdx.org/licenses/MIT.html
+  contact:
+    name: Online Strategy - UC Davis Library
+    url: https://library.ucdavis.edu/online-strategy/
+  x-operator: institution
+  x-operator-note: Operated by UC Davis Library Online Strategy on digital.ucdavis.edu (CNAME next.dams.library.ucdavis.edu).
+  x-provenance:
+    generated: '2026-08-19'
+    method: searched
+    source: https://digital.ucdavis.edu/api/
+servers:
+- url: https://digital.ucdavis.edu
+  description: UC Davis Library Digital Collections (DAMS / fin platform)
+tags:
+- name: page search
+paths:
+  /api/page-search/ia:
+    get:
+      tags:
+      - page search
+      summary: Search item by keyword
+      description: Search item by keyword
+      parameters:
+      - in: query
+        name: item_id
+        schema:
+          type: string
+        description: The item id to search
+      - in: query
+        name: q
+        schema:
+          type: string
+        description: The search term
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ia:
+                    type: string
+                  q:
+                    type: string
+                  indexed:
+                    type: boolean
+                  matches:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        text:
+                          type: string
+                        par:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              l:
+                                type: integer
+                              t:
+                                type: integer
+                              r:
+                                type: integer
+                              b:
+                                type: integer
+                              page:
+                                type: integer
+                              boxes:
+                                type: array
+                                items:
+                                  type: object
+                                  properties:
+                                    l:
+                                      type: integer
+                                    t:
+                                      type: integer
+                                    r:
+                                      type: integer
+                                    b:
+                                      type: integer
+                                    page:
+                                      type: integer
+                              page_width:
+                                type: integer
+                              page_height:
+                                type: integer

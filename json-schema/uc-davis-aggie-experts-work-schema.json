@@ -1,0 +1,23 @@
+{
+  "type": "object",
+  "properties": {
+    "@id": {
+      "type": "string"
+    },
+    "@type": {
+      "items": {
+        "type": "string"
+      }
+    }
+  },
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/uc-davis/refs/heads/main/json-schema/uc-davis-aggie-experts-work-schema.json",
+  "title": "UC Davis Aggie Experts \u2014 Work",
+  "x-provenance": {
+    "generated": "2026-08-19",
+    "method": "derived",
+    "operator": "institution",
+    "source": "components.schemas.Work of https://experts.ucdavis.edu/api/ (retrieved 2026-08-19)",
+    "note": "Lifted verbatim from the institution's own contract; no properties added."
+  }
+}

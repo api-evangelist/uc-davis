@@ -1,0 +1,65 @@
+# generated: 2026-08-19 | method: probed | x-operator: institution
+---
+name: University of California, Davis — identity federation
+slug: uc-davis
+generated: '2026-08-19'
+method: probed
+operator: institution
+source: https://shibboleth.ucdavis.edu/idp/shibboleth and https://mdq.incommon.org/entities/urn%3Amace%3Aincommon%3Aucdavis.edu
+summary: 'UC Davis operates its own SAML 2.0 / Shibboleth identity provider and is a member of the InCommon
+  federation. This is the institution''s most unambiguously self-operated machine-readable surface: the
+  metadata is served from UC Davis address space, the entityID is UC Davis''s, and no vendor authored
+  it.'
+entity:
+  entityID: urn:mace:incommon:ucdavis.edu
+  organization_name: University of California, Davis
+  organization_url: http://www.ucdavis.edu/
+  federation: InCommon (eduGAIN upstream)
+  roles:
+  - IDPSSODescriptor
+  protocols:
+  - urn:mace:shibboleth:1.0
+  - urn:oasis:names:tc:SAML:1.1:protocol
+  - urn:oasis:names:tc:SAML:2.0:protocol
+endpoints:
+- binding: HTTP-POST
+  use: SingleSignOnService
+  url: https://shibboleth.ucdavis.edu/idp/profile/SAML2/POST/SSO
+- binding: HTTP-POST-SimpleSign
+  use: SingleSignOnService
+  url: https://shibboleth.ucdavis.edu/idp/profile/SAML2/POST-SimpleSign/SSO
+- binding: HTTP-Redirect
+  use: SingleSignOnService
+  url: https://shibboleth.ucdavis.edu/idp/profile/SAML2/Redirect/SSO
+- binding: Shibboleth 1.x
+  use: SingleSignOnService
+  url: https://shibboleth.ucdavis.edu/idp/profile/Shibboleth/SSO
+- binding: HTTP-POST
+  use: SingleLogoutService
+  url: https://shibboleth.ucdavis.edu/idp/profile/SAML2/POST/SLO
+- binding: HTTP-Redirect
+  use: SingleLogoutService
+  url: https://shibboleth.ucdavis.edu/idp/profile/SAML2/Redirect/SLO
+evidence:
+- url: https://shibboleth.ucdavis.edu/idp/shibboleth
+  status: 200
+  content_type: application/xml;charset=UTF-8
+  bytes: 6610
+- url: https://mdq.incommon.org/entities/urn%3Amace%3Aincommon%3Aucdavis.edu
+  status: 200
+  content_type: application/samlmetadata+xml
+  bytes: 6993
+  note: Signed by InCommon; validUntil observed 2026-09-02T21:38:00Z.
+local_copies:
+- identity/uc-davis-shibboleth-idp-metadata.xml
+- identity/uc-davis-incommon-entity-metadata.xml
+other_identity_hosts_probed:
+- host: idp.ucdavis.edu
+  resolves: felix.ucdavis.edu / 169.237.11.104
+  note: resolves but is not the federation entityID host
+- host: cas.ucdavis.edu
+  resolves: cas.gdc.ucdavis.edu / 169.237.248.17
+  note: CAS service, used by CAES applications (caeshelp.ucdavis.edu redirects to it)
+- host: shib.ucdavis.edu
+  resolves: null
+  note: does not resolve
