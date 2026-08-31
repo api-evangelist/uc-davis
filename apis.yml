@@ -317,7 +317,7 @@ apis:
   baseURL: https://peaks.ucdavis.edu
   tags:
   - Access
-  - peaks
+  - PEAKS
   - Campus Operations
   tags_raw:
   - Access
@@ -361,7 +361,7 @@ apis:
   baseURL: https://peaks.ucdavis.edu
   tags:
   - Documents
-  - peaks
+  - PEAKS
   - Campus Operations
   tags_raw:
   - Documents
@@ -405,7 +405,7 @@ apis:
   baseURL: https://peaks.ucdavis.edu
   tags:
   - Equipment
-  - peaks
+  - PEAKS
   - Campus Operations
   tags_raw:
   - Equipment
@@ -449,7 +449,7 @@ apis:
   baseURL: https://peaks.ucdavis.edu
   tags:
   - Keys
-  - peaks
+  - PEAKS
   - Campus Operations
   tags_raw:
   - Keys
@@ -493,7 +493,7 @@ apis:
   baseURL: https://peaks.ucdavis.edu
   tags:
   - KeySerials
-  - peaks
+  - PEAKS
   - Campus Operations
   tags_raw:
   - KeySerials
@@ -537,7 +537,7 @@ apis:
   baseURL: https://peaks.ucdavis.edu
   tags:
   - People
-  - peaks
+  - PEAKS
   - Campus Operations
   tags_raw:
   - People
@@ -581,7 +581,7 @@ apis:
   baseURL: https://peaks.ucdavis.edu
   tags:
   - PeopleAdmin
-  - peaks
+  - PEAKS
   - Campus Operations
   tags_raw:
   - PeopleAdmin
@@ -625,7 +625,7 @@ apis:
   baseURL: https://peaks.ucdavis.edu
   tags:
   - Spaces
-  - peaks
+  - PEAKS
   - Campus Operations
   tags_raw:
   - Spaces
@@ -669,7 +669,7 @@ apis:
   baseURL: https://peaks.ucdavis.edu
   tags:
   - Workstations
-  - peaks
+  - PEAKS
   - Campus Operations
   tags_raw:
   - Workstations
@@ -765,6 +765,8 @@ apis:
   humanURL: https://experts.ucdavis.edu/
   baseURL: https://experts.ucdavis.edu/api
   tags:
+  - Collection
+  tags_raw:
   - collection
   properties:
   - type: OpenAPI
@@ -837,6 +839,8 @@ apis:
   humanURL: https://experts.ucdavis.edu/
   baseURL: https://experts.ucdavis.edu/api
   tags:
+  - Item
+  tags_raw:
   - item
   properties:
   - type: OpenAPI
