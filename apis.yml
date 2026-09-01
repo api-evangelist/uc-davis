@@ -317,7 +317,7 @@ apis:
   baseURL: https://peaks.ucdavis.edu
   tags:
   - Access
-  - PEAKS
+  - peaks
   - Campus Operations
   tags_raw:
   - Access
@@ -361,7 +361,7 @@ apis:
   baseURL: https://peaks.ucdavis.edu
   tags:
   - Documents
-  - PEAKS
+  - peaks
   - Campus Operations
   tags_raw:
   - Documents
@@ -405,7 +405,7 @@ apis:
   baseURL: https://peaks.ucdavis.edu
   tags:
   - Equipment
-  - PEAKS
+  - peaks
   - Campus Operations
   tags_raw:
   - Equipment
@@ -449,7 +449,7 @@ apis:
   baseURL: https://peaks.ucdavis.edu
   tags:
   - Keys
-  - PEAKS
+  - peaks
   - Campus Operations
   tags_raw:
   - Keys
@@ -493,7 +493,7 @@ apis:
   baseURL: https://peaks.ucdavis.edu
   tags:
   - KeySerials
-  - PEAKS
+  - peaks
   - Campus Operations
   tags_raw:
   - KeySerials
@@ -537,7 +537,7 @@ apis:
   baseURL: https://peaks.ucdavis.edu
   tags:
   - People
-  - PEAKS
+  - peaks
   - Campus Operations
   tags_raw:
   - People
@@ -581,7 +581,7 @@ apis:
   baseURL: https://peaks.ucdavis.edu
   tags:
   - PeopleAdmin
-  - PEAKS
+  - peaks
   - Campus Operations
   tags_raw:
   - PeopleAdmin
@@ -625,7 +625,7 @@ apis:
   baseURL: https://peaks.ucdavis.edu
   tags:
   - Spaces
-  - PEAKS
+  - peaks
   - Campus Operations
   tags_raw:
   - Spaces
@@ -669,7 +669,7 @@ apis:
   baseURL: https://peaks.ucdavis.edu
   tags:
   - Workstations
-  - PEAKS
+  - peaks
   - Campus Operations
   tags_raw:
   - Workstations
