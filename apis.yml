@@ -52,7 +52,7 @@ accessModel:
     offers. Aggie Experts and DAMS answer anonymously with no registration at all; PEAKS requires an X-Auth-Token
     issued to a campus team; IET middleware and UC Davis Health APIs require institutional affiliation
     or a written agreement.
-position: Producer
+position: Producing
 access: 3rd-Party
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/uc-davis.png
 url: https://raw.githubusercontent.com/api-evangelist/uc-davis/refs/heads/main/apis.yml
