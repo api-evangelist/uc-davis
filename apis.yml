@@ -196,6 +196,12 @@ apis:
   - SAML
   - Shibboleth
   - InCommon
+  - SSO
+  tags_raw:
+  - Identity Federation
+  - SAML
+  - Shibboleth
+  - InCommon
   - Single Sign-On
   x-operator: institution
   x-operator-evidence: >-
@@ -624,7 +630,7 @@ apis:
   humanURL: https://computing.caes.ucdavis.edu/documentation/peaks/api
   baseURL: https://peaks.ucdavis.edu
   tags:
-  - Spaces
+  - Space
   - peaks
   - Campus Operations
   tags_raw:
@@ -716,6 +722,11 @@ apis:
   - Research Repository
   - Open Access
   - OAI-PMH
+  - Tenants
+  tags_raw:
+  - Research Repository
+  - Open Access
+  - OAI-PMH
   - Tenant
   x-operator: tenant
   x-operator-evidence: >-
@@ -741,6 +752,11 @@ apis:
     Libris contract is saved under this slug — that contract belongs in the vendor's own repo.
   humanURL: https://search.library.ucdavis.edu/
   tags:
+  - Library
+  - Discovery
+  - Primo
+  - Tenants
+  tags_raw:
   - Library
   - Discovery
   - Primo
