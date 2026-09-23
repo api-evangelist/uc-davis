@@ -1,3 +1,11 @@
+---
+generated: '2026-08-19'
+method: none
+operator: institution
+source: No published pricing or plan surface exists for any UC Davis API.
+note: Placeholder record. UC Davis publishes no API plans; access to PEAKS, IET middleware
+  and UC Davis Health APIs is granted by institutional affiliation or agreement, not
+  purchase.
 specification: API Commons Plans
 specificationVersion: '0.1'
 schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/Plans

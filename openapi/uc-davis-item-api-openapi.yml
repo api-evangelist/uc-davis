@@ -19,14 +19,13 @@ servers:
 - url: https://digital.ucdavis.edu
   description: UC Davis Library Digital Collections (DAMS / fin platform)
 tags:
-- name: item
+- name: Item
 paths:
   /api/item/{itemId}:
     get:
       tags:
-      - item
+      - Item
       summary: Get item information by id
-      description: Get item information by id
       parameters:
       - name: itemId
         in: path
@@ -128,11 +127,12 @@ paths:
                                 type: string
                   '@id':
                     type: string
+      operationId: getApiItemByItemId
+      x-operation-id-source: derived
     post:
       tags:
-      - item
+      - Item
       summary: Search for items by keyword
-      description: Search for items by keyword
       parameters:
       - name: itemId
         in: path
@@ -262,3 +262,5 @@ paths:
                               type: integer
                             max:
                               type: integer
+      operationId: postApiItemByItemId
+      x-operation-id-source: derived

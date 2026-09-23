@@ -1,0 +1,60 @@
+# generated: 2026-08-19 | method: derived
+---
+name: University of California, Davis — API lifecycle and versioning
+slug: uc-davis
+generated: '2026-08-19'
+method: derived
+source: Derived from info.version and live behaviour of the institution-operated contracts held in openapi/.
+apis:
+- api: Aggie Experts API
+  operator: institution
+  version: '5.0'
+  versioning: none-in-path
+  detail: info.version is 5.0 but no version appears in the path or in a header; /api/ always returns
+    the current document. No deprecation policy published.
+  evidence:
+  - url: https://experts.ucdavis.edu/api/
+    status: 200
+- api: DAMS API
+  operator: institution
+  version: 1.0.0
+  versioning: none-in-path
+  detail: No version segment. Several documented operations return an HTTP 200 carrying an Elasticsearch
+    parse error rather than an error status, which is a soft-failure the contract does not describe.
+  evidence:
+  - url: https://digital.ucdavis.edu/api/collection
+    status: 200
+    note: body is {"error":true,...parsing_exception...}
+- api: PEAKS API
+  operator: institution
+  version: v1
+  versioning: path
+  detail: Swagger document served at /swagger/v1/swagger.json; path-based v1. Source repo github.com/ucdavis/Peaks,
+    MIT licensed.
+  evidence:
+  - url: https://peaks.ucdavis.edu/swagger/v1/swagger.json
+    status: 200
+- api: UC Davis Health FHIR R4
+  operator: institution
+  contract_author: Epic Systems
+  version: R4
+  versioning: path
+  detail: Version is the FHIR release, carried in the path. UC Davis Health operates the endpoint; Epic
+    authors the CapabilityStatement.
+  evidence:
+  - url: https://emrrp.ucdmc.ucdavis.edu/FHIR/api/FHIR/R4/metadata
+    status: 200
+- api: UC Davis Shibboleth IdP
+  operator: institution
+  version: SAML 2.0
+  versioning: federation-metadata
+  detail: Metadata carries validUntil (observed 2026-09-02) and is re-signed by InCommon; the freshness
+    contract is the federation's.
+  evidence:
+  - url: https://mdq.incommon.org/entities/urn%3Amace%3Aincommon%3Aucdavis.edu
+    status: 200
+institution_wide:
+  deprecation_policy_published: false
+  changelog_published: false
+  detail: No campus-wide API deprecation policy, changelog, or developer agreement was found. developers.ucdavis.edu
+    is an internal developer community, not a versioned API catalog.

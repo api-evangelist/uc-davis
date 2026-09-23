@@ -19,14 +19,13 @@ servers:
 - url: https://digital.ucdavis.edu
   description: UC Davis Library Digital Collections (DAMS / fin platform)
 tags:
-- name: collection
+- name: Collection
 paths:
   /api/collection/{collectionId}:
     get:
       tags:
-      - collection
+      - Collection
       summary: Get collection information by id
-      description: Get collection information by id
       parameters:
       - name: collectionId
         in: path
@@ -107,11 +106,12 @@ paths:
                     type: string
                   '@id':
                     type: string
+      operationId: getApiCollectionByCollectionId
+      x-operation-id-source: derived
     post:
       tags:
-      - collection
+      - Collection
       summary: Search for collections by keyword
-      description: Search for collections by keyword
       parameters:
       - name: collectionId
         in: path
@@ -219,10 +219,12 @@ paths:
                         type: object
                       ranges:
                         type: object
+      operationId: postApiCollectionByCollectionId
+      x-operation-id-source: derived
   /api/collection/edits/collection/{collectionId}:
     get:
       tags:
-      - collection
+      - Collection
       summary: Find item and collection edits for a collection by id
       description: Returns admin preferences overrides for item and collection edits for a collection by id
       parameters:
@@ -257,3 +259,5 @@ paths:
                         item_default_display:
                           type: string
                           description: Default display for the item, showing if the item has edits
+      operationId: getApiCollectionEditsCollectionByCollectionId
+      x-operation-id-source: derived

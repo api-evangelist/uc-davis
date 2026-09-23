@@ -1,0 +1,47 @@
+# generated: 2026-08-19 | method: derived + probed
+---
+name: University of California, Davis — error semantics
+slug: uc-davis
+generated: '2026-08-19'
+method: derived
+source: Derived from responses[] across the institution-operated contracts in openapi/, plus live probes.
+apis:
+- api: PEAKS API
+  operator: institution
+  source: openapi/_original/uc-davis-peaks.yaml
+  declared:
+  - status: 200
+    meaning: Success
+  - status: 401
+    meaning: Unauthorized — missing or invalid X-Auth-Token
+  - status: 403
+    meaning: Forbidden — token lacks the required team-scoped permission
+  error_schema: null
+  detail: Status codes are declared but carry no response body schema, so an agent cannot parse a PEAKS
+    failure.
+- api: Aggie Experts API
+  operator: institution
+  source: https://experts.ucdavis.edu/api/
+  declared: []
+  error_schema: null
+  detail: Responses are declared for the success path only. Error behaviour was probed, not documented.
+- api: DAMS API
+  operator: institution
+  source: https://digital.ucdavis.edu/api/
+  declared: []
+  error_schema: null
+  observed:
+  - url: https://digital.ucdavis.edu/api/collection
+    status: 200
+    detail: Returns HTTP 200 with {"error":true,"message":"Error with collection retrieval",...} and a
+      full Node.js stack trace including the container path /fin/services/node_modules/... — a soft-error
+      that leaks internals and defeats status-code handling.
+  - url: https://digital.ucdavis.edu/api/item/ark:/87287/d7c08j
+    status: 200
+    detail: Returns HTTP 200 with the literal body null for a miss, rather than 404.
+  detail: Soft-200 error semantics. This is a real defect and is recorded rather than smoothed over.
+- api: UC Davis Health FHIR R4
+  operator: institution
+  contract_author: Epic Systems
+  detail: Epic's CapabilityStatement governs error semantics (FHIR OperationOutcome). Not UC Davis's engineering;
+    not credited here.

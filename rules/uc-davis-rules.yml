@@ -1,4 +1,9 @@
 ---
+x-generated: '2026-08-19'
+x-method: derived
+x-operator: institution
+x-source: openapi/_original/uc-davis-peaks.yaml (https://peaks.ucdavis.edu/swagger/v1/swagger.json)
+x-note: Spectral ruleset derived by API Evangelist tooling from the institution's own PEAKS contract. Not published by UC Davis.
 # Spectral ruleset encoding observed patterns in the UC Davis CAES PEAKS API.
 # Derived from https://peaks.ucdavis.edu/swagger/v1/swagger.json (OpenAPI 3.0.1).
 formats:

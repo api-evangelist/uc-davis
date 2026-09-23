@@ -1,4 +1,11 @@
 {
+  "x-provenance": {
+    "generated": "2026-08-19",
+    "method": "generated",
+    "operator": "institution",
+    "source": "openapi/_original/uc-davis-peaks.yaml (PEAKS API v1, https://peaks.ucdavis.edu/swagger/v1/swagger.json)",
+    "note": "Illustrative payload generated from the PEAKS contract's schemas. Values are synthetic, not a captured response."
+  },
   "operation": "POST /api/{teamName}/equipment/Create",
   "description": "Representative request/response for creating a piece of equipment in PEAKS. Field shapes derived from the PEAKS OpenAPI Equipment schema; values are illustrative.",
   "request": {

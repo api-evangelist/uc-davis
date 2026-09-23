@@ -3,55 +3,145 @@ name: University of California, Davis
 description: University of California, Davis public developer/API footprint review for APIs.json cataloging.
 url: https://raw.githubusercontent.com/api-evangelist/uc-davis/refs/heads/main/review.yml
 created: '2026-06-03'
-modified: '2026-06-03'
+modified: '2026-08-19'
 reviews:
-  - date: '2026-06-03'
-    rating: 3
-    summary: >-
-      UC Davis has a real but decentralized API footprint with no single unified
-      developer portal. Verified live (HTTP 200): IET Middleware Web Service APIs,
-      UC Davis Health systems-integration developer page (Epic/FHIR/custom REST-SOAP,
-      API key/OAuth2), CAES PEAKS and ACE API docs, the developers.ucdavis.edu
-      internal developer SIG, the official ucdavis GitHub org (441+ repos), the main
-      website, library site, and status page. AggieData returned 403 (likely
-      bot-blocked) and LinkedIn returned 999 (anti-scraping), both expected. No openly
-      documented public library/repository REST API was confirmed, so none was
-      fabricated. Most identity and administrative APIs are gated behind institutional
-      affiliation rather than open signup.
-    endpoints:
-      - url: https://iet-ws.ucdavis.edu/api/
-        status: 200
-        note: IET Middleware Web Service APIs landing/docs page.
-      - url: https://health.ucdavis.edu/systems-integration/developers
-        status: 200
-        note: UC Davis Health developer/integration page; Epic, FHIR, custom APIs.
-      - url: https://computing.caes.ucdavis.edu/documentation/peaks/api
-        status: 200
-        note: CAES PEAKS API documentation (Swagger/OpenAPI).
-      - url: https://computing.caes.ucdavis.edu/documentation/ace/api
-        status: 200
-        note: CAES ACE API documentation.
-      - url: https://peaks.ucdavis.edu/swagger/index.html
-        status: 200
-        note: PEAKS Swagger UI endpoint.
-      - url: https://developers.ucdavis.edu/
-        status: 200
-        note: Internal developer SIG community; not a public API catalog.
-      - url: https://github.com/ucdavis
-        status: 200
-        note: Official verified GitHub org, 441+ public repositories.
-      - url: https://www.ucdavis.edu/
-        status: 200
-        note: Official institutional website.
-      - url: https://library.ucdavis.edu/
-        status: 200
-        note: Library site; no confirmed documented public REST API.
-      - url: https://status.ucdavis.edu/
-        status: 200
-        note: Campus systems status page.
-      - url: https://aggiedata.ucdavis.edu/
-        status: 403
-        note: Institutional data portal; bot-blocked, no documented public API.
-      - url: https://www.linkedin.com/school/uc-davis/
-        status: 999
-        note: LinkedIn school page; 999 is LinkedIn anti-scraping, page exists.
+- date: '2026-08-19'
+  rating: 4
+  pipeline: university
+  summary: 'Re-profiled under the university pipeline, which settles WHO OPERATES each surface before
+    saving anything. The June 2026 pass concluded ''no openly documented public library/repository REST
+    API was confirmed''. That was wrong, and this pass corrects it: UC Davis Library publishes TWO of
+    its own OpenAPI documents. The Aggie Experts API (experts.ucdavis.edu/api, OpenAPI 3.0.0 v5.0, Apache-2.0,
+    twelve operations, terms of use, contact address) answers anonymously and was verified callable —
+    196 experts under letter A, 1,625 hits for ''genomics'' — returning JSON-LD with VIVO/vCard terms,
+    UC Davis ARK identifiers and ORCID iDs. The DAMS API (digital.ucdavis.edu/api, MIT, four paths) sits
+    on ''fin'', the Library''s own open-source repository framework. Also newly recorded: a SAML 2.0 Shibboleth
+    IdP published to InCommon as urn:mace:incommon:ucdavis.edu, verified 200 at both the campus endpoint
+    and the InCommon MDQ service — the one surface no vendor can possibly be running — and a live UC Davis
+    Health FHIR R4 endpoint on emrrp.ucdmc.ucdavis.edu with a US Core CapabilityStatement and SMART configuration.
+    ATTRIBUTION CORRECTIONS: the FHIR CapabilityStatement is Epic''s (''Copyright Epic 1979-2026'') and
+    was deliberately NOT saved into this repo; eScholarship (California Digital Library) and library discovery
+    (Ex Libris Primo) were relabelled as TENANT relationships rather than deleted or credited; the nine
+    PEAKS entries were renamed to make plain they are nine tags of ONE application, not nine APIs; and
+    accessModel was corrected from ''self-serve signup'' to ''no self-service signup'', which no UC Davis
+    surface offers. DEFECTS RECORDED RATHER THAN SMOOTHED: DAMS returns HTTP 200 carrying an Elasticsearch
+    stack trace on /api/collection and a body of null on an item miss; the production Aggie Experts API
+    emits a JSON-LD @context pointing at stage.experts.library.ucdavis.edu, which does not resolve. BLOCKED:
+    aggiedata.ucdavis.edu, registrar-apps.ucdavis.edu, hpc.ucdavis.edu and it.ucdavis.edu all return 403
+    behind Cloudflare to every user agent tried; escholarship.org and ucdavis.figshare.com return an AWS
+    WAF challenge (202, zero bytes). Those are live hosts we could not read, not absences. No Figshare
+    tenant was claimed because none could be verified, and no contract was generated to fill any gap.'
+  endpoints:
+  - url: https://experts.ucdavis.edu/api/
+    status: 200
+    note: Aggie Experts OpenAPI 3.0.0 v5.0 — NEW, institution-authored.
+  - url: https://experts.ucdavis.edu/api/expert/browse?p=A&size=3
+    status: 200
+    note: Callable anonymously; 196 total.
+  - url: https://digital.ucdavis.edu/api/
+    status: 200
+    note: DAMS OpenAPI 3.0.0 — NEW, institution-authored.
+  - url: https://digital.ucdavis.edu/api/collection
+    status: 200
+    note: Soft-200 error with Node.js stack trace — defect.
+  - url: https://shibboleth.ucdavis.edu/idp/shibboleth
+    status: 200
+    note: SAML 2.0 IdP metadata — NEW.
+  - url: https://mdq.incommon.org/entities/urn%3Amace%3Aincommon%3Aucdavis.edu
+    status: 200
+    note: Signed InCommon entity for UC Davis.
+  - url: https://emrrp.ucdmc.ucdavis.edu/FHIR/api/FHIR/R4/metadata
+    status: 200
+    note: FHIR R4 CapabilityStatement — Epic-authored; endpoint UC Davis Health-operated.
+  - url: https://emrrp.ucdmc.ucdavis.edu/FHIR/api/FHIR/R4/.well-known/smart-configuration
+    status: 200
+    note: SMART on FHIR discovery, 5 scopes.
+  - url: https://peaks.ucdavis.edu/swagger/v1/swagger.json
+    status: 200
+    note: PEAKS API v1, still live.
+  - url: https://escholarship.org/oai?verb=Identify
+    status: 200
+    note: CDL-operated; tenant relationship only.
+  - url: https://escholarship.org/uc/ucd
+    status: 202
+    note: AWS WAF challenge, zero bytes.
+  - url: https://search.library.ucdavis.edu/
+    status: 200
+    note: Ex Libris Primo — tenant.
+  - url: https://digital.ucdavis.edu/oai?verb=Identify
+    status: 404
+    note: No institution-operated OAI-PMH.
+  - url: https://api.ucdavis.edu/
+    status: 404
+    note: Host resolves (18.144.178.99); serves nothing.
+  - url: https://aggiedata.ucdavis.edu/
+    status: 403
+    note: Cloudflare bot challenge — live, unreadable.
+  - url: https://registrar-apps.ucdavis.edu/courses/search/index.cfm
+    status: 403
+    note: Cloudflare bot challenge.
+  - url: https://hpc.ucdavis.edu/
+    status: 403
+    note: Cloudflare bot challenge.
+  - url: https://it.ucdavis.edu/artificial-intelligence/
+    status: 403
+    note: Cloudflare bot challenge; no AIPolicy pointer emitted.
+  - url: https://ucdavis.figshare.com/
+    status: 202
+    note: AWS WAF challenge; NO Figshare tenant claimed.
+  - url: https://stage.experts.library.ucdavis.edu/api/schema/context.jsonld
+    status: 0
+    note: '@context emitted by production does not resolve — defect.'
+  - url: https://www.ucdavis.edu/help/privacy-accessibility
+    status: 200
+    note: Privacy/accessibility statement.
+  - url: https://www.ucdavis.edu/privacy
+    status: 404
+    note: 'Soft-404 trap: 120KB body with a 404 status. Not used.'
+- date: '2026-06-03'
+  rating: 3
+  summary: 'UC Davis has a real but decentralized API footprint with no single unified developer portal.
+    Verified live (HTTP 200): IET Middleware Web Service APIs, UC Davis Health systems-integration developer
+    page (Epic/FHIR/custom REST-SOAP, API key/OAuth2), CAES PEAKS and ACE API docs, the developers.ucdavis.edu
+    internal developer SIG, the official ucdavis GitHub org (441+ repos), the main website, library site,
+    and status page. AggieData returned 403 (likely bot-blocked) and LinkedIn returned 999 (anti-scraping),
+    both expected. No openly documented public library/repository REST API was confirmed, so none was
+    fabricated. Most identity and administrative APIs are gated behind institutional affiliation rather
+    than open signup.'
+  endpoints:
+  - url: https://iet-ws.ucdavis.edu/api/
+    status: 200
+    note: IET Middleware Web Service APIs landing/docs page.
+  - url: https://health.ucdavis.edu/systems-integration/developers
+    status: 200
+    note: UC Davis Health developer/integration page; Epic, FHIR, custom APIs.
+  - url: https://computing.caes.ucdavis.edu/documentation/peaks/api
+    status: 200
+    note: CAES PEAKS API documentation (Swagger/OpenAPI).
+  - url: https://computing.caes.ucdavis.edu/documentation/ace/api
+    status: 200
+    note: CAES ACE API documentation.
+  - url: https://peaks.ucdavis.edu/swagger/index.html
+    status: 200
+    note: PEAKS Swagger UI endpoint.
+  - url: https://developers.ucdavis.edu/
+    status: 200
+    note: Internal developer SIG community; not a public API catalog.
+  - url: https://github.com/ucdavis
+    status: 200
+    note: Official verified GitHub org, 441+ public repositories.
+  - url: https://www.ucdavis.edu/
+    status: 200
+    note: Official institutional website.
+  - url: https://library.ucdavis.edu/
+    status: 200
+    note: Library site; no confirmed documented public REST API.
+  - url: https://status.ucdavis.edu/
+    status: 200
+    note: Campus systems status page.
+  - url: https://aggiedata.ucdavis.edu/
+    status: 403
+    note: Institutional data portal; bot-blocked, no documented public API.
+  - url: https://www.linkedin.com/school/uc-davis/
+    status: 999
+    note: LinkedIn school page; 999 is LinkedIn anti-scraping, page exists.

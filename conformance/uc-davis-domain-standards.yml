@@ -1,0 +1,115 @@
+# Education-regime domain standard conformance for University of California, Davis.
+# generated: 2026-08-19 | method: probed | reward-only — nothing here was inferred from prose.
+---
+name: University of California, Davis — education-regime domain standard conformance
+slug: uc-davis
+generated: '2026-08-19'
+method: probed
+source: Live probes of institution-operated hosts on 2026-08-19; see evidence[] on each entry.
+regime: education
+note: Reward-only. Only standards with a fetched, status-checked artifact are listed. Standards in the
+  education regime that were probed and NOT found are recorded under not_found[] so the absence is a measurement
+  rather than a silence.
+standards:
+- standard: shibboleth
+  status: conformant
+  operator: institution
+  evidence:
+  - url: https://shibboleth.ucdavis.edu/idp/shibboleth
+    status: 200
+    location: EntityDescriptor/IDPSSODescriptor with protocolSupportEnumeration 'urn:mace:shibboleth:1.0'
+    detail: Shibboleth IdP metadata served directly by UC Davis on shibboleth.ucdavis.edu (CNAME shibboleth.gdc.ucdavis.edu,
+      169.237.248.65 — UC Davis address space).
+  - url: https://mdq.incommon.org/entities/urn%3Amace%3Aincommon%3Aucdavis.edu
+    status: 200
+    location: entityID=urn:mace:incommon:ucdavis.edu, Organization/OrganizationName='University of California,
+      Davis'
+    detail: Signed InCommon federation metadata for the UC Davis IdP.
+  local_copy:
+  - identity/uc-davis-shibboleth-idp-metadata.xml
+  - identity/uc-davis-incommon-entity-metadata.xml
+- standard: saml
+  status: conformant
+  operator: institution
+  evidence:
+  - url: https://shibboleth.ucdavis.edu/idp/shibboleth
+    status: 200
+    location: SingleSignOnService Binding=urn:oasis:names:tc:SAML:2.0:bindings:HTTP-POST at https://shibboleth.ucdavis.edu/idp/profile/SAML2/POST/SSO
+    detail: SAML 1.1 and SAML 2.0 profiles both advertised; SLO endpoints present.
+  local_copy:
+  - identity/uc-davis-shibboleth-idp-metadata.xml
+- standard: orcid
+  status: partial
+  operator: institution
+  evidence:
+  - url: https://experts.ucdavis.edu/api/expert/9iH9TgOE
+    status: 200
+    location: $.'@graph'[].orcidId and $.'@graph'[].identifier[] containing 'http://orcid.org/0000-0002-7512-592X'
+    detail: Aggie Experts resolves and republishes ORCID iDs for UC Davis researchers.
+  caveat: 'Recorded as PARTIAL on purpose: the ORCID iD is present in the live response payload but is
+    NOT declared in the Aggie Experts OpenAPI components.schemas.Expert. A contract-reading conformance
+    check will not see it, and that is a correct read of the contract, not a scoring bug.'
+not_found:
+- standard: oai-pmh
+  detail: No OAI-PMH verb responds on any ucdavis.edu host. digital.ucdavis.edu/oai returns 404 (Express
+    'Cannot GET /oai'). UC Davis scholarly output is harvested through eScholarship, which is operated
+    by the California Digital Library, not by UC Davis — see the tenant entry in apis.yml.
+  evidence:
+  - url: https://digital.ucdavis.edu/oai?verb=Identify
+    status: 404
+  - url: https://escholarship.org/oai?verb=Identify
+    status: 200
+    note: CDL-operated, not UC Davis; ListSets returns a single set 'everything' with no UC Davis-specific
+      setSpec.
+  - url: https://escholarship.org/oai?verb=ListSets
+    status: 200
+- standard: scim
+  detail: No SCIM endpoint found on iet-ws.ucdavis.edu or any identity host; IET middleware documentation
+    is not machine-readable.
+  evidence:
+  - url: https://iet-ws.ucdavis.edu/api/
+    status: 200
+    note: 1KB HTML landing page, no contract
+- standard: lti
+  detail: No public LTI tool/platform registration surface found. Canvas is UC Davis's LMS but is Instructure-operated
+    (vendor).
+- standard: oneroster
+  detail: Not found.
+- standard: ed-fi
+  detail: Not found.
+- standard: caliper
+  detail: Not found.
+- standard: qti
+  detail: Not found.
+- standard: datacite
+  detail: DOIs appear in Aggie Experts work records but no DataCite member API, repository prefix listing,
+    or metadata endpoint is operated by UC Davis. UC DOIs are minted through CDL/EZID.
+- standard: crossref
+  detail: No UC Davis-operated Crossref deposit or query surface; Crossref DOIs are consumed, not published.
+adjacent_standards_observed:
+- standard: hl7-fhir-r4
+  operator: institution
+  note: UC Davis Health serves a live FHIR R4 CapabilityStatement on its OWN domain, but the CapabilityStatement
+    is Epic's (info copyright 'Copyright Epic 1979-2026'). Not an education-regime standard; recorded
+    so the surface is not lost.
+  evidence:
+  - url: https://emrrp.ucdmc.ucdavis.edu/FHIR/api/FHIR/R4/metadata
+    status: 200
+    location: resourceType=CapabilityStatement, instantiates[] includes http://hl7.org/fhir/us/core/CapabilityStatement/us-core-server
+- standard: smart-app-launch
+  operator: institution
+  evidence:
+  - url: https://emrrp.ucdmc.ucdavis.edu/FHIR/api/FHIR/R4/.well-known/smart-configuration
+    status: 200
+    location: authorization_endpoint / token_endpoint / scopes_supported
+- standard: json-ld
+  operator: institution
+  note: Aggie Experts emits JSON-LD (@context, @graph, @id, @type) using VIVO and vCard terms and ARK
+    identifiers.
+  evidence:
+  - url: https://experts.ucdavis.edu/api/expert/9iH9TgOE
+    status: 200
+    location: $.'@context'
+  defect: The @context URL the PRODUCTION API emits is https://stage.experts.library.ucdavis.edu/api/schema/context.jsonld
+    — a STAGE host that does not resolve (connection timeout). The JSON-LD is therefore not dereferenceable
+    by a consumer.

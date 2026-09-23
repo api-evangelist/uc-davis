@@ -1,4 +1,10 @@
 ---
+generated: '2026-08-19'
+method: derived
+operator: institution
+source: openapi/_original/uc-davis-peaks.yaml (PEAKS API v1, https://peaks.ucdavis.edu/swagger/v1/swagger.json)
+note: Derived by API Evangelist tooling from the institution's own PEAKS contract. Not published
+  by UC Davis.
 vocabulary:
   name: UC Davis CAES PEAKS Vocabulary
   description: >-

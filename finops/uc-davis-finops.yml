@@ -1,3 +1,9 @@
+---
+generated: '2026-08-19'
+method: none
+operator: institution
+source: No cost or metering surface exists; UC Davis APIs are not commercially metered.
+note: Placeholder record retained for schema parity.
 specification: FinOps Framework
 specificationVersion: '1.0'
 schema: https://www.finops.org/framework/
