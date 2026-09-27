@@ -70,7 +70,7 @@ tags:
 - Digital Collections
 - Library
 - Health
-- Open-Source
+- Open Source
 tags_raw:
 - University
 - Higher Education
@@ -86,6 +86,7 @@ tags_raw:
 - Library
 - Health
 - Open Source
+- Open-Source
 created: '2026-06-03'
 modified: '2026-08-19'
 specificationVersion: '0.23'
@@ -630,13 +631,15 @@ apis:
   humanURL: https://computing.caes.ucdavis.edu/documentation/peaks/api
   baseURL: https://peaks.ucdavis.edu
   tags:
-  - Space
+  - Spaces
   - peaks
   - Campus Operations
+  - Space
   tags_raw:
   - Spaces
   - PEAKS
   - Campus Operations
+  - Space
   properties:
   - type: OpenAPI
     url: openapi/uc-davis-spaces-api-openapi.yml
