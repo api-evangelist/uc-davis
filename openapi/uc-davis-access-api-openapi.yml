@@ -444,130 +444,6 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    Workstation:
-      required:
-      - name
-      - space
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int32
-        name:
-          maxLength: 64
-          minLength: 0
-          type: string
-        notes:
-          type:
-          - string
-          - 'null'
-        tags:
-          type:
-          - string
-          - 'null'
-        team:
-          $ref: '#/components/schemas/Team'
-        teamId:
-          type: integer
-          format: int32
-        active:
-          type: boolean
-        title:
-          type:
-          - string
-          - 'null'
-          readOnly: true
-        type:
-          type:
-          - string
-          - 'null'
-        space:
-          $ref: '#/components/schemas/Space'
-        spaceId:
-          type: integer
-          format: int32
-        assignment:
-          $ref: '#/components/schemas/WorkstationAssignment'
-        workstationAssignmentId:
-          type:
-          - integer
-          - 'null'
-          format: int32
-        attributes:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/WorkstationAttribute'
-      additionalProperties: false
-    GroupPermission:
-      required:
-      - group
-      - user
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int32
-        group:
-          $ref: '#/components/schemas/Group'
-        groupId:
-          type: integer
-          format: int32
-        user:
-          $ref: '#/components/schemas/User'
-        userId:
-          type:
-          - string
-          - 'null'
-      additionalProperties: false
-    WorkstationAssignment:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int32
-        person:
-          $ref: '#/components/schemas/Person'
-        personId:
-          type: integer
-          format: int32
-        requestedAt:
-          type: string
-          format: date-time
-        requestedBy:
-          $ref: '#/components/schemas/User'
-        requestedById:
-          type:
-          - string
-          - 'null'
-        requestedByName:
-          type:
-          - string
-          - 'null'
-        approvedAt:
-          type:
-          - string
-          - 'null'
-          format: date-time
-        expiresAt:
-          type: string
-          format: date-time
-        isConfirmed:
-          type: boolean
-        confirmedAt:
-          type:
-          - string
-          - 'null'
-          format: date-time
-        nextNotificationDate:
-          type:
-          - string
-          - 'null'
-          format: date-time
-        workstation:
-          $ref: '#/components/schemas/Workstation'
-      additionalProperties: false
     Group:
       required:
       - name
@@ -593,7 +469,7 @@ components:
           items:
             $ref: '#/components/schemas/GroupXTeam'
       additionalProperties: false
-    Access:
+    Document:
       required:
       - name
       type: object
@@ -625,288 +501,41 @@ components:
           - string
           - 'null'
           readOnly: true
-        assignments:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/AccessAssignment'
-      additionalProperties: false
-    Team:
-      required:
-      - name
-      - slug
-      type: object
-      properties:
-        id:
+        person:
+          $ref: '#/components/schemas/Person'
+        personId:
           type: integer
           format: int32
-        name:
-          maxLength: 128
-          minLength: 0
-          type: string
-        slug:
-          maxLength: 40
-          minLength: 3
-          pattern: ^([a-z0-9]+[a-z0-9\-]?)+[a-z0-9]$
-          type: string
-        boardingNotificationEmail:
-          maxLength: 256
-          minLength: 0
+        envelopeId:
           type:
           - string
           - 'null'
-          format: email
-        people:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/Person'
-        teamPermissions:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/TeamPermission'
-        fisOrgs:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/FinancialOrganization'
-        ppsDepartments:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/TeamPpsDepartment'
-        groups:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/GroupXTeam'
-        teamApiCode:
-          $ref: '#/components/schemas/TeamApiCode'
-        documentAccountName:
+        templateId:
           type:
           - string
           - 'null'
-        documentAccountId:
+        status:
           type:
           - string
           - 'null'
-        documentApiBasePath:
-          type:
-          - string
-          - 'null'
-      additionalProperties: false
-    TeamApiCode:
-      required:
-      - team
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int32
-        team:
-          $ref: '#/components/schemas/Team'
-        teamId:
-          type: integer
-          format: int32
-        apiCode:
-          type: string
-          format: uuid
-      additionalProperties: false
-    History:
-      required:
-      - description
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int32
-        description:
-          minLength: 1
-          type: string
-        actor:
-          $ref: '#/components/schemas/User'
-        actorId:
-          type:
-          - string
-          - 'null'
-        actedDate:
+        createdAt:
           type: string
           format: date-time
-        target:
-          $ref: '#/components/schemas/Person'
-        targetId:
-          type:
-          - integer
-          - 'null'
-          format: int32
-        assetType:
+        completedAt:
           type:
           - string
           - 'null'
-        actionType:
+          format: date-time
+        accountId:
           type:
           - string
           - 'null'
-        key:
-          $ref: '#/components/schemas/Key'
-        keyId:
-          type:
-          - integer
-          - 'null'
-          format: int32
-        keySerial:
-          $ref: '#/components/schemas/KeySerial'
-        keySerialId:
-          type:
-          - integer
-          - 'null'
-          format: int32
-        equipment:
-          $ref: '#/components/schemas/Equipment'
-        equipmentId:
-          type:
-          - integer
-          - 'null'
-          format: int32
-        access:
-          $ref: '#/components/schemas/Access'
-        accessId:
-          type:
-          - integer
-          - 'null'
-          format: int32
-        workstation:
-          $ref: '#/components/schemas/Workstation'
-        workstationId:
-          type:
-          - integer
-          - 'null'
-          format: int32
-        document:
-          $ref: '#/components/schemas/Document'
-        documentId:
-          type:
-          - integer
-          - 'null'
-          format: int32
-        link:
+        apiBasePath:
           type:
           - string
           - 'null'
-          readOnly: true
       additionalProperties: false
-    Space:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int32
-        deptKey:
-          type:
-          - string
-          - 'null'
-        bldgKey:
-          type:
-          - string
-          - 'null'
-        roomKey:
-          type:
-          - string
-          - 'null'
-        floorKey:
-          type:
-          - string
-          - 'null'
-        bldgName:
-          type:
-          - string
-          - 'null'
-        floorName:
-          type:
-          - string
-          - 'null'
-        roomNumber:
-          type:
-          - string
-          - 'null'
-        roomName:
-          type:
-          - string
-          - 'null'
-        roomCategoryName:
-          type:
-          - string
-          - 'null'
-        roomCategoryCode:
-          type:
-          - string
-          - 'null'
-        chartNum:
-          type:
-          - string
-          - 'null'
-        orgId:
-          type:
-          - string
-          - 'null'
-        deptName:
-          type:
-          - string
-          - 'null'
-        source:
-          type:
-          - string
-          - 'null'
-        active:
-          type: boolean
-        sqFt:
-          type:
-          - integer
-          - 'null'
-          format: int32
-        shortName:
-          type:
-          - string
-          - 'null'
-          readOnly: true
-      additionalProperties: false
-    FinancialOrganization:
-      required:
-      - chart
-      - orgCode
-      - team
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int32
-        chart:
-          maxLength: 1
-          minLength: 0
-          type: string
-        orgCode:
-          maxLength: 4
-          minLength: 0
-          type: string
-        team:
-          $ref: '#/components/schemas/Team'
-        teamId:
-          type: integer
-          format: int32
-        chartAndOrg:
-          type:
-          - string
-          - 'null'
-          readOnly: true
-      additionalProperties: false
-    EquipmentAssignment:
+    KeySerialAssignment:
       type: object
       properties:
         id:
@@ -950,73 +579,11 @@ components:
           - string
           - 'null'
           format: date-time
-        equipment:
-          $ref: '#/components/schemas/Equipment'
-      additionalProperties: false
-    Key:
-      required:
-      - code
-      - name
-      type: object
-      properties:
-        id:
+        keySerialId:
           type: integer
           format: int32
-        name:
-          maxLength: 64
-          minLength: 0
-          type: string
-        notes:
-          type:
-          - string
-          - 'null'
-        tags:
-          type:
-          - string
-          - 'null'
-        team:
-          $ref: '#/components/schemas/Team'
-        teamId:
-          type: integer
-          format: int32
-        active:
-          type: boolean
-        code:
-          maxLength: 64
-          minLength: 0
-          type: string
-        keyXSpaces:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/KeyXSpace'
-        serials:
-          type:
-          - array
-          - 'null'
-          items:
-            $ref: '#/components/schemas/KeySerial'
-        title:
-          type:
-          - string
-          - 'null'
-          readOnly: true
-      additionalProperties: false
-    Role:
-      required:
-      - name
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int32
-        name:
-          maxLength: 50
-          minLength: 0
-          type: string
-        isAdmin:
-          type: boolean
+        keySerial:
+          $ref: '#/components/schemas/KeySerial'
       additionalProperties: false
     Person:
       required:
@@ -1143,47 +710,60 @@ components:
           items:
             $ref: '#/components/schemas/Document'
       additionalProperties: false
-    User:
+    FinancialOrganization:
       required:
-      - email
-      - firstName
-      - lastName
+      - chart
+      - orgCode
+      - team
       type: object
       properties:
         id:
-          type:
-          - string
-          - 'null'
-        iam:
-          type:
-          - string
-          - 'null'
-        firstName:
-          maxLength: 50
+          type: integer
+          format: int32
+        chart:
+          maxLength: 1
           minLength: 0
           type: string
-        lastName:
-          maxLength: 50
+        orgCode:
+          maxLength: 4
           minLength: 0
           type: string
-        name:
-          maxLength: 256
-          minLength: 0
+        team:
+          $ref: '#/components/schemas/Team'
+        teamId:
+          type: integer
+          format: int32
+        chartAndOrg:
           type:
           - string
           - 'null'
           readOnly: true
-        email:
-          maxLength: 256
+      additionalProperties: false
+    Team:
+      required:
+      - name
+      - slug
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        name:
+          maxLength: 128
           minLength: 0
           type: string
-          format: email
-        pronouns:
-          maxLength: 50
+        slug:
+          maxLength: 40
+          minLength: 3
+          pattern: ^([a-z0-9]+[a-z0-9\-]?)+[a-z0-9]$
+          type: string
+        boardingNotificationEmail:
+          maxLength: 256
           minLength: 0
           type:
           - string
           - 'null'
+          format: email
         people:
           type:
           - array
@@ -1196,6 +776,38 @@ components:
           - 'null'
           items:
             $ref: '#/components/schemas/TeamPermission'
+        fisOrgs:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/FinancialOrganization'
+        ppsDepartments:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/TeamPpsDepartment'
+        groups:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/GroupXTeam'
+        teamApiCode:
+          $ref: '#/components/schemas/TeamApiCode'
+        documentAccountName:
+          type:
+          - string
+          - 'null'
+        documentAccountId:
+          type:
+          - string
+          - 'null'
+        documentApiBasePath:
+          type:
+          - string
+          - 'null'
       additionalProperties: false
     Filter:
       enum:
@@ -1204,145 +816,50 @@ components:
       - 2
       type: integer
       format: int32
-    KeySerial:
+    TeamApiCode:
+      required:
+      - team
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        team:
+          $ref: '#/components/schemas/Team'
+        teamId:
+          type: integer
+          format: int32
+        apiCode:
+          type: string
+          format: uuid
+      additionalProperties: false
+    Role:
       required:
       - name
-      - number
       type: object
       properties:
         id:
           type: integer
           format: int32
         name:
-          maxLength: 64
+          maxLength: 50
           minLength: 0
           type: string
-        notes:
-          type:
-          - string
-          - 'null'
-        tags:
-          type:
-          - string
-          - 'null'
-        team:
-          $ref: '#/components/schemas/Team'
-        teamId:
-          type: integer
-          format: int32
-        active:
+        isAdmin:
           type: boolean
-        number:
-          maxLength: 64
-          minLength: 0
-          type: string
-        status:
-          type:
-          - string
-          - 'null'
-        key:
-          $ref: '#/components/schemas/Key'
-        keyId:
-          type: integer
-          format: int32
-        keySerialAssignment:
-          $ref: '#/components/schemas/KeySerialAssignment'
-        keySerialAssignmentId:
-          type:
-          - integer
-          - 'null'
-          format: int32
-        title:
-          type:
-          - string
-          - 'null'
-          readOnly: true
       additionalProperties: false
-    KeySerialAssignment:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int32
-        person:
-          $ref: '#/components/schemas/Person'
-        personId:
-          type: integer
-          format: int32
-        requestedAt:
-          type: string
-          format: date-time
-        requestedBy:
-          $ref: '#/components/schemas/User'
-        requestedById:
-          type:
-          - string
-          - 'null'
-        requestedByName:
-          type:
-          - string
-          - 'null'
-        approvedAt:
-          type:
-          - string
-          - 'null'
-          format: date-time
-        expiresAt:
-          type: string
-          format: date-time
-        isConfirmed:
-          type: boolean
-        confirmedAt:
-          type:
-          - string
-          - 'null'
-          format: date-time
-        nextNotificationDate:
-          type:
-          - string
-          - 'null'
-          format: date-time
-        keySerialId:
-          type: integer
-          format: int32
-        keySerial:
-          $ref: '#/components/schemas/KeySerial'
-      additionalProperties: false
-    KeyXSpace:
+    GroupPermission:
       required:
-      - key
-      - space
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int32
-        key:
-          $ref: '#/components/schemas/Key'
-        keyId:
-          type: integer
-          format: int32
-        space:
-          $ref: '#/components/schemas/Space'
-        spaceId:
-          type:
-          - integer
-          - 'null'
-          format: int32
-      additionalProperties: false
-    TeamPermission:
-      required:
-      - role
-      - team
+      - group
       - user
       type: object
       properties:
         id:
           type: integer
           format: int32
-        team:
-          $ref: '#/components/schemas/Team'
-        teamId:
+        group:
+          $ref: '#/components/schemas/Group'
+        groupId:
           type: integer
           format: int32
         user:
@@ -1351,11 +868,6 @@ components:
           type:
           - string
           - 'null'
-        role:
-          $ref: '#/components/schemas/Role'
-        roleId:
-          type: integer
-          format: int32
       additionalProperties: false
     GroupXTeam:
       required:
@@ -1377,27 +889,7 @@ components:
           type: integer
           format: int32
       additionalProperties: false
-    WorkstationAttribute:
-      type: object
-      properties:
-        id:
-          type: integer
-          format: int32
-        workstation:
-          $ref: '#/components/schemas/Workstation'
-        workstationId:
-          type: integer
-          format: int32
-        key:
-          type:
-          - string
-          - 'null'
-        value:
-          type:
-          - string
-          - 'null'
-      additionalProperties: false
-    AccessAssignment:
+    WorkstationAssignment:
       type: object
       properties:
         id:
@@ -1441,38 +933,88 @@ components:
           - string
           - 'null'
           format: date-time
-        accessId:
-          type: integer
-          format: int32
-        access:
-          $ref: '#/components/schemas/Access'
+        workstation:
+          $ref: '#/components/schemas/Workstation'
       additionalProperties: false
-    TeamPpsDepartment:
-      required:
-      - ppsDepartmentCode
-      - team
+    Space:
       type: object
       properties:
         id:
           type: integer
           format: int32
-        ppsDepartmentCode:
-          maxLength: 6
-          minLength: 0
-          type: string
-        departmentName:
+        deptKey:
           type:
           - string
           - 'null'
-        team:
-          $ref: '#/components/schemas/Team'
-        teamId:
-          type: integer
+        bldgKey:
+          type:
+          - string
+          - 'null'
+        roomKey:
+          type:
+          - string
+          - 'null'
+        floorKey:
+          type:
+          - string
+          - 'null'
+        bldgName:
+          type:
+          - string
+          - 'null'
+        floorName:
+          type:
+          - string
+          - 'null'
+        roomNumber:
+          type:
+          - string
+          - 'null'
+        roomName:
+          type:
+          - string
+          - 'null'
+        roomCategoryName:
+          type:
+          - string
+          - 'null'
+        roomCategoryCode:
+          type:
+          - string
+          - 'null'
+        chartNum:
+          type:
+          - string
+          - 'null'
+        orgId:
+          type:
+          - string
+          - 'null'
+        deptName:
+          type:
+          - string
+          - 'null'
+        source:
+          type:
+          - string
+          - 'null'
+        active:
+          type: boolean
+        sqFt:
+          type:
+          - integer
+          - 'null'
           format: int32
+        shortName:
+          type:
+          - string
+          - 'null'
+          readOnly: true
       additionalProperties: false
-    Document:
+    Workstation:
       required:
       - name
+      - space
       type: object
       properties:
         id:
@@ -1502,59 +1044,111 @@ components:
           - string
           - 'null'
           readOnly: true
-        person:
-          $ref: '#/components/schemas/Person'
-        personId:
+        type:
+          type:
+          - string
+          - 'null'
+        space:
+          $ref: '#/components/schemas/Space'
+        spaceId:
           type: integer
           format: int32
-        envelopeId:
+        assignment:
+          $ref: '#/components/schemas/WorkstationAssignment'
+        workstationAssignmentId:
           type:
-          - string
+          - integer
           - 'null'
-        templateId:
+          format: int32
+        attributes:
           type:
-          - string
+          - array
           - 'null'
-        status:
-          type:
-          - string
-          - 'null'
-        createdAt:
-          type: string
-          format: date-time
-        completedAt:
-          type:
-          - string
-          - 'null'
-          format: date-time
-        accountId:
-          type:
-          - string
-          - 'null'
-        apiBasePath:
-          type:
-          - string
-          - 'null'
+          items:
+            $ref: '#/components/schemas/WorkstationAttribute'
       additionalProperties: false
-    EquipmentAttribute:
+    History:
+      required:
+      - description
       type: object
       properties:
         id:
           type: integer
           format: int32
+        description:
+          minLength: 1
+          type: string
+        actor:
+          $ref: '#/components/schemas/User'
+        actorId:
+          type:
+          - string
+          - 'null'
+        actedDate:
+          type: string
+          format: date-time
+        target:
+          $ref: '#/components/schemas/Person'
+        targetId:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        assetType:
+          type:
+          - string
+          - 'null'
+        actionType:
+          type:
+          - string
+          - 'null'
+        key:
+          $ref: '#/components/schemas/Key'
+        keyId:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        keySerial:
+          $ref: '#/components/schemas/KeySerial'
+        keySerialId:
+          type:
+          - integer
+          - 'null'
+          format: int32
         equipment:
           $ref: '#/components/schemas/Equipment'
         equipmentId:
-          type: integer
+          type:
+          - integer
+          - 'null'
           format: int32
-        key:
+        access:
+          $ref: '#/components/schemas/Access'
+        accessId:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        workstation:
+          $ref: '#/components/schemas/Workstation'
+        workstationId:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        document:
+          $ref: '#/components/schemas/Document'
+        documentId:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        link:
           type:
           - string
           - 'null'
-        value:
-          type:
-          - string
-          - 'null'
+          readOnly: true
       additionalProperties: false
     Equipment:
       required:
@@ -1642,6 +1236,412 @@ components:
           - 'null'
           items:
             $ref: '#/components/schemas/EquipmentAttribute'
+      additionalProperties: false
+    EquipmentAttribute:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        equipment:
+          $ref: '#/components/schemas/Equipment'
+        equipmentId:
+          type: integer
+          format: int32
+        key:
+          type:
+          - string
+          - 'null'
+        value:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+    Access:
+      required:
+      - name
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        name:
+          maxLength: 64
+          minLength: 0
+          type: string
+        notes:
+          type:
+          - string
+          - 'null'
+        tags:
+          type:
+          - string
+          - 'null'
+        team:
+          $ref: '#/components/schemas/Team'
+        teamId:
+          type: integer
+          format: int32
+        active:
+          type: boolean
+        title:
+          type:
+          - string
+          - 'null'
+          readOnly: true
+        assignments:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/AccessAssignment'
+      additionalProperties: false
+    Key:
+      required:
+      - code
+      - name
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        name:
+          maxLength: 64
+          minLength: 0
+          type: string
+        notes:
+          type:
+          - string
+          - 'null'
+        tags:
+          type:
+          - string
+          - 'null'
+        team:
+          $ref: '#/components/schemas/Team'
+        teamId:
+          type: integer
+          format: int32
+        active:
+          type: boolean
+        code:
+          maxLength: 64
+          minLength: 0
+          type: string
+        keyXSpaces:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/KeyXSpace'
+        serials:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/KeySerial'
+        title:
+          type:
+          - string
+          - 'null'
+          readOnly: true
+      additionalProperties: false
+    User:
+      required:
+      - email
+      - firstName
+      - lastName
+      type: object
+      properties:
+        id:
+          type:
+          - string
+          - 'null'
+        iam:
+          type:
+          - string
+          - 'null'
+        firstName:
+          maxLength: 50
+          minLength: 0
+          type: string
+        lastName:
+          maxLength: 50
+          minLength: 0
+          type: string
+        name:
+          maxLength: 256
+          minLength: 0
+          type:
+          - string
+          - 'null'
+          readOnly: true
+        email:
+          maxLength: 256
+          minLength: 0
+          type: string
+          format: email
+        pronouns:
+          maxLength: 50
+          minLength: 0
+          type:
+          - string
+          - 'null'
+        people:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/Person'
+        teamPermissions:
+          type:
+          - array
+          - 'null'
+          items:
+            $ref: '#/components/schemas/TeamPermission'
+      additionalProperties: false
+    KeySerial:
+      required:
+      - name
+      - number
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        name:
+          maxLength: 64
+          minLength: 0
+          type: string
+        notes:
+          type:
+          - string
+          - 'null'
+        tags:
+          type:
+          - string
+          - 'null'
+        team:
+          $ref: '#/components/schemas/Team'
+        teamId:
+          type: integer
+          format: int32
+        active:
+          type: boolean
+        number:
+          maxLength: 64
+          minLength: 0
+          type: string
+        status:
+          type:
+          - string
+          - 'null'
+        key:
+          $ref: '#/components/schemas/Key'
+        keyId:
+          type: integer
+          format: int32
+        keySerialAssignment:
+          $ref: '#/components/schemas/KeySerialAssignment'
+        keySerialAssignmentId:
+          type:
+          - integer
+          - 'null'
+          format: int32
+        title:
+          type:
+          - string
+          - 'null'
+          readOnly: true
+      additionalProperties: false
+    WorkstationAttribute:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        workstation:
+          $ref: '#/components/schemas/Workstation'
+        workstationId:
+          type: integer
+          format: int32
+        key:
+          type:
+          - string
+          - 'null'
+        value:
+          type:
+          - string
+          - 'null'
+      additionalProperties: false
+    KeyXSpace:
+      required:
+      - key
+      - space
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        key:
+          $ref: '#/components/schemas/Key'
+        keyId:
+          type: integer
+          format: int32
+        space:
+          $ref: '#/components/schemas/Space'
+        spaceId:
+          type:
+          - integer
+          - 'null'
+          format: int32
+      additionalProperties: false
+    AccessAssignment:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        person:
+          $ref: '#/components/schemas/Person'
+        personId:
+          type: integer
+          format: int32
+        requestedAt:
+          type: string
+          format: date-time
+        requestedBy:
+          $ref: '#/components/schemas/User'
+        requestedById:
+          type:
+          - string
+          - 'null'
+        requestedByName:
+          type:
+          - string
+          - 'null'
+        approvedAt:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        expiresAt:
+          type: string
+          format: date-time
+        isConfirmed:
+          type: boolean
+        confirmedAt:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        nextNotificationDate:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        accessId:
+          type: integer
+          format: int32
+        access:
+          $ref: '#/components/schemas/Access'
+      additionalProperties: false
+    TeamPpsDepartment:
+      required:
+      - ppsDepartmentCode
+      - team
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        ppsDepartmentCode:
+          maxLength: 6
+          minLength: 0
+          type: string
+        departmentName:
+          type:
+          - string
+          - 'null'
+        team:
+          $ref: '#/components/schemas/Team'
+        teamId:
+          type: integer
+          format: int32
+      additionalProperties: false
+    TeamPermission:
+      required:
+      - role
+      - team
+      - user
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        team:
+          $ref: '#/components/schemas/Team'
+        teamId:
+          type: integer
+          format: int32
+        user:
+          $ref: '#/components/schemas/User'
+        userId:
+          type:
+          - string
+          - 'null'
+        role:
+          $ref: '#/components/schemas/Role'
+        roleId:
+          type: integer
+          format: int32
+      additionalProperties: false
+    EquipmentAssignment:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+        person:
+          $ref: '#/components/schemas/Person'
+        personId:
+          type: integer
+          format: int32
+        requestedAt:
+          type: string
+          format: date-time
+        requestedBy:
+          $ref: '#/components/schemas/User'
+        requestedById:
+          type:
+          - string
+          - 'null'
+        requestedByName:
+          type:
+          - string
+          - 'null'
+        approvedAt:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        expiresAt:
+          type: string
+          format: date-time
+        isConfirmed:
+          type: boolean
+        confirmedAt:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        nextNotificationDate:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        equipment:
+          $ref: '#/components/schemas/Equipment'
       additionalProperties: false
   securitySchemes:
     ApiKey:
