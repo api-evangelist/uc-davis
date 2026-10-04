@@ -281,53 +281,43 @@ paths:
       x-operation-id-source: derived
 components:
   parameters:
-    email:
+    include:
       in: query
-      name: email
-      description: Filter grants by email
+      name: include
+      description: Pass 'hidden' to include non-visible entries (requires owner or admin)
       required: false
       schema:
         type: string
-    all:
+        enum:
+        - hidden
+    q:
       in: query
-      name: all
-      description: Return all grants and works without pagination (requires owner or admin)
-      required: false
-      schema:
-        type: boolean
-    id:
-      name: id
-      in: path
-      required: true
-      schema:
-        type: string
-    previewEsIndex:
-      in: query
-      name: previewEsIndex
-      description: Override the Elasticsearch index used for this request
+      name: q
+      description: Text query to search for
       required: false
       schema:
         type: string
-    dateTo:
+    status:
       in: query
-      name: dateTo
-      description: Filter results up to this date (inclusive). A 4-digit year (YYYY) will automatically expand to the last day of that year (YYYY-12-31).
+      name: status
+      description: Comma-separated search filter on grant status
+      required: false
+      schema:
+        type: array
+        items:
+          type: string
+          enum:
+          - completed
+          - active
+      style: simple
+      explode: false
+    iamId:
+      in: query
+      name: iamId
+      description: Filter grants by IAM ID
       required: false
       schema:
         type: string
-        format: date
-        pattern: ^[0-9]{4}(-(?:0[1-9]|1[0-2])-(?:0[1-9]|[12][0-9]|3[01]))?$
-        example: '2023-12-31'
-    until:
-      in: query
-      name: until
-      description: Filter grants up to this date (inclusive). Defaults to today if not provided.
-      required: false
-      schema:
-        type: string
-        format: date
-        pattern: ^[0-9]{4}-(?:0[1-9]|1[0-2])-(?:0[1-9]|[12][0-9]|3[01])$
-        example: '2030-12-31'
     type:
       in: query
       name: type
@@ -375,6 +365,30 @@ components:
           - webpage
       style: simple
       explode: false
+    availability:
+      in: query
+      name: availability
+      description: Comma-separated search filter on expert availability types
+      required: false
+      schema:
+        type: array
+        items:
+          type: string
+          enum:
+          - community partnerships
+          - collaborative projects
+          - industry Projects
+          - media enquiries
+      style: simple
+      explode: false
+    expertId:
+      name: expertId
+      in: path
+      required: true
+      schema:
+        type: string
+        format: nano(\d{8})
+        description: The unique identifier for the expert
     p:
       in: query
       name: p
@@ -382,21 +396,34 @@ components:
       required: false
       schema:
         type: string
-    size:
+    previewEsIndex:
       in: query
-      name: size
-      description: The number of results to return per page, defaults to 25
-      required: false
-      schema:
-        type: integer
-        default: 25
-    q:
-      in: query
-      name: q
-      description: Text query to search for
+      name: previewEsIndex
+      description: Override the Elasticsearch index used for this request
       required: false
       schema:
         type: string
+    inner_hit_size:
+      in: query
+      name: inner_hit_size
+      description: The number of inner hits (works per expert) to return
+      required: false
+      schema:
+        type: integer
+    sitefarmId:
+      name: ids
+      in: path
+      required: true
+      schema:
+        type: string
+      description: A comma separated list of expert IDs. Ids are in the format of '{idType}:{Id}'. For example 'expertId:12345'
+    page:
+      in: query
+      name: page
+      description: The pagination of results to return, defaults to 1
+      required: false
+      schema:
+        type: integer
     since:
       in: query
       name: since
@@ -407,21 +434,72 @@ components:
         format: date
         pattern: ^[0-9]{4}-(?:0[1-9]|1[0-2])-(?:0[1-9]|[12][0-9]|3[01])$
         example: '2010-01-01'
-    expertId:
-      name: expertId
+    email:
+      in: query
+      name: email
+      description: Filter grants by email
+      required: false
+      schema:
+        type: string
+    ucdPersonUUID:
+      in: query
+      name: ucdPersonUUID
+      description: Filter grants by UCD Person UUID
+      required: false
+      schema:
+        type: string
+    id:
+      name: id
       in: path
       required: true
       schema:
         type: string
-        format: nano(\d{8})
-        description: The unique identifier for the expert
-    iamId:
+    atType:
       in: query
-      name: iamId
-      description: Filter grants by IAM ID
+      name: '@type'
+      description: Comma-separated list of item @types to return.
+      required: false
+      schema:
+        type: array
+        default:
+        - expert
+        - grant
+        - work
+        items:
+          type: string
+          enum:
+          - expert
+          - grant
+          - work
+      style: simple
+      explode: false
+    until:
+      in: query
+      name: until
+      description: Filter grants up to this date (inclusive). Defaults to today if not provided.
       required: false
       schema:
         type: string
+        format: date
+        pattern: ^[0-9]{4}-(?:0[1-9]|1[0-2])-(?:0[1-9]|[12][0-9]|3[01])$
+        example: '2030-12-31'
+    dateTo:
+      in: query
+      name: dateTo
+      description: Filter results up to this date (inclusive). A 4-digit year (YYYY) will automatically expand to the last day of that year (YYYY-12-31).
+      required: false
+      schema:
+        type: string
+        format: date
+        pattern: ^[0-9]{4}(-(?:0[1-9]|1[0-2])-(?:0[1-9]|[12][0-9]|3[01]))?$
+        example: '2023-12-31'
+    all:
+      in: query
+      name: all
+      description: Return all grants and works without pagination (requires owner or admin)
+      required: false
+      schema:
+        type: boolean
     expert:
       in: query
       name: expert
@@ -443,279 +521,15 @@ components:
         format: date
         pattern: ^[0-9]{4}(-(?:0[1-9]|1[0-2])-(?:0[1-9]|[12][0-9]|3[01]))?$
         example: '2017-01-01'
-    sitefarmId:
-      name: ids
-      in: path
-      required: true
-      schema:
-        type: string
-      description: A comma separated list of expert IDs. Ids are in the format of '{idType}:{Id}'. For example 'expertId:12345'
-    status:
+    size:
       in: query
-      name: status
-      description: Comma-separated search filter on grant status
-      required: false
-      schema:
-        type: array
-        items:
-          type: string
-          enum:
-          - completed
-          - active
-      style: simple
-      explode: false
-    include:
-      in: query
-      name: include
-      description: Pass 'hidden' to include non-visible entries (requires owner or admin)
-      required: false
-      schema:
-        type: string
-        enum:
-        - hidden
-    page:
-      in: query
-      name: page
-      description: The pagination of results to return, defaults to 1
+      name: size
+      description: The number of results to return per page, defaults to 25
       required: false
       schema:
         type: integer
-    ucdPersonUUID:
-      in: query
-      name: ucdPersonUUID
-      description: Filter grants by UCD Person UUID
-      required: false
-      schema:
-        type: string
-    inner_hit_size:
-      in: query
-      name: inner_hit_size
-      description: The number of inner hits (works per expert) to return
-      required: false
-      schema:
-        type: integer
-    atType:
-      in: query
-      name: '@type'
-      description: Comma-separated list of item @types to return.
-      required: false
-      schema:
-        type: array
-        default:
-        - expert
-        - grant
-        - work
-        items:
-          type: string
-          enum:
-          - expert
-          - grant
-          - work
-      style: simple
-      explode: false
-    availability:
-      in: query
-      name: availability
-      description: Comma-separated search filter on expert availability types
-      required: false
-      schema:
-        type: array
-        items:
-          type: string
-          enum:
-          - community partnerships
-          - collaborative projects
-          - industry Projects
-          - media enquiries
-      style: simple
-      explode: false
-  responses:
-    Not_found:
-      description: Resource not found
-    Invalid_ID_supplied:
-      description: Invalid ID supplied
-    Forbidden:
-      description: Request is forbidden
-    Grant:
-      description: grant
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Grant'
-    Invalid_request:
-      description: Invalid request
-    Browse:
-      description: The list of experts
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Browse'
-    Successful_operation:
-      description: Successful operation
-    Expert_not_found:
-      description: Expert not found
-    Work:
-      description: work
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Work'
-    Missing_id:
-      description: Request needs id
-    Expert:
-      description: The expert
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Expert'
-    Search:
-      description: The list of search results
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Search'
-  requestBodies:
-    Expert_post:
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              is-visible:
-                type: boolean
-              expert:
-                type: object
-                properties:
-                  include:
-                    type: boolean
-              grants:
-                type: object
-                properties:
-                  include:
-                    type: boolean
-                  page:
-                    type: integer
-                  size:
-                    type: integer
-                  exclude:
-                    type: array
-                    items:
-                      type: string
-                  includeMisformatted:
-                    type: boolean
-                  sort:
-                    type: array
-                    items:
-                      type: object
-                      properties:
-                        field:
-                          type: string
-                        sort:
-                          type: string
-                        type:
-                          type: string
-              works:
-                type: object
-                properties:
-                  include:
-                    type: boolean
-                  page:
-                    type: integer
-                  size:
-                    type: integer
-                  exclude:
-                    type: array
-                    items:
-                      type: string
-                  includeMisformatted:
-                    type: boolean
-                  sort:
-                    type: array
-                    items:
-                      type: object
-                      properties:
-                        field:
-                          type: string
-                        sort:
-                          type: string
-                        type:
-                          type: string
+        default: 25
   schemas:
-    Browse:
-      type: object
-      properties:
-        total:
-          type: integer
-        hits:
-          type: array
-          items:
-            type: object
-            properties:
-              contactInfo:
-                type: object
-                properties:
-                  hasURL:
-                    type: array
-                    items:
-                      type: object
-                      properties:
-                        '@type':
-                          type: array
-                          items:
-                            type: string
-                        '@id':
-                          type: string
-                        url:
-                          type: string
-                        name:
-                          type: string
-                        rank:
-                          type: integer
-                  hasEmail:
-                    type: string
-                  hasName:
-                    type: object
-                    properties:
-                      given:
-                        type: string
-                      '@type':
-                        type: string
-                      pronouns:
-                        type: string
-                      '@id':
-                        type: string
-                      family:
-                        type: string
-                  name:
-                    type: string
-                  hasTitle:
-                    type: object
-                    properties:
-                      '@type':
-                        type: string
-                      name:
-                        type: string
-                      '@id':
-                        type: string
-                  hasOrganizationalUnit:
-                    type: object
-                    properties:
-                      name:
-                        type: string
-                      '@id':
-                        type: string
-              name:
-                type: string
-              '@id':
-                type: string
-    Grant:
-      type: object
-      properties:
-        '@id':
-          type: string
-        '@type':
-          items:
-            type: string
     Expert:
       type: object
       properties:
@@ -809,6 +623,73 @@ components:
       - hasTitle
       - hasOrganizationalUnit
       - roles
+    Browse:
+      type: object
+      properties:
+        total:
+          type: integer
+        hits:
+          type: array
+          items:
+            type: object
+            properties:
+              contactInfo:
+                type: object
+                properties:
+                  hasURL:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        '@type':
+                          type: array
+                          items:
+                            type: string
+                        '@id':
+                          type: string
+                        url:
+                          type: string
+                        name:
+                          type: string
+                        rank:
+                          type: integer
+                  hasEmail:
+                    type: string
+                  hasName:
+                    type: object
+                    properties:
+                      given:
+                        type: string
+                      '@type':
+                        type: string
+                      pronouns:
+                        type: string
+                      '@id':
+                        type: string
+                      family:
+                        type: string
+                  name:
+                    type: string
+                  hasTitle:
+                    type: object
+                    properties:
+                      '@type':
+                        type: string
+                      name:
+                        type: string
+                      '@id':
+                        type: string
+                  hasOrganizationalUnit:
+                    type: object
+                    properties:
+                      name:
+                        type: string
+                      '@id':
+                        type: string
+              name:
+                type: string
+              '@id':
+                type: string
     Search:
       type: object
       properties:
@@ -899,6 +780,14 @@ components:
                       type: string
                     status:
                       type: string
+    Grant:
+      type: object
+      properties:
+        '@id':
+          type: string
+        '@type':
+          items:
+            type: string
     Work:
       type: object
       properties:
@@ -907,3 +796,114 @@ components:
         '@type':
           items:
             type: string
+  responses:
+    Invalid_ID_supplied:
+      description: Invalid ID supplied
+    Not_found:
+      description: Resource not found
+    Missing_id:
+      description: Request needs id
+    Browse:
+      description: The list of experts
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Browse'
+    Search:
+      description: The list of search results
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Search'
+    Grant:
+      description: grant
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Grant'
+    Expert:
+      description: The expert
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Expert'
+    Work:
+      description: work
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Work'
+    Forbidden:
+      description: Request is forbidden
+    Expert_not_found:
+      description: Expert not found
+    Successful_operation:
+      description: Successful operation
+    Invalid_request:
+      description: Invalid request
+  requestBodies:
+    Expert_post:
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              is-visible:
+                type: boolean
+              expert:
+                type: object
+                properties:
+                  include:
+                    type: boolean
+              grants:
+                type: object
+                properties:
+                  include:
+                    type: boolean
+                  page:
+                    type: integer
+                  size:
+                    type: integer
+                  exclude:
+                    type: array
+                    items:
+                      type: string
+                  includeMisformatted:
+                    type: boolean
+                  sort:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        field:
+                          type: string
+                        sort:
+                          type: string
+                        type:
+                          type: string
+              works:
+                type: object
+                properties:
+                  include:
+                    type: boolean
+                  page:
+                    type: integer
+                  size:
+                    type: integer
+                  exclude:
+                    type: array
+                    items:
+                      type: string
+                  includeMisformatted:
+                    type: boolean
+                  sort:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        field:
+                          type: string
+                        sort:
+                          type: string
+                        type:
+                          type: string
