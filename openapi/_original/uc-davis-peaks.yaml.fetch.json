@@ -1,0 +1,12 @@
+{
+ "url": "https://peaks.ucdavis.edu/swagger/v1/swagger.json",
+ "requested_url": "https://peaks.ucdavis.edu/swagger/v1/swagger.json",
+ "status": 200,
+ "content_type": "application/json;charset=utf-8",
+ "bytes": 214393,
+ "sha256": "5cc58e48a10efd17180851cd2fb7b877a33a65e467f2fcf401993793628919b5",
+ "fetched_at": "2026-10-04",
+ "fetched_by": "APIEvangelist-Harvest/1.0 (+https://apievangelist.com)",
+ "match": "equivalent",
+ "note": "Re-fetched from the provider by verify-openapi-sources.py; the provider's current document describes the same operations (Jaccard 1.0), but the bytes differ, so the archive is an earlier or reformatted copy."
+}
