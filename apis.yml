@@ -88,7 +88,7 @@ tags_raw:
 - Open Source
 - Open-Source
 created: '2026-06-03'
-modified: '2026-08-19'
+modified: '2026-10-06'
 specificationVersion: '0.23'
 x-coverage:
   state: gated
@@ -928,6 +928,8 @@ apis:
   - type: x-source-repository
     url: https://github.com/ucd-library/fin
 common:
+- url: https://www.ucdavis.edu/news
+  type: Blog
 - type: CapabilityMap
   url: capabilities/uc-davis-capability-edges.yml
   name: University of California, Davis Business Capability Map
