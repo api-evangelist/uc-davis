@@ -281,43 +281,79 @@ paths:
       x-operation-id-source: derived
 components:
   parameters:
-    include:
+    atType:
       in: query
-      name: include
-      description: Pass 'hidden' to include non-visible entries (requires owner or admin)
+      name: '@type'
+      description: Comma-separated list of item @types to return.
+      required: false
+      schema:
+        type: array
+        default:
+        - expert
+        - grant
+        - work
+        items:
+          type: string
+          enum:
+          - expert
+          - grant
+          - work
+      style: simple
+      explode: false
+    email:
+      in: query
+      name: email
+      description: Filter grants by email
       required: false
       schema:
         type: string
-        enum:
-        - hidden
-    q:
+    all:
       in: query
-      name: q
-      description: Text query to search for
+      name: all
+      description: Return all grants and works without pagination (requires owner or admin)
       required: false
       schema:
-        type: string
-    status:
+        type: boolean
+    expert:
       in: query
-      name: status
-      description: Comma-separated search filter on grant status
+      name: expert
+      description: Comma-separated search filter on experts
+      required: false
+      schema:
+        type: array
+        items:
+          type: string
+      style: simple
+      explode: false
+    id:
+      name: id
+      in: path
+      required: true
+      schema:
+        type: string
+    availability:
+      in: query
+      name: availability
+      description: Comma-separated search filter on expert availability types
       required: false
       schema:
         type: array
         items:
           type: string
           enum:
-          - completed
-          - active
+          - community partnerships
+          - collaborative projects
+          - industry Projects
+          - media enquiries
       style: simple
       explode: false
-    iamId:
-      in: query
-      name: iamId
-      description: Filter grants by IAM ID
-      required: false
+    sitefarmId:
+      name: ids
+      in: path
+      required: true
       schema:
         type: string
+      description: A comma separated list of expert IDs. Ids are in the format of '{idType}:{Id}'. For example 'expertId:12345'
     type:
       in: query
       name: type
@@ -365,62 +401,10 @@ components:
           - webpage
       style: simple
       explode: false
-    availability:
-      in: query
-      name: availability
-      description: Comma-separated search filter on expert availability types
-      required: false
-      schema:
-        type: array
-        items:
-          type: string
-          enum:
-          - community partnerships
-          - collaborative projects
-          - industry Projects
-          - media enquiries
-      style: simple
-      explode: false
-    expertId:
-      name: expertId
-      in: path
-      required: true
-      schema:
-        type: string
-        format: nano(\d{8})
-        description: The unique identifier for the expert
-    p:
-      in: query
-      name: p
-      description: The letter the experts last name starts with
-      required: false
-      schema:
-        type: string
-    previewEsIndex:
-      in: query
-      name: previewEsIndex
-      description: Override the Elasticsearch index used for this request
-      required: false
-      schema:
-        type: string
     inner_hit_size:
       in: query
       name: inner_hit_size
       description: The number of inner hits (works per expert) to return
-      required: false
-      schema:
-        type: integer
-    sitefarmId:
-      name: ids
-      in: path
-      required: true
-      schema:
-        type: string
-      description: A comma separated list of expert IDs. Ids are in the format of '{idType}:{Id}'. For example 'expertId:12345'
-    page:
-      in: query
-      name: page
-      description: The pagination of results to return, defaults to 1
       required: false
       schema:
         type: integer
@@ -434,10 +418,24 @@ components:
         format: date
         pattern: ^[0-9]{4}-(?:0[1-9]|1[0-2])-(?:0[1-9]|[12][0-9]|3[01])$
         example: '2010-01-01'
-    email:
+    page:
       in: query
-      name: email
-      description: Filter grants by email
+      name: page
+      description: The pagination of results to return, defaults to 1
+      required: false
+      schema:
+        type: integer
+    q:
+      in: query
+      name: q
+      description: Text query to search for
+      required: false
+      schema:
+        type: string
+    previewEsIndex:
+      in: query
+      name: previewEsIndex
+      description: Override the Elasticsearch index used for this request
       required: false
       schema:
         type: string
@@ -448,41 +446,15 @@ components:
       required: false
       schema:
         type: string
-    id:
-      name: id
-      in: path
-      required: true
-      schema:
-        type: string
-    atType:
+    include:
       in: query
-      name: '@type'
-      description: Comma-separated list of item @types to return.
-      required: false
-      schema:
-        type: array
-        default:
-        - expert
-        - grant
-        - work
-        items:
-          type: string
-          enum:
-          - expert
-          - grant
-          - work
-      style: simple
-      explode: false
-    until:
-      in: query
-      name: until
-      description: Filter grants up to this date (inclusive). Defaults to today if not provided.
+      name: include
+      description: Pass 'hidden' to include non-visible entries (requires owner or admin)
       required: false
       schema:
         type: string
-        format: date
-        pattern: ^[0-9]{4}-(?:0[1-9]|1[0-2])-(?:0[1-9]|[12][0-9]|3[01])$
-        example: '2030-12-31'
+        enum:
+        - hidden
     dateTo:
       in: query
       name: dateTo
@@ -493,24 +465,35 @@ components:
         format: date
         pattern: ^[0-9]{4}(-(?:0[1-9]|1[0-2])-(?:0[1-9]|[12][0-9]|3[01]))?$
         example: '2023-12-31'
-    all:
+    status:
       in: query
-      name: all
-      description: Return all grants and works without pagination (requires owner or admin)
-      required: false
-      schema:
-        type: boolean
-    expert:
-      in: query
-      name: expert
-      description: Comma-separated search filter on experts
+      name: status
+      description: Comma-separated search filter on grant status
       required: false
       schema:
         type: array
         items:
           type: string
+          enum:
+          - completed
+          - active
       style: simple
       explode: false
+    iamId:
+      in: query
+      name: iamId
+      description: Filter grants by IAM ID
+      required: false
+      schema:
+        type: string
+    expertId:
+      name: expertId
+      in: path
+      required: true
+      schema:
+        type: string
+        format: nano(\d{8})
+        description: The unique identifier for the expert
     dateFrom:
       in: query
       name: dateFrom
@@ -521,6 +504,23 @@ components:
         format: date
         pattern: ^[0-9]{4}(-(?:0[1-9]|1[0-2])-(?:0[1-9]|[12][0-9]|3[01]))?$
         example: '2017-01-01'
+    until:
+      in: query
+      name: until
+      description: Filter grants up to this date (inclusive). Defaults to today if not provided.
+      required: false
+      schema:
+        type: string
+        format: date
+        pattern: ^[0-9]{4}-(?:0[1-9]|1[0-2])-(?:0[1-9]|[12][0-9]|3[01])$
+        example: '2030-12-31'
+    p:
+      in: query
+      name: p
+      description: The letter the experts last name starts with
+      required: false
+      schema:
+        type: string
     size:
       in: query
       name: size
@@ -623,73 +623,6 @@ components:
       - hasTitle
       - hasOrganizationalUnit
       - roles
-    Browse:
-      type: object
-      properties:
-        total:
-          type: integer
-        hits:
-          type: array
-          items:
-            type: object
-            properties:
-              contactInfo:
-                type: object
-                properties:
-                  hasURL:
-                    type: array
-                    items:
-                      type: object
-                      properties:
-                        '@type':
-                          type: array
-                          items:
-                            type: string
-                        '@id':
-                          type: string
-                        url:
-                          type: string
-                        name:
-                          type: string
-                        rank:
-                          type: integer
-                  hasEmail:
-                    type: string
-                  hasName:
-                    type: object
-                    properties:
-                      given:
-                        type: string
-                      '@type':
-                        type: string
-                      pronouns:
-                        type: string
-                      '@id':
-                        type: string
-                      family:
-                        type: string
-                  name:
-                    type: string
-                  hasTitle:
-                    type: object
-                    properties:
-                      '@type':
-                        type: string
-                      name:
-                        type: string
-                      '@id':
-                        type: string
-                  hasOrganizationalUnit:
-                    type: object
-                    properties:
-                      name:
-                        type: string
-                      '@id':
-                        type: string
-              name:
-                type: string
-              '@id':
-                type: string
     Search:
       type: object
       properties:
@@ -780,14 +713,6 @@ components:
                       type: string
                     status:
                       type: string
-    Grant:
-      type: object
-      properties:
-        '@id':
-          type: string
-        '@type':
-          items:
-            type: string
     Work:
       type: object
       properties:
@@ -796,51 +721,126 @@ components:
         '@type':
           items:
             type: string
+    Grant:
+      type: object
+      properties:
+        '@id':
+          type: string
+        '@type':
+          items:
+            type: string
+    Browse:
+      type: object
+      properties:
+        total:
+          type: integer
+        hits:
+          type: array
+          items:
+            type: object
+            properties:
+              contactInfo:
+                type: object
+                properties:
+                  hasURL:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        '@type':
+                          type: array
+                          items:
+                            type: string
+                        '@id':
+                          type: string
+                        url:
+                          type: string
+                        name:
+                          type: string
+                        rank:
+                          type: integer
+                  hasEmail:
+                    type: string
+                  hasName:
+                    type: object
+                    properties:
+                      given:
+                        type: string
+                      '@type':
+                        type: string
+                      pronouns:
+                        type: string
+                      '@id':
+                        type: string
+                      family:
+                        type: string
+                  name:
+                    type: string
+                  hasTitle:
+                    type: object
+                    properties:
+                      '@type':
+                        type: string
+                      name:
+                        type: string
+                      '@id':
+                        type: string
+                  hasOrganizationalUnit:
+                    type: object
+                    properties:
+                      name:
+                        type: string
+                      '@id':
+                        type: string
+              name:
+                type: string
+              '@id':
+                type: string
   responses:
-    Invalid_ID_supplied:
-      description: Invalid ID supplied
     Not_found:
       description: Resource not found
-    Missing_id:
-      description: Request needs id
-    Browse:
-      description: The list of experts
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Browse'
     Search:
       description: The list of search results
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Search'
-    Grant:
-      description: grant
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Grant'
-    Expert:
-      description: The expert
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Expert'
     Work:
       description: work
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Work'
-    Forbidden:
-      description: Request is forbidden
     Expert_not_found:
       description: Expert not found
-    Successful_operation:
-      description: Successful operation
     Invalid_request:
       description: Invalid request
+    Invalid_ID_supplied:
+      description: Invalid ID supplied
+    Browse:
+      description: The list of experts
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Browse'
+    Missing_id:
+      description: Request needs id
+    Expert:
+      description: The expert
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Expert'
+    Grant:
+      description: grant
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Grant'
+    Successful_operation:
+      description: Successful operation
+    Forbidden:
+      description: Request is forbidden
   requestBodies:
     Expert_post:
       content:
