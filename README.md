@@ -1,4 +1,4 @@
-# University of California, Davis (uc-davis)
+# University of California, Davis
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -64,57 +64,203 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-The University of California, Davis (UC Davis) is a public land-grant research university in Davis, California, ranked #48 in the QS World University Rankings 2025. This repository catalogs the institution's public developer and API footprint as an [APIs.json](https://apisjson.org) provider profile. UC Davis has no single unified developer portal; its API surfaces are decentralized across campus units (IET middleware, UC Davis Health, CAES Computing Resources Unit) plus the official `ucdavis` GitHub organization.
+The University of California, Davis is a public land-grant research university in Davis, California and a member of the ten-campus University of California system. Its programmable footprint is real but decentralized: there is no campus-wide developer portal, no API gateway, no published deprecation policy and no self-service signup for anything. What UC Davis genuinely operates and authored itself is three things — the Aggie Experts API (UC Davis Library, OpenAPI 3.0.0 v5.0, twelve operations over experts, works and grants, callable anonymously and returning JSON-LD with ORCID iDs and UC Davis ARK identifiers), the DAMS API behind digital.ucdavis.edu (built on the Library's own open-source 'fin' framework, though several documented operations return soft-200 errors), and the PEAKS asset- and access-tracking API run by the College of Agricultural and Environmental Sciences (MIT-licensed, source at github.com/ucdavis/Peaks, API-key gated). Alongside those it runs a SAML 2.0 Shibboleth identity provider published to InCommon as urn:mace:incommon:ucdavis.edu, and UC Davis Health operates a live FHIR R4 endpoint on its own domain — although that endpoint's CapabilityStatement is Epic's work, not UC Davis's, and is deliberately not claimed here. Two further surfaces are TENANT relationships and are labelled as such rather than credited as UC Davis engineering: scholarly output in eScholarship (operated by the California Digital Library for all of UC) and library discovery on Ex Libris Primo. Several campus surfaces that plainly exist — the open data portal aggiedata.ucdavis.edu, the registrar's course search, research computing at hpc.ucdavis.edu — sit behind a Cloudflare bot challenge and could not be read; that is a limit on this profile, not evidence of absence.
 
-- APIs.json: <https://raw.githubusercontent.com/api-evangelist/uc-davis/refs/heads/main/apis.yml>
-- Run with Naftiko: <https://github.com/naftiko/fleet?utm_source=api-evangelist&utm_medium=readme&utm_campaign=uc-davis-api-evangelist&utm_content=repo>
+**Areas:** University · Higher Education · Education · United States · California · UC System · Public Research University · Research · Research Data · Identity Federation · Digital Collections · Library
 
-## Type
+## University of California, Davis on APIs.io
 
-- Index
-- Consumer
-- 3rd-Party
+Everything profiled for University of California, Davis is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/uc-davis/](https://apis.io/providers/uc-davis/)** — or go straight to one of the APIs or properties below.
 
-## Tags
+### APIs (20)
 
-Education, Higher Education, University, Research, United States, California, Identity, Health
+- [UC Davis Shibboleth Identity Provider (SAML 2.0 / InCommon)](https://apis.io/apis/uc-davis/shibboleth-idp/) — UC Davis operates its own SAML 2.0 identity provider and publishes signed federation metadata as entityID urn:mace:incommon:ucdavis.edu. This is…
+- [UC Davis Health FHIR R4 endpoint](https://apis.io/apis/uc-davis/health-fhir-r4/) — UC Davis Health runs a live HL7 FHIR R4 endpoint on its own domain at emrrp.ucdmc.ucdavis.edu, registered in Epic's public endpoint directory as 'UC Davis'…
+- [IET Middleware Web Service APIs](https://apis.io/apis/uc-davis/iet-middleware/) — Information and Educational Technology (IET) Middleware Web Service APIs provide campus integration and identity-related middleware. Probed 2026-08-19: the…
+- [UC Davis Health Systems Integration APIs](https://apis.io/apis/uc-davis/health-integration/) — UC Davis Health Systems Integration offers Epic (EHR), HL7 FHIR and custom SOAP/REST APIs, authenticated with API keys, OAuth2 or Epic Interconnect and…
+- [CAES ACE API](https://apis.io/apis/uc-davis/ace/) — The CAES Computing Resources Unit documents an ACE API supporting college administrative and content workflows. Probed 2026-08-19: the documentation page…
+- [PEAKS (CAES) — Access API](https://apis.io/apis/uc-davis/uc-davis-access-api/) — The Access resource of PEAKS (People, Equipment, Access, Keys, Space), the asset- and access-tracking application the UC Davis College of Agricultural and…
+- [PEAKS (CAES) — Documents API](https://apis.io/apis/uc-davis/uc-davis-documents-api/) — The Documents resource of PEAKS (People, Equipment, Access, Keys, Space), the asset- and access-tracking application the UC Davis College of Agricultural…
+- [PEAKS (CAES) — Equipment API](https://apis.io/apis/uc-davis/uc-davis-equipment-api/) — The Equipment resource of PEAKS (People, Equipment, Access, Keys, Space), the asset- and access-tracking application the UC Davis College of Agricultural…
+- [PEAKS (CAES) — Keys API](https://apis.io/apis/uc-davis/uc-davis-keys-api/) — The Keys resource of PEAKS (People, Equipment, Access, Keys, Space), the asset- and access-tracking application the UC Davis College of Agricultural and…
+- [PEAKS (CAES) — KeySerials API](https://apis.io/apis/uc-davis/uc-davis-keyserials-api/) — The KeySerials resource of PEAKS (People, Equipment, Access, Keys, Space), the asset- and access-tracking application the UC Davis College of Agricultural…
+- [PEAKS (CAES) — People API](https://apis.io/apis/uc-davis/uc-davis-people-api/) — The People resource of PEAKS (People, Equipment, Access, Keys, Space), the asset- and access-tracking application the UC Davis College of Agricultural and…
+- [PEAKS (CAES) — PeopleAdmin API](https://apis.io/apis/uc-davis/uc-davis-peopleadmin-api/) — The PeopleAdmin resource of PEAKS (People, Equipment, Access, Keys, Space), the asset- and access-tracking application the UC Davis College of Agricultural…
+- [PEAKS (CAES) — Spaces API](https://apis.io/apis/uc-davis/uc-davis-spaces-api/) — The Spaces resource of PEAKS (People, Equipment, Access, Keys, Space), the asset- and access-tracking application the UC Davis College of Agricultural and…
+- [PEAKS (CAES) — Workstations API](https://apis.io/apis/uc-davis/uc-davis-workstations-api/) — The Workstations resource of PEAKS (People, Equipment, Access, Keys, Space), the asset- and access-tracking application the UC Davis College of Agricultural…
+- [eScholarship — UC Davis unit (tenant)](https://apis.io/apis/uc-davis/escholarship-tenant/) — UC Davis's open-access scholarly output is deposited into eScholarship, the University of California's shared repository, under the campus unit path…
+- [UC Davis Library discovery — Ex Libris Primo (tenant)](https://apis.io/apis/uc-davis/library-primo-tenant/) — Library discovery at search.library.ucdavis.edu is an Ex Libris Primo instance. The subdomain is UC Davis's and the collection is UC Davis's, but the…
+- [University of California, Davis Collection API](https://apis.io/apis/uc-davis/uc-davis-collection-api/) — The collection API from University of California, Davis — 2 operation(s) for collection.
+- [University of California, Davis Expert API](https://apis.io/apis/uc-davis/uc-davis-expert-api/) — Expert Information
+- [University of California, Davis Item API](https://apis.io/apis/uc-davis/uc-davis-item-api/) — The item API from University of California, Davis — 1 operation(s) for item.
+- [University of California, Davis page search API](https://apis.io/apis/uc-davis/uc-davis-page-search-api/) — The page search API from University of California, Davis — 1 operation(s) for page search.
 
-## APIs
+### Published properties
 
-- **IET Middleware Web Service APIs** — campus integration/identity middleware. Docs: <https://iet-ws.ucdavis.edu/api/>
-- **UC Davis Health Systems Integration APIs** — Epic (EHR), HL7 FHIR, and custom REST/SOAP APIs with API Key/OAuth2 auth. Docs: <https://health.ucdavis.edu/systems-integration/developers>
-- **CAES PEAKS API** — CAES Computing Resources Unit API with Swagger/OpenAPI docs. Docs: <https://computing.caes.ucdavis.edu/documentation/peaks/api>
-- **CAES ACE API** — CAES Computing Resources Unit administrative/content API. Docs: <https://computing.caes.ucdavis.edu/documentation/ace/api>
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-## Plans
+#### Agentic access (1)
 
-See [plans/uc-davis-plans-pricing.yml](plans/uc-davis-plans-pricing.yml).
+Which operations an agent can call, which act, and which need a human in the loop.
 
-## Rate Limits
+- [Uc Davis Agentic Access](https://apis.io/agentic-access/uc-davis/uc-davis-agentic-access/)
 
-See [rate-limits/uc-davis-rate-limits.yml](rate-limits/uc-davis-rate-limits.yml).
+#### JSON Schema (7)
 
-## FinOps
+The data models the API reads and writes.
 
-See [finops/uc-davis-finops.yml](finops/uc-davis-finops.yml).
+- [UC Davis Aggie Experts — Expert](https://apis.io/schemas/uc-davis/uc-davis-aggie-experts-expert/)
+- [UC Davis Aggie Experts — Grant](https://apis.io/schemas/uc-davis/uc-davis-aggie-experts-grant/)
+- [UC Davis Aggie Experts — Work](https://apis.io/schemas/uc-davis/uc-davis-aggie-experts-work/)
+- [PEAKS Equipment](https://apis.io/schemas/uc-davis/uc-davis-equipment/)
+- [PEAKS Key](https://apis.io/schemas/uc-davis/uc-davis-key/)
+- [PEAKS Person](https://apis.io/schemas/uc-davis/uc-davis-person/)
+- [PEAKS Space](https://apis.io/schemas/uc-davis/uc-davis-space/)
 
-## Timestamps
+#### JSON Structure (2)
 
-- Created: 2026-06-03
-- Modified: 2026-06-03
+Data models expressed in JSON Structure.
 
-## Common Properties
+- [Uc Davis Equipment Structure](https://apis.io/json-structure/uc-davis/uc-davis-equipment-structure/)
+- [Uc Davis Key Structure](https://apis.io/json-structure/uc-davis/uc-davis-key-structure/)
 
-- Website: <https://www.ucdavis.edu/>
-- Developer Portal (internal SIG): <https://developers.ucdavis.edu/>
-- GitHub: <https://github.com/ucdavis>
-- LinkedIn: <https://www.linkedin.com/school/uc-davis/>
-- Status: <https://status.ucdavis.edu/>
+#### JSON-LD (1)
 
-## Notes
+Linked-data contexts for the provider's vocabulary.
 
-All listed URLs were probed during cataloging; the four documented API surfaces and the GitHub org, website, developer SIG, library, and status page returned HTTP 200. The AggieData institutional data portal returned HTTP 403 (bot-blocked) and LinkedIn returned 999 (anti-scraping) — both pages exist. No openly documented public library/repository REST API was confirmed, so none was invented. Most identity and administrative APIs are gated behind institutional affiliation, SSO, or partner agreements rather than open self-service signup.
+- [Uc Davis Context](https://apis.io/jsonld/uc-davis/uc-davis-context/)
 
-## Maintainers
+#### Vocabulary (1)
 
-- Kin Lane — kin@apievangelist.com
+The provider's domain terms, defined.
+
+- [UC Davis CAES PEAKS Vocabulary](https://apis.io/vocabularies/uc-davis/uc-davis-vocabulary/)
+
+#### Examples (4)
+
+Example requests and responses.
+
+- [Uc Davis Aggie Experts Browse Example](https://apis.io/examples/uc-davis/uc-davis-aggie-experts-browse-example/)
+- [Uc Davis Aggie Experts Work Browse Example](https://apis.io/examples/uc-davis/uc-davis-aggie-experts-work-browse-example/)
+- [Uc Davis Equipment Create Example](https://apis.io/examples/uc-davis/uc-davis-equipment-create-example/)
+- [Uc Davis Keys List Example](https://apis.io/examples/uc-davis/uc-davis-keys-list-example/)
+
+#### Collections (9)
+
+Postman and Open Collection request collections.
+
+- [PEAKS API v1 Access API](https://apis.io/collections/uc-davis/open-uc-davis-access-api/)
+- [PEAKS API v1 Access Documents API](https://apis.io/collections/uc-davis/open-uc-davis-documents-api/)
+- [PEAKS API v1 Access Equipment API](https://apis.io/collections/uc-davis/open-uc-davis-equipment-api/)
+- [PEAKS API v1 Access Keys API](https://apis.io/collections/uc-davis/open-uc-davis-keys-api/)
+- [PEAKS API v1 Access KeySerials API](https://apis.io/collections/uc-davis/open-uc-davis-keyserials-api/)
+- [PEAKS API v1 Access People API](https://apis.io/collections/uc-davis/open-uc-davis-people-api/)
+- [PEAKS API v1 Access PeopleAdmin API](https://apis.io/collections/uc-davis/open-uc-davis-peopleadmin-api/)
+- [PEAKS API v1 Access Spaces API](https://apis.io/collections/uc-davis/open-uc-davis-spaces-api/)
+- [PEAKS API v1 Access Workstations API](https://apis.io/collections/uc-davis/open-uc-davis-workstations-api/)
+
+#### Governance rules (2)
+
+Spectral rulesets for the provider's contracts.
+
+- [University of California, Davis — jsonschema rules](https://apis.io/rules/uc-davis/uc-davis-jsonschema-spectral-rules/)
+- [University of California, Davis API Rules](https://apis.io/rules/uc-davis/uc-davis-rules/)
+
+#### Security (2)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Uc Davis Authentication](https://apis.io/security/uc-davis/uc-davis-authentication/)
+- [Uc Davis Domain Security](https://apis.io/security/uc-davis/uc-davis-domain-security/)
+
+#### OAuth scopes (1)
+
+The permissions the API asks for.
+
+- [Uc Davis Scopes](https://apis.io/scopes/uc-davis/uc-davis-scopes/)
+
+#### Plans and pricing (1)
+
+Published plans, tiers and prices.
+
+- [Uc Davis Plans Pricing](https://apis.io/plans/uc-davis/uc-davis-plans-pricing/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [Uc Davis Rate Limits](https://apis.io/rate-limits/uc-davis/uc-davis-rate-limits/)
+
+#### FinOps (1)
+
+What the API costs to run, by operation.
+
+- [Uc Davis Finops](https://apis.io/finops/uc-davis/uc-davis-finops/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
+- [Website](https://www.ucdavis.edu/)
+- [Documentation](https://library.ucdavis.edu/online-strategy/)
+- [API reference](https://experts.ucdavis.edu/api/)
+- [Support](https://www.ucdavis.edu/help)
+- [Blog](https://www.ucdavis.edu/news)
+- [Terms of service](https://experts.ucdavis.edu/termsofuse)
+- [Privacy policy](https://www.ucdavis.edu/help/privacy-accessibility)
+- [GitHub](https://github.com/ucdavis)
+
+## API Evangelist rating
+
+**Kin Score 43.6** — developing · rubric 0.25.0 · scored 2026-10-23
+
+| Facet | Score |
+|---|---|
+| Discoverability | 62.5 |
+| Contract quality | 49.8 |
+| Contract governance | 9.8 |
+| Operational transparency | 21.6 |
+| Developer ergonomics | 42.9 |
+| Access clarity | 53.2 |
+
+**Agent readiness 20.7** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | — |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | — |
+| OpenAPI Examples | — |
+| Rate Limit Signal | documented (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+| Pagination Ratio | — |
+| Operation Distinctiveness | distinct |
+
+**Regulatory alignment 34.3** — Education & Research
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/uc-davis/](https://apis.io/providers/uc-davis/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for University of California, Davis: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/uc-davis/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
